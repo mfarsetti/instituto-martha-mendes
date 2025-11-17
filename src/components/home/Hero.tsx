@@ -2,19 +2,21 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-main.jpg";
+import { motion } from "framer-motion";
+import ParallaxSection from "@/components/animations/ParallaxSection";
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
+      {/* Background Image with Overlay - Parallax */}
+      <ParallaxSection speed={-0.3} className="absolute inset-0 z-0">
         <img
           src={heroImage}
           alt="Instituto Martha Mendes"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60" />
-      </div>
+      </ParallaxSection>
 
       {/* Decorative Elements */}
       <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float" />
@@ -24,23 +26,43 @@ const Hero = () => {
       <div className="container mx-auto px-4 relative z-10 pt-20">
         <div className="max-w-4xl">
           {/* Badge */}
-          <div className="inline-flex items-center space-x-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 mb-6 animate-fadeIn">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="inline-flex items-center space-x-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 mb-6"
+          >
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary">Mais de 3 décadas de excelência</span>
-          </div>
+          </motion.div>
 
           {/* Headline */}
-          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight animate-slideUp">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight"
+          >
             Instituto Martha Mendes
-          </h1>
+          </motion.h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed max-w-2xl animate-slideUp" style={{ animationDelay: "0.1s" }}>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed max-w-2xl"
+          >
             Formação completa em <span className="text-primary font-semibold">terapias integrativas</span> e <span className="text-secondary font-semibold">desenvolvimento humano</span> para transformar vidas através da Psicobiosofia®.
-          </p>
+          </motion.p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 animate-slideUp" style={{ animationDelay: "0.2s" }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex flex-col sm:flex-row gap-4"
+          >
             <Link to="/cursos">
               <Button size="lg" className="gradient-gold text-white shadow-elegant hover:shadow-glow transition-all group">
                 Conheça os Cursos
@@ -52,10 +74,15 @@ const Hero = () => {
                 Fale Conosco
               </Button>
             </Link>
-          </div>
+          </motion.div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mt-16 animate-fadeIn" style={{ animationDelay: "0.3s" }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="grid grid-cols-2 md:grid-cols-3 gap-8 mt-16"
+          >
             <div>
               <div className="text-4xl md:text-5xl font-heading font-bold text-primary mb-2">30+</div>
               <div className="text-sm text-muted-foreground">Anos de História</div>
@@ -68,7 +95,7 @@ const Hero = () => {
               <div className="text-4xl md:text-5xl font-heading font-bold gradient-gold bg-clip-text text-transparent mb-2">100+</div>
               <div className="text-sm text-muted-foreground">Cursos Disponíveis</div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
