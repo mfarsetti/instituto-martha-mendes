@@ -18,10 +18,10 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center space-x-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 mb-6"
+            className="inline-flex items-center space-x-2 bg-white/10 border border-white/20 rounded-full px-4 py-2 mb-6 backdrop-blur-sm"
           >
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Mais de 3 décadas de excelência</span>
+            <span className="text-sm font-medium text-white">Mais de 3 décadas de excelência</span>
           </motion.div>
 
           {/* Headline */}
@@ -29,7 +29,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight"
+            className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg"
           >
             Conectando Propósitos
           </motion.h1>
@@ -39,7 +39,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed max-w-2xl"
+            className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed max-w-2xl drop-shadow-md"
           >
             Transforme sua carreira com conhecimento de ponta e uma visão humanizada. Bem-vindo ao futuro da educação.
           </motion.p>
@@ -58,7 +58,7 @@ const Hero = () => {
               </Button>
             </Link>
             <Link to="/contato">
-              <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white shadow-soft">
+              <Button size="lg" variant="outline" className="border-2 border-white/50 text-white hover:bg-white/20 shadow-soft backdrop-blur-sm">
                 Fale Conosco
               </Button>
             </Link>
