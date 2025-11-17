@@ -75,18 +75,33 @@ const BlogPost = () => {
     `
   };
 
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: post.title,
-        url: window.location.href,
-      });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      toast({
-        title: "Link copiado!",
-        description: "O link do artigo foi copiado para a área de transferência.",
-      });
+  const handleShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: post.title,
+          url: window.location.href,
+        });
+        toast({
+          title: "Compartilhado!",
+          description: "Artigo compartilhado com sucesso.",
+        });
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        toast({
+          title: "Link copiado!",
+          description: "O link do artigo foi copiado para a área de transferência.",
+        });
+      }
+    } catch (error) {
+      // Se o usuário cancelar o compartilhamento ou houver erro
+      if (error instanceof Error && error.name !== 'AbortError') {
+        toast({
+          title: "Erro",
+          description: "Não foi possível compartilhar o artigo.",
+          variant: "destructive",
+        });
+      }
     }
   };
 
