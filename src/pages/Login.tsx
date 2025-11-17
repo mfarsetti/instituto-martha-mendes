@@ -1,45 +1,148 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import { Lock, GraduationCap } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Eye, EyeOff, GraduationCap, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import AnimatedBackground from "@/components/animations/AnimatedBackground";
 
 const Login = () => {
-  return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Header />
+  const navigate = useNavigate();
+  const { login, isAuthenticated } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [capsLockOn, setCapsLockOn] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/admin");
+    }
+  }, [isAuthenticated, navigate]);
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    setCapsLockOn(e.getModifierState && e.getModifierState("CapsLock"));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const result = await login(email, password);
       
-      <main className="flex-1 flex items-center justify-center pt-20 pb-12">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center">
-            {/* Icon */}
-            <div className="w-20 h-20 rounded-full gradient-gold flex items-center justify-center mx-auto mb-8 shadow-elegant animate-float">
-              <GraduationCap className="w-10 h-10 text-white" />
-            </div>
+      if (result.success) {
+        toast.success("Login realizado com sucesso!");
+        navigate("/admin");
+      } else {
+        toast.error(result.error || "Erro ao fazer login");
+      }
+    } catch (error) {
+      toast.error("Erro ao fazer login. Tente novamente.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-            {/* Content */}
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Área do Aluno
+  return (
+    <div className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden">
+      <AnimatedBackground />
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-md mx-auto">
+          {/* Icon */}
+          <div className="w-20 h-20 rounded-full gradient-gold flex items-center justify-center mx-auto mb-8 shadow-elegant animate-float">
+            <GraduationCap className="w-10 h-10 text-white" />
+          </div>
+
+          {/* Card */}
+          <div className="glass-effect rounded-2xl p-8 shadow-elegant">
+            <h1 className="font-heading text-3xl font-bold text-center text-foreground mb-2">
+              Área Administrativa
             </h1>
-            <div className="bg-card rounded-2xl p-12 shadow-elegant">
-              <Lock className="w-16 h-16 text-primary mx-auto mb-6 opacity-50" />
-              <p className="text-xl text-muted-foreground mb-4">
-                Área em Desenvolvimento
-              </p>
-              <p className="text-muted-foreground leading-relaxed max-w-md mx-auto">
-                Em breve, alunos e professores terão acesso a uma plataforma completa com materiais de estudo, certificados, cronograma de aulas e muito mais.
-              </p>
+            <p className="text-center text-muted-foreground mb-8">
+              Faça login para acessar o painel
+            </p>
+
+            {/* Demo Credentials Info */}
+            <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
+              <p className="text-sm font-medium text-foreground mb-2">Credenciais Demo:</p>
+              <p className="text-xs text-muted-foreground">Admin: admin@imm.com / admin123</p>
+              <p className="text-xs text-muted-foreground">Editor: editor@imm.com / editor123</p>
             </div>
 
-            <p className="text-sm text-muted-foreground mt-8">
-              Tem dúvidas? Entre em{" "}
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="email">E-mail</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="seu@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  autoComplete="email"
+                  className="transition-smooth"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="password">Senha</Label>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    required
+                    autoComplete="current-password"
+                    className="pr-10 transition-smooth"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-smooth"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+                {capsLockOn && (
+                  <p className="text-xs text-yellow-600 dark:text-yellow-400 flex items-center gap-1">
+                    ⚠️ Caps Lock ativado
+                  </p>
+                )}
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full gradient-gold text-white hover:opacity-90"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Entrando...
+                  </>
+                ) : (
+                  "Entrar"
+                )}
+              </Button>
+            </form>
+
+            <p className="text-sm text-center text-muted-foreground mt-6">
+              Tem dúvidas?{" "}
               <a href="/contato" className="text-primary hover:underline font-medium">
-                contato conosco
+                Entre em contato
               </a>
             </p>
           </div>
         </div>
-      </main>
-
-      <Footer />
+      </div>
     </div>
   );
 };
