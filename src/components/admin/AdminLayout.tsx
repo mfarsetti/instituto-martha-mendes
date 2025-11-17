@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { LayoutDashboard, FileText, BookOpen, LogOut, Menu, X, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/logo.svg";
+import logoWhite from "@/assets/logo-white.svg";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -49,7 +49,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
             <Link to="/" className="flex items-center">
-              <img src={logo} alt="Instituto Martha Mendes" className="h-8 w-auto" />
+              <img src={logoWhite} alt="Instituto Martha Mendes" className="h-12 w-auto" />
             </Link>
           </div>
 
