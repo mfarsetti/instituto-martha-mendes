@@ -63,27 +63,6 @@ const Hero = () => {
               </Button>
             </Link>
           </motion.div>
-
-          {/* Stats */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="grid grid-cols-2 md:grid-cols-3 gap-8 mt-16"
-          >
-            <div>
-              <div className="text-4xl md:text-5xl font-heading font-bold text-primary mb-2">30+</div>
-              <div className="text-sm text-muted-foreground">Anos de História</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-heading font-bold text-secondary mb-2">10k+</div>
-              <div className="text-sm text-muted-foreground">Alunos Formados</div>
-            </div>
-            <div className="col-span-2 md:col-span-1">
-              <div className="text-4xl md:text-5xl font-heading font-bold gradient-gold bg-clip-text text-transparent mb-2">100+</div>
-              <div className="text-sm text-muted-foreground">Cursos Disponíveis</div>
-            </div>
-          </motion.div>
         </div>
       </div>
 
