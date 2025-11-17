@@ -52,7 +52,7 @@ const Header = () => {
               <Link
                 key={item.href}
                 to={item.href}
-                className="text-sm font-medium text-white/90 hover:text-white transition-smooth relative group"
+                className="text-sm font-medium text-foreground hover:text-primary transition-smooth relative group"
               >
                 {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
@@ -72,26 +72,26 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-smooth"
+            className="lg:hidden p-2 rounded-lg hover:bg-muted transition-smooth"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-white" />
+              <X className="w-6 h-6 text-foreground" />
             ) : (
-              <Menu className="w-6 h-6 text-white" />
+              <Menu className="w-6 h-6 text-foreground" />
             )}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-white/20 animate-fadeIn">
+          <div className="lg:hidden py-4 border-t border-border animate-fadeIn">
             <nav className="flex flex-col space-y-2">
               {menuItems.map((item) => (
                 <Link
                   key={item.href}
                   to={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-4 py-3 text-sm font-medium text-white hover:bg-white/10 rounded-lg transition-smooth"
+                  className="px-4 py-3 text-sm font-medium text-foreground hover:bg-muted rounded-lg transition-smooth"
                 >
                   {item.label}
                 </Link>
