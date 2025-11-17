@@ -3,47 +3,11 @@ import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/animations/ScrollReveal";
-
-const courses = [
-  {
-    id: 1,
-    title: "Florais de Bach",
-    category: "Terapia Floral",
-    duration: "120h",
-    certification: "Certificado MEC",
-    description: "Aprenda a arte de usar as essências florais para equilíbrio emocional e bem-estar integral.",
-    image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=600&fit=crop",
-  },
-  {
-    id: 2,
-    title: "Psicobiosofia®",
-    category: "Metodologia Exclusiva",
-    duration: "200h",
-    certification: "Certificado MEC",
-    description: "Mergulhe na metodologia que integra psicologia, biologia e filosofia para o autoconhecimento.",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop",
-  },
-  {
-    id: 3,
-    title: "Hipnose e Regressão",
-    category: "Terapia Regressiva",
-    duration: "160h",
-    certification: "Certificado MEC",
-    description: "Técnicas avançadas de hipnose clínica e terapia regressiva para transformação profunda.",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=600&fit=crop",
-  },
-  {
-    id: 4,
-    title: "Bioeletrografia",
-    category: "Diagnóstico Energético",
-    duration: "80h",
-    certification: "Certificado MEC",
-    description: "Análise do campo bioelétrico humano através de tecnologia científica de ponta.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop",
-  },
-];
+import { useData } from "@/contexts/DataContext";
 
 const FeaturedCourses = () => {
+  const { courses: allCourses } = useData();
+  const courses = allCourses.filter(c => c.status === 'published').slice(0, 4);
   return (
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -64,7 +28,7 @@ const FeaturedCourses = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {courses.map((course, index) => (
               <ScrollReveal key={course.id} direction="up" delay={index * 0.1}>
-                <Link to={`/curso/${course.id}`} className="group block">
+                <Link to={`/cursos/${course.slug}`} className="group block">
                   <div className="bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-2">
                     {/* Image */}
                     <div className="relative h-48 overflow-hidden">
@@ -75,7 +39,7 @@ const FeaturedCourses = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                       <div className="absolute top-4 right-4 bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
-                        {course.category}
+                        {course.modality}
                       </div>
                     </div>
 
@@ -85,7 +49,7 @@ const FeaturedCourses = () => {
                         {course.title}
                       </h3>
                       <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                        {course.description}
+                        {course.summary}
                       </p>
 
                       {/* Meta */}
