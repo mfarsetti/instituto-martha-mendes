@@ -4,7 +4,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Eye, EyeOff, GraduationCap, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
+import logoWhite from "@/assets/logo-white.svg";
 import { toast } from "sonner";
 import AnimatedBackground from "@/components/animations/AnimatedBackground";
 
@@ -53,9 +54,9 @@ const Login = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-md mx-auto">
-          {/* Icon */}
-          <div className="w-20 h-20 rounded-full gradient-gold flex items-center justify-center mx-auto mb-8 shadow-elegant animate-float">
-            <GraduationCap className="w-10 h-10 text-white" />
+          {/* Logo */}
+          <div className="flex justify-center mb-8">
+            <img src={logoWhite} alt="Instituto Martha Mendes" className="h-24 w-auto animate-float" />
           </div>
 
           {/* Card */}
@@ -67,12 +68,6 @@ const Login = () => {
               Faça login para acessar o painel
             </p>
 
-            {/* Demo Credentials Info */}
-            <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-6">
-              <p className="text-sm font-medium text-foreground mb-2">Credenciais Demo:</p>
-              <p className="text-xs text-muted-foreground">Admin: admin@imm.com / admin123</p>
-              <p className="text-xs text-muted-foreground">Editor: editor@imm.com / editor123</p>
-            </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
