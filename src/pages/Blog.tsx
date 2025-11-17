@@ -92,7 +92,7 @@ const Blog = () => {
                   {filteredArticles.map((article, index) => (
                     <Link
                       key={article.id}
-                      to={`/blog/${article.id}`}
+                      to={`/blog/${article.slug}`}
                       className="group animate-fadeIn"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
