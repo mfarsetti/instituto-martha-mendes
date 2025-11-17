@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Card } from "@/components/ui/card";
 import { useData } from "@/contexts/DataContext";
 import {
   Clock,
@@ -15,8 +16,20 @@ import {
   BookOpen,
   ArrowLeft,
   Mail,
+  Phone,
+  MapPin,
+  CheckCircle2,
+  Star,
 } from "lucide-react";
 import { toast } from "sonner";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 const CursoDetalhes = () => {
   const { id } = useParams();
@@ -62,49 +75,75 @@ const CursoDetalhes = () => {
       <Header />
       
       <main className="pt-20">
+        {/* Breadcrumbs */}
+        <section className="bg-muted/30 py-4 border-b border-border/40">
+          <div className="container mx-auto px-4">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/">Home</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/cursos">Cursos</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>{course.title}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </section>
+
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-primary/20 to-secondary/20 overflow-hidden">
+        <section className="relative py-32 overflow-hidden">
           <div className="absolute inset-0">
             <img
               src={course.image || 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1600&h=900&fit=crop'}
               alt={course.title}
-              className="w-full h-full object-cover brightness-50"
+              className="w-full h-full object-cover brightness-[0.35]"
             />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-primary/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           </div>
           <div className="relative container mx-auto px-4">
-            <Link to="/cursos">
-              <Button variant="ghost" className="mb-6 text-white hover:bg-white/20">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Voltar
-              </Button>
-            </Link>
-            <div className="max-w-3xl">
-              <span className="inline-block bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-medium mb-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <span className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-primary-foreground border border-primary/30 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                <Star className="w-4 h-4" />
                 {course.category}
               </span>
-              <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6">
+              <h1 className="font-heading text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl">
                 {course.title}
               </h1>
-              <p className="text-xl text-white/90 mb-8">
+              <p className="text-xl md:text-2xl text-white/95 mb-12 drop-shadow-lg max-w-3xl mx-auto leading-relaxed">
                 {course.summary}
               </p>
-              <div className="flex flex-wrap gap-6 text-white/90">
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5" />
-                  <span>{course.duration}</span>
+              <div className="flex flex-wrap justify-center gap-8 text-white/95">
+                <div className="flex flex-col items-center space-y-2 bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4 min-w-[140px]">
+                  <Clock className="w-6 h-6 text-primary" />
+                  <span className="font-semibold">{course.duration}</span>
+                  <span className="text-xs text-white/70">Duração</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Award className="w-5 h-5" />
-                  <span>{course.certification}</span>
+                <div className="flex flex-col items-center space-y-2 bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4 min-w-[140px]">
+                  <Award className="w-6 h-6 text-primary" />
+                  <span className="font-semibold">{course.certification}</span>
+                  <span className="text-xs text-white/70">Certificação</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <BookOpen className="w-5 h-5" />
-                  <span>{course.modality}</span>
+                <div className="flex flex-col items-center space-y-2 bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4 min-w-[140px]">
+                  <BookOpen className="w-6 h-6 text-primary" />
+                  <span className="font-semibold">{course.modality}</span>
+                  <span className="text-xs text-white/70">Modalidade</span>
                 </div>
                 {course.students && (
-                  <div className="flex items-center space-x-2">
-                    <Users className="w-5 h-5" />
-                    <span>{course.students}+ alunos</span>
+                  <div className="flex flex-col items-center space-y-2 bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4 min-w-[140px]">
+                    <Users className="w-6 h-6 text-primary" />
+                    <span className="font-semibold">{course.students}+</span>
+                    <span className="text-xs text-white/70">Alunos</span>
                   </div>
                 )}
               </div>
@@ -115,65 +154,166 @@ const CursoDetalhes = () => {
         {/* Content */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div
-                className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-foreground prose-p:text-foreground prose-ul:text-foreground"
-                dangerouslySetInnerHTML={{
-                  __html: course.content
-                    .split('\n\n')
-                    .map(p => {
-                      if (p.startsWith('# ')) return `<h1>${p.slice(2)}</h1>`;
-                      if (p.startsWith('## ')) return `<h2>${p.slice(3)}</h2>`;
-                      if (p.startsWith('### ')) return `<h3>${p.slice(4)}</h3>`;
-                      if (p.startsWith('- ')) {
-                        const items = p.split('\n').map(i => i.startsWith('- ') ? `<li>${i.slice(2)}</li>` : i).join('');
-                        return `<ul>${items}</ul>`;
-                      }
-                      return `<p>${p}</p>`;
-                    })
-                    .join('')
-                }}
-              />
+            <div className="max-w-7xl mx-auto">
+              <div className="grid lg:grid-cols-3 gap-12">
+                {/* Main Content */}
+                <div className="lg:col-span-2 space-y-8">
+                  <Card className="p-8 border-2 shadow-lg">
+                    <div
+                      className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-foreground prose-h2:text-3xl prose-h2:mb-4 prose-h2:mt-8 prose-h2:first:mt-0 prose-h3:text-xl prose-h3:font-semibold prose-h3:text-primary prose-p:text-foreground prose-p:leading-relaxed prose-ul:text-foreground prose-li:my-2 prose-strong:text-primary"
+                      dangerouslySetInnerHTML={{
+                        __html: course.content
+                          .split('\n\n')
+                          .map(p => {
+                            if (p.startsWith('# ')) return `<h1>${p.slice(2)}</h1>`;
+                            if (p.startsWith('## ')) return `<h2>${p.slice(3)}</h2>`;
+                            if (p.startsWith('### ')) return `<h3>${p.slice(4)}</h3>`;
+                            if (p.startsWith('- ')) {
+                              const items = p.split('\n').map(i => i.startsWith('- ') ? `<li>${i.slice(2)}</li>` : i).join('');
+                              return `<ul class="space-y-2">${items}</ul>`;
+                            }
+                            return `<p>${p}</p>`;
+                          })
+                          .join('')
+                      }}
+                    />
+                  </Card>
+                </div>
+
+                {/* Sidebar */}
+                <div className="lg:col-span-1">
+                  <div className="sticky top-24 space-y-6">
+                    {/* Course Info Card */}
+                    <Card className="p-6 border-2 shadow-lg bg-gradient-to-br from-primary/5 to-transparent">
+                      <h3 className="font-heading text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary" />
+                        Informações do Curso
+                      </h3>
+                      <div className="space-y-4">
+                        <div className="flex items-start gap-3 p-3 rounded-lg bg-background/50">
+                          <Clock className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm text-muted-foreground">Duração</p>
+                            <p className="font-semibold text-foreground">{course.duration}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-3 p-3 rounded-lg bg-background/50">
+                          <BookOpen className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm text-muted-foreground">Modalidade</p>
+                            <p className="font-semibold text-foreground">{course.modality}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-3 p-3 rounded-lg bg-background/50">
+                          <Award className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm text-muted-foreground">Certificação</p>
+                            <p className="font-semibold text-foreground">{course.certification}</p>
+                          </div>
+                        </div>
+                        {course.investment && (
+                          <div className="flex items-start gap-3 p-3 rounded-lg bg-background/50">
+                            <Star className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="text-sm text-muted-foreground">Investimento</p>
+                              <p className="font-bold text-foreground text-lg">{course.investment}</p>
+                              <p className="text-xs text-muted-foreground">ou em até 12x</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      <Button className="w-full mt-6 gradient-gold text-white font-semibold py-6 text-base">
+                        Quero me inscrever
+                      </Button>
+                    </Card>
+
+                    {/* Contact Card */}
+                    <Card className="p-6 border-2 shadow-lg">
+                      <h3 className="font-heading text-lg font-bold text-foreground mb-4">
+                        Precisa de ajuda?
+                      </h3>
+                      <div className="space-y-3 text-sm">
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Phone className="w-4 h-4 text-primary" />
+                          <span>(11) 98765-4321</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Mail className="w-4 h-4 text-primary" />
+                          <span>contato@institutomm.com.br</span>
+                        </div>
+                        <div className="flex items-start gap-2 text-muted-foreground">
+                          <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <span>São Paulo, SP</span>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Next Classes */}
         {course.startDates.length > 0 && (
-          <section className="py-20 bg-muted/30">
+          <section className="py-20 bg-gradient-to-br from-muted/50 to-muted/20">
             <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto">
-                <SectionHeading
-                  title="Próximas Turmas"
-                  subtitle="Vagas limitadas"
-                />
-                <div className="grid gap-6 md:grid-cols-3">
+              <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-12">
+                  <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
+                    Próximas Turmas
+                  </h2>
+                  <p className="text-lg text-muted-foreground">
+                    Inscrições abertas • Vagas limitadas
+                  </p>
+                </div>
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                   {course.startDates.slice(0, 3).map((date, index) => (
-                    <div
+                    <Card
                       key={index}
-                      className="glass-effect rounded-xl p-6 hover:shadow-elegant transition-smooth"
+                      className="relative overflow-hidden border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group"
                     >
-                      <div className="flex items-center space-x-3 mb-4">
-                        <Calendar className="w-6 h-6 text-primary" />
-                        <div>
-                          <p className="font-semibold text-foreground">
-                            {new Date(date).toLocaleDateString('pt-BR', { dateStyle: 'long' })}
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            Inscrições abertas
-                          </p>
+                      <div className="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-bl-full" />
+                      <div className="relative p-6 space-y-6">
+                        <div className="flex items-start gap-4">
+                          <div className="p-3 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors">
+                            <Calendar className="w-6 h-6 text-primary" />
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-1">
+                              Turma {index + 1}
+                            </p>
+                            <p className="font-bold text-foreground text-lg leading-tight">
+                              {new Date(date).toLocaleDateString('pt-BR', { 
+                                day: '2-digit',
+                                month: 'long',
+                                year: 'numeric'
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        {course.investment && (
+                          <div className="pt-4 border-t border-border/50">
+                            <p className="text-sm text-muted-foreground mb-1">Investimento</p>
+                            <p className="text-3xl font-bold text-foreground mb-1">{course.investment}</p>
+                            <p className="text-xs text-muted-foreground">
+                              ou em até 12x sem juros
+                            </p>
+                          </div>
+                        )}
+                        
+                        <div className="pt-2">
+                          <div className="flex items-center gap-2 text-xs text-primary font-medium mb-3">
+                            <CheckCircle2 className="w-4 h-4" />
+                            <span>Vagas disponíveis</span>
+                          </div>
+                          <Button className="w-full gradient-gold text-white font-semibold hover:opacity-90 transition-opacity">
+                            Inscrever-se agora
+                          </Button>
                         </div>
                       </div>
-                      {course.investment && (
-                        <div className="mb-4">
-                          <p className="text-2xl font-bold text-foreground">{course.investment}</p>
-                          <p className="text-sm text-muted-foreground">ou em até 12x</p>
-                        </div>
-                      )}
-                      <Button className="w-full gradient-gold text-white hover:opacity-90">
-                        Inscrever-se
-                      </Button>
-                    </div>
+                    </Card>
                   ))}
                 </div>
               </div>
@@ -182,63 +322,102 @@ const CursoDetalhes = () => {
         )}
 
         {/* Interest Form */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto">
-              <SectionHeading
-                title="Manifestar Interesse"
-                subtitle="Preencha o formulário e entraremos em contato"
-              />
-              <form onSubmit={handleSubmit} className="glass-effect rounded-2xl p-8 space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                    Nome completo *
-                  </label>
-                  <Input
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                  />
+        <section className="py-20 bg-background relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+          <div className="container mx-auto px-4 relative">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
+                  Manifestar Interesse
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Preencha o formulário abaixo e nossa equipe entrará em contato para fornecer mais informações sobre o curso
+                </p>
+              </div>
+              
+              <Card className="border-2 shadow-2xl overflow-hidden">
+                <div className="bg-gradient-to-r from-primary/10 to-primary/5 p-6 border-b-2">
+                  <h3 className="font-heading text-xl font-bold text-foreground flex items-center gap-2">
+                    <Mail className="w-5 h-5 text-primary" />
+                    Formulário de Contato
+                  </h3>
                 </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                    E-mail *
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
-                    Telefone
-                  </label>
-                  <Input
-                    id="phone"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                    Mensagem
-                  </label>
-                  <Textarea
-                    id="message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  />
-                </div>
-                <Button type="submit" className="w-full gradient-gold text-white hover:opacity-90">
-                  <Mail className="w-4 h-4 mr-2" />
-                  Enviar
-                </Button>
-              </form>
+                
+                <form onSubmit={handleSubmit} className="p-8 space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-semibold text-foreground mb-2">
+                        Nome completo *
+                      </label>
+                      <Input
+                        id="name"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        required
+                        className="h-12 border-2 focus:border-primary"
+                        placeholder="Seu nome"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-semibold text-foreground mb-2">
+                        Telefone *
+                      </label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        required
+                        className="h-12 border-2 focus:border-primary"
+                        placeholder="(00) 00000-0000"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-2">
+                      E-mail *
+                    </label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      required
+                      className="h-12 border-2 focus:border-primary"
+                      placeholder="seu@email.com"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-2">
+                      Mensagem (opcional)
+                    </label>
+                    <Textarea
+                      id="message"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="min-h-[120px] border-2 focus:border-primary resize-none"
+                      placeholder="Conte-nos um pouco sobre seu interesse neste curso..."
+                    />
+                  </div>
+                  
+                  <div className="flex items-start gap-3 p-4 bg-muted/50 rounded-lg">
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <p className="text-sm text-muted-foreground">
+                      Ao enviar este formulário, você concorda em receber comunicações sobre este curso e outras informações relevantes do Instituto Martha Mendes.
+                    </p>
+                  </div>
+                  
+                  <Button 
+                    type="submit" 
+                    className="w-full gradient-gold text-white font-semibold py-6 text-lg hover:opacity-90 transition-opacity"
+                  >
+                    <Mail className="w-5 h-5 mr-2" />
+                    Enviar mensagem
+                  </Button>
+                </form>
+              </Card>
             </div>
           </div>
         </section>
