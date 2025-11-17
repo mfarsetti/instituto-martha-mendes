@@ -8,10 +8,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ImagePicker } from "@/components/admin/ImagePicker";
 import { MarkdownEditor } from "@/components/admin/MarkdownEditor";
 import { DatesArrayInput } from "@/components/admin/DatesArrayInput";
+import { ModulesArrayInput } from "@/components/admin/ModulesArrayInput";
+import { TeachersArrayInput } from "@/components/admin/TeachersArrayInput";
+import { FAQsArrayInput } from "@/components/admin/FAQsArrayInput";
 import { useData } from "@/contexts/DataContext";
 import { ArrowLeft, Save, Eye } from "lucide-react";
 import { toast } from "sonner";
-import { CourseStatus, CourseModality, CourseCertification } from "@/types";
+import { CourseStatus, CourseModality, CourseCertification, CourseModule, CourseTeacher, CourseFAQ } from "@/types";
 
 const CursosForm = () => {
   const { id } = useParams();
@@ -32,6 +35,9 @@ const CursosForm = () => {
   const [status, setStatus] = useState<CourseStatus>("draft");
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
+  const [modules, setModules] = useState<CourseModule[]>([]);
+  const [teachers, setTeachers] = useState<CourseTeacher[]>([]);
+  const [faqs, setFaqs] = useState<CourseFAQ[]>([]);
 
   useEffect(() => {
     if (id) {
@@ -51,6 +57,9 @@ const CursosForm = () => {
         setStatus(course.status);
         setSeoTitle(course.seoTitle || "");
         setSeoDescription(course.seoDescription || "");
+        setModules(course.modules || []);
+        setTeachers(course.teachers || []);
+        setFaqs(course.faqs || []);
       }
     }
   }, [id, getCourse]);
@@ -85,6 +94,9 @@ const CursosForm = () => {
       investment: investment || null,
       startDates: startDates.filter(d => d),
       image, content,
+      modules,
+      teachers,
+      faqs,
       status: publishNow ? 'published' as CourseStatus : status,
       seoTitle: seoTitle || null,
       seoDescription: seoDescription || null,
