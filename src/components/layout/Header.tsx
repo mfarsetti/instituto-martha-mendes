@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/logo.svg";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -39,15 +40,11 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="w-12 h-12 rounded-full gradient-gold flex items-center justify-center shadow-soft transition-transform group-hover:scale-110">
-              <span className="text-white font-heading text-xl font-bold">IMM</span>
-            </div>
-            <div className="hidden md:block">
-              <h1 className="font-heading text-xl font-semibold text-foreground">
-                Instituto Martha Mendes
-              </h1>
-              <p className="text-xs text-muted-foreground">Terapias Integrativas</p>
-            </div>
+            <img 
+              src={logo} 
+              alt="Instituto Martha Mendes" 
+              className="h-12 md:h-14 w-auto transition-transform group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Navigation */}
