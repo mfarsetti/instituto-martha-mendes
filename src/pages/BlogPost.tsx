@@ -167,7 +167,7 @@ const BlogPost = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="max-w-3xl mx-auto prose prose-lg prose-headings:font-heading prose-headings:font-bold prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-ul:text-muted-foreground"
+              className="max-w-3xl mx-auto prose prose-xl prose-headings:font-heading prose-h2:text-3xl prose-h2:font-bold prose-h2:text-foreground prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-2xl prose-h3:font-semibold prose-h3:text-foreground prose-h3:mt-8 prose-h3:mb-4 prose-p:text-muted-foreground prose-p:text-lg prose-p:leading-relaxed prose-p:mb-6 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground prose-strong:font-semibold prose-ul:text-muted-foreground prose-ul:text-lg prose-ul:my-6 prose-li:mb-3 prose-li:leading-relaxed"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </div>
