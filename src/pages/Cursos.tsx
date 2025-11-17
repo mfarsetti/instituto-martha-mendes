@@ -5,84 +5,18 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { Clock, Award, Users, BookOpen, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const courses = [
-  {
-    id: 1,
-    title: "Florais de Bach",
-    category: "Terapia Floral",
-    modality: "Online",
-    duration: "120h",
-    certification: "Certificado MEC",
-    students: 2500,
-    description: "Formação completa em terapia floral com as 38 essências do Dr. Edward Bach. Aprenda diagnóstico, preparação e prescrição floral.",
-    image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=600&fit=crop",
-  },
-  {
-    id: 2,
-    title: "Psicobiosofia®",
-    category: "Metodologia Exclusiva",
-    modality: "Híbrido",
-    duration: "200h",
-    certification: "Certificado MEC",
-    students: 1800,
-    description: "Metodologia exclusiva que integra psicologia, biologia e filosofia para o autoconhecimento e transformação pessoal profunda.",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop",
-  },
-  {
-    id: 3,
-    title: "Hipnose e Regressão",
-    category: "Terapia Regressiva",
-    modality: "Online",
-    duration: "160h",
-    certification: "Certificado MEC",
-    students: 3200,
-    description: "Técnicas avançadas de hipnose clínica, terapia regressiva e ericsoniana para transformação profunda do inconsciente.",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=600&fit=crop",
-  },
-  {
-    id: 4,
-    title: "Bioeletrografia",
-    category: "Diagnóstico Energético",
-    modality: "Presencial",
-    duration: "80h",
-    certification: "Certificado MEC",
-    students: 950,
-    description: "Análise do campo bioelétrico humano através de tecnologia científica. Diagnóstico energético de alta precisão.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop",
-  },
-  {
-    id: 5,
-    title: "Aromaterapia Clínica",
-    category: "Terapia Natural",
-    modality: "Online",
-    duration: "100h",
-    certification: "Certificado MEC",
-    students: 2100,
-    description: "Uso terapêutico de óleos essenciais puros. Propriedades, aplicações clínicas e protocolos de tratamento.",
-    image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&h=600&fit=crop",
-  },
-  {
-    id: 6,
-    title: "Reiki Tradicional",
-    category: "Terapia Energética",
-    modality: "Híbrido",
-    duration: "60h",
-    certification: "Certificado MEC",
-    students: 4500,
-    description: "Sistema Usui de cura natural. Níveis 1, 2 e 3 com iniciação presencial e prática supervisionada.",
-    image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&h=600&fit=crop",
-  },
-];
+import { useData } from "@/contexts/DataContext";
 
 const Cursos = () => {
+  const { courses } = useData();
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [selectedModality, setSelectedModality] = useState("Todos");
 
-  const categories = ["Todos", ...Array.from(new Set(courses.map(c => c.category)))];
-  const modalities = ["Todos", "Online", "Presencial", "Híbrido"];
+  const publishedCourses = courses.filter(c => c.status === 'published');
+  const categories = ["Todos", ...Array.from(new Set(publishedCourses.map(c => c.category)))];
+  const modalities = ["Todos", "Presencial", "EAD", "Híbrido"];
 
-  const filteredCourses = courses.filter(course => {
+  const filteredCourses = publishedCourses.filter(course => {
     const categoryMatch = selectedCategory === "Todos" || course.category === selectedCategory;
     const modalityMatch = selectedModality === "Todos" || course.modality === selectedModality;
     return categoryMatch && modalityMatch;
@@ -200,7 +134,7 @@ const Cursos = () => {
                     {/* Content */}
                     <div className="p-6">
                       <p className="text-sm text-muted-foreground mb-6 line-clamp-3">
-                        {course.description}
+                        {course.summary}
                       </p>
 
                       {/* Meta Info */}

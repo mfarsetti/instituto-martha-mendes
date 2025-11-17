@@ -6,80 +6,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BookOpen, Calendar, Clock, Search, Tag } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const articles = [
-  {
-    id: 1,
-    title: "Os Benefícios Científicos da Meditação",
-    excerpt: "Descubra como a prática meditativa regular transforma o cérebro e promove bem-estar físico e mental.",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=600&fit=crop",
-    category: "Bem-estar",
-    date: "15 Mar 2024",
-    readTime: "8 min",
-    author: "Dra. Martha Mendes",
-  },
-  {
-    id: 2,
-    title: "Florais de Bach: Ciência ou Placebo?",
-    excerpt: "Uma análise científica sobre como as essências florais atuam no equilíbrio emocional.",
-    image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=600&fit=crop",
-    category: "Terapias",
-    date: "10 Mar 2024",
-    readTime: "10 min",
-    author: "Profª Ana Costa",
-  },
-  {
-    id: 3,
-    title: "Hipnose Clínica no Tratamento da Ansiedade",
-    excerpt: "Como a hipnoterapia tem se mostrado eficaz no manejo de transtornos de ansiedade.",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=600&fit=crop",
-    category: "Saúde Mental",
-    date: "5 Mar 2024",
-    readTime: "12 min",
-    author: "Dr. Carlos Eduardo",
-  },
-  {
-    id: 4,
-    title: "Energia Sutil: O Que a Física Quântica Tem a Dizer",
-    excerpt: "Explorando as conexões entre física moderna e práticas energéticas milenares.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop",
-    category: "Ciência",
-    date: "1 Mar 2024",
-    readTime: "15 min",
-    author: "Prof. Ricardo Alves",
-  },
-  {
-    id: 5,
-    title: "Aromaterapia na Prática Clínica",
-    excerpt: "Protocolos e aplicações terapêuticas de óleos essenciais baseados em evidências.",
-    image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&h=600&fit=crop",
-    category: "Terapias",
-    date: "25 Fev 2024",
-    readTime: "7 min",
-    author: "Profª Ana Costa",
-  },
-  {
-    id: 6,
-    title: "Psicobiosofia®: Uma Nova Visão do Ser Humano",
-    excerpt: "Compreendendo a integração entre psicologia, biologia e filosofia na prática terapêutica.",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop",
-    category: "Metodologia",
-    date: "20 Fev 2024",
-    readTime: "20 min",
-    author: "Dra. Martha Mendes",
-  },
-];
+import { useData } from "@/contexts/DataContext";
 
 const Blog = () => {
+  const { posts } = useData();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Todas");
 
-  const categories = ["Todas", ...Array.from(new Set(articles.map(a => a.category)))];
+  const publishedPosts = posts.filter(p => p.status === 'published');
+  const categories = ["Todas", ...Array.from(new Set(publishedPosts.flatMap(p => p.tags)))];
 
-  const filteredArticles = articles.filter(article => {
-    const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         article.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === "Todas" || article.category === selectedCategory;
+  const filteredArticles = publishedPosts.filter(post => {
+    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         post.summary.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === "Todas" || post.tags.includes(selectedCategory);
     return matchesSearch && matchesCategory;
   });
 
@@ -165,11 +105,13 @@ const Blog = () => {
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                          <div className="absolute top-4 left-4">
-                            <span className="bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
-                              {article.category}
-                            </span>
-                          </div>
+                          {article.tags && article.tags.length > 0 && (
+                            <div className="absolute top-4 left-4">
+                              <span className="bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
+                                {article.tags[0]}
+                              </span>
+                            </div>
+                          )}
                         </div>
 
                         {/* Content */}
@@ -178,7 +120,7 @@ const Blog = () => {
                             {article.title}
                           </h2>
                           <p className="text-sm text-muted-foreground mb-4 line-clamp-3 flex-1">
-                            {article.excerpt}
+                            {article.summary}
                           </p>
 
                           {/* Meta */}
@@ -186,7 +128,7 @@ const Blog = () => {
                             <div className="flex items-center space-x-4">
                               <div className="flex items-center space-x-1">
                                 <Calendar className="w-3 h-3" />
-                                <span>{article.date}</span>
+                                <span>{new Date(article.publishedAt || article.createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })}</span>
                               </div>
                               <div className="flex items-center space-x-1">
                                 <Clock className="w-3 h-3" />
