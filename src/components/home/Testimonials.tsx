@@ -1,5 +1,6 @@
 import { Star, Quote } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
+import ScrollReveal from "@/components/animations/ScrollReveal";
 
 const testimonials = [
   {
@@ -46,40 +47,38 @@ const Testimonials = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.name}
-                className="bg-card rounded-2xl p-8 shadow-soft hover:shadow-elegant transition-all duration-300 relative animate-fadeIn"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {/* Quote Icon */}
-                <Quote className="absolute top-6 right-6 w-12 h-12 text-primary/10" />
+              <ScrollReveal key={testimonial.name} direction="up" delay={index * 0.15}>
+                <div className="bg-card rounded-2xl p-8 shadow-soft hover:shadow-elegant transition-all duration-300 relative">
+                  {/* Quote Icon */}
+                  <Quote className="absolute top-6 right-6 w-12 h-12 text-primary/10" />
 
-                {/* Rating */}
-                <div className="flex space-x-1 mb-4">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                  ))}
-                </div>
+                  {/* Rating */}
+                  <div className="flex space-x-1 mb-4">
+                    {Array.from({ length: testimonial.rating }).map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                    ))}
+                  </div>
 
-                {/* Text */}
-                <p className="text-muted-foreground mb-6 leading-relaxed relative z-10">
-                  "{testimonial.text}"
-                </p>
+                  {/* Text */}
+                  <p className="text-muted-foreground mb-6 leading-relaxed relative z-10">
+                    "{testimonial.text}"
+                  </p>
 
-                {/* Author */}
-                <div className="flex items-center space-x-4">
-                  <img
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <div className="font-semibold text-foreground">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                    <div className="text-xs text-primary mt-0.5">{testimonial.course}</div>
+                  {/* Author */}
+                  <div className="flex items-center space-x-4">
+                    <img
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold text-foreground">{testimonial.name}</div>
+                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                      <div className="text-xs text-primary mt-0.5">{testimonial.course}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
