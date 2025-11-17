@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import logo from "@/assets/logo.svg";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -32,10 +33,7 @@ const Footer = () => {
           {/* About */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full gradient-gold flex items-center justify-center shadow-soft">
-                <span className="text-white font-heading text-lg font-bold">IMM</span>
-              </div>
-              <h3 className="font-heading text-lg font-semibold">Instituto Martha Mendes</h3>
+              <img src={logo} alt="Instituto Martha Mendes" className="h-12 w-auto" />
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Mais de 3 décadas dedicadas à formação de profissionais em terapias integrativas e desenvolvimento humano integral.
