@@ -11,6 +11,8 @@ import Equipe from "./pages/Equipe";
 import Cursos from "./pages/Cursos";
 import CursoDetalhes from "./pages/CursoDetalhes";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import FAQ from "./pages/FAQ";
 import Contato from "./pages/Contato";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
@@ -30,6 +32,8 @@ const AnimatedRoutes = () => {
         <Route path="/cursos" element={<Cursos />} />
         <Route path="/curso/:id" element={<CursoDetalhes />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
+        <Route path="/faq" element={<FAQ />} />
         <Route path="/contato" element={<Contato />} />
         <Route path="/login" element={<Login />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
