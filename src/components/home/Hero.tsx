@@ -58,7 +58,7 @@ const Hero = () => {
               </Button>
             </Link>
             <Link to="/contato">
-              <Button size="lg" variant="outline" className="border-2 border-white/50 text-white hover:bg-white/20 shadow-soft backdrop-blur-sm">
+              <Button size="lg" variant="outline" className="border-2 border-white text-white bg-white/10 hover:bg-white/30 shadow-elegant backdrop-blur-md">
                 Fale Conosco
               </Button>
             </Link>
