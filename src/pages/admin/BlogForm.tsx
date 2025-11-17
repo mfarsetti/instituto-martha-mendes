@@ -115,6 +115,16 @@ const BlogForm = () => {
             </div>
           </div>
           <div className="flex gap-2">
+            {slug && (
+              <Button 
+                type="button" 
+                variant="outline"
+                onClick={() => window.open(`/blog/${slug}`, '_blank')}
+              >
+                <Eye className="w-4 h-4 mr-2" />
+                Preview
+              </Button>
+            )}
             <Button type="submit" variant="outline">
               <Save className="w-4 h-4 mr-2" />
               Salvar Rascunho

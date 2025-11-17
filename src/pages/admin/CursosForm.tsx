@@ -9,7 +9,7 @@ import { ImagePicker } from "@/components/admin/ImagePicker";
 import { MarkdownEditor } from "@/components/admin/MarkdownEditor";
 import { DatesArrayInput } from "@/components/admin/DatesArrayInput";
 import { useData } from "@/contexts/DataContext";
-import { ArrowLeft, Save } from "lucide-react";
+import { ArrowLeft, Save, Eye } from "lucide-react";
 import { toast } from "sonner";
 import { CourseStatus, CourseModality, CourseCertification } from "@/types";
 
@@ -112,6 +112,16 @@ const CursosForm = () => {
             <h1 className="text-3xl font-heading font-bold">{id ? "Editar Curso" : "Novo Curso"}</h1>
           </div>
           <div className="flex gap-2">
+            {slug && (
+              <Button 
+                type="button" 
+                variant="outline"
+                onClick={() => window.open(`/cursos/${slug}`, '_blank')}
+              >
+                <Eye className="w-4 h-4 mr-2" />
+                Preview
+              </Button>
+            )}
             <Button type="submit" variant="outline"><Save className="w-4 h-4 mr-2" />Salvar Rascunho</Button>
             <Button type="button" onClick={(e) => handleSubmit(e, true)} className="gradient-gold text-white">Publicar</Button>
           </div>

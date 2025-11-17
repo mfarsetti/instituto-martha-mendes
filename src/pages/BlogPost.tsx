@@ -12,7 +12,7 @@ const BlogPost = () => {
 
   const post = getPostBySlug(id || '');
 
-  if (!post || post.status !== 'published') {
+  if (!post) {
     return (
       <div className="min-h-screen bg-background">
         <Header />
