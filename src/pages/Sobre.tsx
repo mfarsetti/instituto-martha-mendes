@@ -114,10 +114,10 @@ const Sobre = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="font-heading text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight"
+                className="font-heading text-5xl md:text-7xl font-bold mb-6 leading-tight"
               >
-                Nossa Jornada de
-                <span className="block gradient-gold bg-clip-text text-transparent">Transformação</span>
+                <span className="text-foreground">Nossa Jornada de </span>
+                <span className="text-primary">Transformação</span>
               </motion.h1>
               
               <motion.p
