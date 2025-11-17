@@ -30,7 +30,7 @@ const CursoDetalhes = () => {
 
   const course = getCourseBySlug(id || '');
 
-  if (!course || course.status !== 'published') {
+  if (!course) {
     return (
       <div className="min-h-screen bg-background">
         <Header />
