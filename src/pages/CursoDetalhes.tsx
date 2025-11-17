@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useData } from "@/contexts/DataContext";
 import {
   Clock,
@@ -20,6 +22,10 @@ import {
   MapPin,
   CheckCircle2,
   Star,
+  GraduationCap,
+  FileText,
+  HelpCircle,
+  Target,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -158,25 +164,282 @@ const CursoDetalhes = () => {
               <div className="grid lg:grid-cols-3 gap-12">
                 {/* Main Content */}
                 <div className="lg:col-span-2 space-y-8">
-                  <Card className="p-8 border-2 shadow-lg">
-                    <div
-                      className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-foreground prose-h2:text-3xl prose-h2:mb-4 prose-h2:mt-8 prose-h2:first:mt-0 prose-h3:text-xl prose-h3:font-semibold prose-h3:text-primary prose-p:text-foreground prose-p:leading-relaxed prose-ul:text-foreground prose-li:my-2 prose-strong:text-primary"
-                      dangerouslySetInnerHTML={{
-                        __html: course.content
-                          .split('\n\n')
-                          .map(p => {
-                            if (p.startsWith('# ')) return `<h1>${p.slice(2)}</h1>`;
-                            if (p.startsWith('## ')) return `<h2>${p.slice(3)}</h2>`;
-                            if (p.startsWith('### ')) return `<h3>${p.slice(4)}</h3>`;
-                            if (p.startsWith('- ')) {
-                              const items = p.split('\n').map(i => i.startsWith('- ') ? `<li>${i.slice(2)}</li>` : i).join('');
-                              return `<ul class="space-y-2">${items}</ul>`;
-                            }
-                            return `<p>${p}</p>`;
-                          })
-                          .join('')
-                      }}
-                    />
+                  <Card className="border-2 shadow-lg overflow-hidden">
+                    <Tabs defaultValue="sobre" className="w-full">
+                      <TabsList className="w-full grid grid-cols-4 h-auto p-0 bg-muted/50 rounded-none">
+                        <TabsTrigger 
+                          value="sobre" 
+                          className="flex flex-col items-center gap-2 py-4 data-[state=active]:bg-background data-[state=active]:shadow-md"
+                        >
+                          <Target className="w-5 h-5" />
+                          <span className="text-xs md:text-sm font-medium">Sobre</span>
+                        </TabsTrigger>
+                        <TabsTrigger 
+                          value="conteudo" 
+                          className="flex flex-col items-center gap-2 py-4 data-[state=active]:bg-background data-[state=active]:shadow-md"
+                        >
+                          <FileText className="w-5 h-5" />
+                          <span className="text-xs md:text-sm font-medium">Conteúdo</span>
+                        </TabsTrigger>
+                        <TabsTrigger 
+                          value="docentes" 
+                          className="flex flex-col items-center gap-2 py-4 data-[state=active]:bg-background data-[state=active]:shadow-md"
+                        >
+                          <GraduationCap className="w-5 h-5" />
+                          <span className="text-xs md:text-sm font-medium">Docentes</span>
+                        </TabsTrigger>
+                        <TabsTrigger 
+                          value="faq" 
+                          className="flex flex-col items-center gap-2 py-4 data-[state=active]:bg-background data-[state=active]:shadow-md"
+                        >
+                          <HelpCircle className="w-5 h-5" />
+                          <span className="text-xs md:text-sm font-medium">FAQ</span>
+                        </TabsTrigger>
+                      </TabsList>
+                      
+                      <TabsContent value="sobre" className="p-8 m-0">
+                        <div className="space-y-6">
+                          <div>
+                            <h3 className="font-heading text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+                              <Target className="w-6 h-6 text-primary" />
+                              Sobre o Curso
+                            </h3>
+                            <div
+                              className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-foreground prose-h3:text-xl prose-h3:font-semibold prose-h3:text-primary prose-p:text-foreground prose-p:leading-relaxed prose-ul:text-foreground prose-li:my-2"
+                              dangerouslySetInnerHTML={{
+                                __html: course.content
+                                  .split('\n\n')
+                                  .slice(0, 5)
+                                  .map(p => {
+                                    if (p.startsWith('### ')) return `<h3>${p.slice(4)}</h3>`;
+                                    if (p.startsWith('- ')) {
+                                      const items = p.split('\n').map(i => i.startsWith('- ') ? `<li>${i.slice(2)}</li>` : i).join('');
+                                      return `<ul class="space-y-2">${items}</ul>`;
+                                    }
+                                    return `<p>${p}</p>`;
+                                  })
+                                  .join('')
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </TabsContent>
+                      
+                      <TabsContent value="conteudo" className="p-8 m-0">
+                        <div className="space-y-6">
+                          <h3 className="font-heading text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+                            <FileText className="w-6 h-6 text-primary" />
+                            Conteúdo Programático
+                          </h3>
+                          <Accordion type="single" collapsible className="space-y-4">
+                            <AccordionItem value="modulo-1" className="border-2 rounded-lg px-6 bg-gradient-to-r from-primary/5 to-transparent">
+                              <AccordionTrigger className="font-heading text-lg font-semibold hover:text-primary py-4">
+                                Módulo 1: Fundamentos
+                              </AccordionTrigger>
+                              <AccordionContent className="text-muted-foreground space-y-2 pb-4">
+                                <ul className="space-y-2 list-disc list-inside">
+                                  <li>Introdução à metodologia</li>
+                                  <li>Bases teóricas e conceituais</li>
+                                  <li>História e desenvolvimento</li>
+                                  <li>Princípios fundamentais</li>
+                                </ul>
+                              </AccordionContent>
+                            </AccordionItem>
+                            
+                            <AccordionItem value="modulo-2" className="border-2 rounded-lg px-6 bg-gradient-to-r from-primary/5 to-transparent">
+                              <AccordionTrigger className="font-heading text-lg font-semibold hover:text-primary py-4">
+                                Módulo 2: Prática e Aplicação
+                              </AccordionTrigger>
+                              <AccordionContent className="text-muted-foreground space-y-2 pb-4">
+                                <ul className="space-y-2 list-disc list-inside">
+                                  <li>Técnicas e ferramentas práticas</li>
+                                  <li>Estudos de caso</li>
+                                  <li>Exercícios supervisionados</li>
+                                  <li>Dinâmicas de grupo</li>
+                                </ul>
+                              </AccordionContent>
+                            </AccordionItem>
+                            
+                            <AccordionItem value="modulo-3" className="border-2 rounded-lg px-6 bg-gradient-to-r from-primary/5 to-transparent">
+                              <AccordionTrigger className="font-heading text-lg font-semibold hover:text-primary py-4">
+                                Módulo 3: Aprofundamento
+                              </AccordionTrigger>
+                              <AccordionContent className="text-muted-foreground space-y-2 pb-4">
+                                <ul className="space-y-2 list-disc list-inside">
+                                  <li>Tópicos avançados</li>
+                                  <li>Pesquisa e investigação</li>
+                                  <li>Desenvolvimento de projetos</li>
+                                  <li>Trabalho de conclusão</li>
+                                </ul>
+                              </AccordionContent>
+                            </AccordionItem>
+                          </Accordion>
+                        </div>
+                      </TabsContent>
+                      
+                      <TabsContent value="docentes" className="p-8 m-0">
+                        <div className="space-y-6">
+                          <h3 className="font-heading text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+                            <GraduationCap className="w-6 h-6 text-primary" />
+                            Corpo Docente
+                          </h3>
+                          <div className="grid gap-6">
+                            {/* Docente 1 */}
+                            <Card className="overflow-hidden border-2 hover:shadow-xl transition-shadow">
+                              <div className="md:flex">
+                                <div className="md:w-48 h-48 md:h-auto bg-gradient-to-br from-primary/20 to-primary/5 relative overflow-hidden flex-shrink-0">
+                                  <img 
+                                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop" 
+                                    alt="Dra. Martha Mendes"
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <div className="p-6 flex-1">
+                                  <h4 className="font-heading text-xl font-bold text-foreground mb-2">
+                                    Dra. Martha Mendes
+                                  </h4>
+                                  <p className="text-primary font-medium mb-3">Fundadora e Coordenadora</p>
+                                  <p className="text-muted-foreground leading-relaxed mb-3">
+                                    Doutora em Psicologia, especialista em Terapias Integrativas com mais de 20 anos de experiência. 
+                                    Criadora da metodologia Psicobiosofia®.
+                                  </p>
+                                  <div className="flex flex-wrap gap-2">
+                                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                                      Psicologia
+                                    </span>
+                                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                                      Terapias Integrativas
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </Card>
+                            
+                            {/* Docente 2 */}
+                            <Card className="overflow-hidden border-2 hover:shadow-xl transition-shadow">
+                              <div className="md:flex">
+                                <div className="md:w-48 h-48 md:h-auto bg-gradient-to-br from-primary/20 to-primary/5 relative overflow-hidden flex-shrink-0">
+                                  <img 
+                                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop" 
+                                    alt="Prof. Carlos Silva"
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <div className="p-6 flex-1">
+                                  <h4 className="font-heading text-xl font-bold text-foreground mb-2">
+                                    Prof. Carlos Silva
+                                  </h4>
+                                  <p className="text-primary font-medium mb-3">Professor Associado</p>
+                                  <p className="text-muted-foreground leading-relaxed mb-3">
+                                    Mestre em Filosofia e especialista em Bioética. Atua há 15 anos na formação de terapeutas 
+                                    holísticos e profissionais de saúde integrativa.
+                                  </p>
+                                  <div className="flex flex-wrap gap-2">
+                                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                                      Filosofia
+                                    </span>
+                                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                                      Bioética
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </Card>
+                            
+                            {/* Docente 3 */}
+                            <Card className="overflow-hidden border-2 hover:shadow-xl transition-shadow">
+                              <div className="md:flex">
+                                <div className="md:w-48 h-48 md:h-auto bg-gradient-to-br from-primary/20 to-primary/5 relative overflow-hidden flex-shrink-0">
+                                  <img 
+                                    src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=400&fit=crop" 
+                                    alt="Dra. Ana Costa"
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <div className="p-6 flex-1">
+                                  <h4 className="font-heading text-xl font-bold text-foreground mb-2">
+                                    Dra. Ana Costa
+                                  </h4>
+                                  <p className="text-primary font-medium mb-3">Professora Visitante</p>
+                                  <p className="text-muted-foreground leading-relaxed mb-3">
+                                    Doutora em Neurociências com especialização em Medicina Integrativa. 
+                                    Pesquisadora nas áreas de consciência e neuroplasticidade.
+                                  </p>
+                                  <div className="flex flex-wrap gap-2">
+                                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                                      Neurociências
+                                    </span>
+                                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                                      Medicina Integrativa
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </Card>
+                          </div>
+                        </div>
+                      </TabsContent>
+                      
+                      <TabsContent value="faq" className="p-8 m-0">
+                        <div className="space-y-6">
+                          <h3 className="font-heading text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+                            <HelpCircle className="w-6 h-6 text-primary" />
+                            Perguntas Frequentes
+                          </h3>
+                          <Accordion type="single" collapsible className="space-y-4">
+                            <AccordionItem value="faq-1" className="border-2 rounded-lg px-6 bg-background">
+                              <AccordionTrigger className="font-semibold text-left hover:text-primary py-4">
+                                Preciso ter formação prévia para fazer este curso?
+                              </AccordionTrigger>
+                              <AccordionContent className="text-muted-foreground pb-4">
+                                Não é necessário ter formação prévia. O curso é estruturado para receber tanto iniciantes quanto 
+                                profissionais que desejam ampliar seus conhecimentos na área de terapias integrativas.
+                              </AccordionContent>
+                            </AccordionItem>
+                            
+                            <AccordionItem value="faq-2" className="border-2 rounded-lg px-6 bg-background">
+                              <AccordionTrigger className="font-semibold text-left hover:text-primary py-4">
+                                O certificado é reconhecido pelo MEC?
+                              </AccordionTrigger>
+                              <AccordionContent className="text-muted-foreground pb-4">
+                                Sim, nossos cursos de {course.certification} são reconhecidos pelo MEC e seguem todas as 
+                                diretrizes e normas estabelecidas para a formação em terapias integrativas.
+                              </AccordionContent>
+                            </AccordionItem>
+                            
+                            <AccordionItem value="faq-3" className="border-2 rounded-lg px-6 bg-background">
+                              <AccordionTrigger className="font-semibold text-left hover:text-primary py-4">
+                                Qual é a carga horária do curso?
+                              </AccordionTrigger>
+                              <AccordionContent className="text-muted-foreground pb-4">
+                                O curso tem duração de {course.duration}, distribuídos em aulas teóricas, práticas 
+                                supervisionadas e atividades complementares. A carga horária é compatível com as exigências do MEC.
+                              </AccordionContent>
+                            </AccordionItem>
+                            
+                            <AccordionItem value="faq-4" className="border-2 rounded-lg px-6 bg-background">
+                              <AccordionTrigger className="font-semibold text-left hover:text-primary py-4">
+                                Há possibilidade de parcelamento?
+                              </AccordionTrigger>
+                              <AccordionContent className="text-muted-foreground pb-4">
+                                Sim, oferecemos condições facilitadas de pagamento em até 12x sem juros. Entre em contato 
+                                com nossa equipe para conhecer todas as opções disponíveis.
+                              </AccordionContent>
+                            </AccordionItem>
+                            
+                            <AccordionItem value="faq-5" className="border-2 rounded-lg px-6 bg-background">
+                              <AccordionTrigger className="font-semibold text-left hover:text-primary py-4">
+                                O curso oferece estágio supervisionado?
+                              </AccordionTrigger>
+                              <AccordionContent className="text-muted-foreground pb-4">
+                                Sim, o curso inclui carga horária de estágio supervisionado onde os alunos poderão aplicar 
+                                os conhecimentos adquiridos sob orientação de profissionais experientes.
+                              </AccordionContent>
+                            </AccordionItem>
+                          </Accordion>
+                        </div>
+                      </TabsContent>
+                    </Tabs>
                   </Card>
                 </div>
 
