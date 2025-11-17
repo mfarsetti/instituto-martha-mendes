@@ -1,21 +1,26 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-main.jpg";
+import heroImage from "@/assets/hero-animated.jpg";
 import { motion } from "framer-motion";
 import ParallaxSection from "@/components/animations/ParallaxSection";
+import FloatingParticles from "@/components/animations/FloatingParticles";
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay - Parallax */}
       <ParallaxSection speed={-0.3} className="absolute inset-0 z-0">
-        <img
-          src={heroImage}
-          alt="Instituto Martha Mendes"
-          className="w-full h-full object-cover scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#8B6F47]/60 via-[#A0826D]/50 to-[#C2A86E]/40" />
+        <div className="absolute inset-0 animate-slow-zoom">
+          <img
+            src={heroImage}
+            alt="Instituto Martha Mendes"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-transparent to-amber-900/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+        <FloatingParticles />
       </ParallaxSection>
 
       {/* Content */}
