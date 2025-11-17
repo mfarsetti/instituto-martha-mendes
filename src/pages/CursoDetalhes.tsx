@@ -231,49 +231,32 @@ const CursoDetalhes = () => {
                             <FileText className="w-6 h-6 text-primary" />
                             Conteúdo Programático
                           </h3>
-                          <Accordion type="single" collapsible className="space-y-4">
-                            <AccordionItem value="modulo-1" className="border-2 rounded-lg px-6 bg-gradient-to-r from-primary/5 to-transparent">
-                              <AccordionTrigger className="font-heading text-lg font-semibold hover:text-primary py-4">
-                                Módulo 1: Fundamentos
-                              </AccordionTrigger>
-                              <AccordionContent className="text-muted-foreground space-y-2 pb-4">
-                                <ul className="space-y-2 list-disc list-inside">
-                                  <li>Introdução à metodologia</li>
-                                  <li>Bases teóricas e conceituais</li>
-                                  <li>História e desenvolvimento</li>
-                                  <li>Princípios fundamentais</li>
-                                </ul>
-                              </AccordionContent>
-                            </AccordionItem>
-                            
-                            <AccordionItem value="modulo-2" className="border-2 rounded-lg px-6 bg-gradient-to-r from-primary/5 to-transparent">
-                              <AccordionTrigger className="font-heading text-lg font-semibold hover:text-primary py-4">
-                                Módulo 2: Prática e Aplicação
-                              </AccordionTrigger>
-                              <AccordionContent className="text-muted-foreground space-y-2 pb-4">
-                                <ul className="space-y-2 list-disc list-inside">
-                                  <li>Técnicas e ferramentas práticas</li>
-                                  <li>Estudos de caso</li>
-                                  <li>Exercícios supervisionados</li>
-                                  <li>Dinâmicas de grupo</li>
-                                </ul>
-                              </AccordionContent>
-                            </AccordionItem>
-                            
-                            <AccordionItem value="modulo-3" className="border-2 rounded-lg px-6 bg-gradient-to-r from-primary/5 to-transparent">
-                              <AccordionTrigger className="font-heading text-lg font-semibold hover:text-primary py-4">
-                                Módulo 3: Aprofundamento
-                              </AccordionTrigger>
-                              <AccordionContent className="text-muted-foreground space-y-2 pb-4">
-                                <ul className="space-y-2 list-disc list-inside">
-                                  <li>Tópicos avançados</li>
-                                  <li>Pesquisa e investigação</li>
-                                  <li>Desenvolvimento de projetos</li>
-                                  <li>Trabalho de conclusão</li>
-                                </ul>
-                              </AccordionContent>
-                            </AccordionItem>
-                          </Accordion>
+                          {course.modules.length > 0 ? (
+                            <Accordion type="single" collapsible className="space-y-4">
+                              {course.modules.map((module) => (
+                                <AccordionItem 
+                                  key={module.id} 
+                                  value={module.id} 
+                                  className="border-2 rounded-lg px-6 bg-gradient-to-r from-primary/5 to-transparent"
+                                >
+                                  <AccordionTrigger className="font-heading text-lg font-semibold hover:text-primary py-4">
+                                    {module.title}
+                                  </AccordionTrigger>
+                                  <AccordionContent className="text-muted-foreground space-y-2 pb-4">
+                                    <ul className="space-y-2 list-disc list-inside">
+                                      {module.topics.map((topic, idx) => (
+                                        <li key={idx}>{topic}</li>
+                                      ))}
+                                    </ul>
+                                  </AccordionContent>
+                                </AccordionItem>
+                              ))}
+                            </Accordion>
+                          ) : (
+                            <p className="text-muted-foreground text-center py-8">
+                              Nenhum módulo cadastrado para este curso.
+                            </p>
+                          )}
                         </div>
                       </TabsContent>
                       
@@ -283,100 +266,46 @@ const CursoDetalhes = () => {
                             <GraduationCap className="w-6 h-6 text-primary" />
                             Corpo Docente
                           </h3>
-                          <div className="grid gap-6">
-                            {/* Docente 1 */}
-                            <Card className="overflow-hidden border-2 hover:shadow-xl transition-shadow">
-                              <div className="md:flex">
-                                <div className="md:w-48 h-48 md:h-auto bg-gradient-to-br from-primary/20 to-primary/5 relative overflow-hidden flex-shrink-0">
-                                  <img 
-                                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop" 
-                                    alt="Dra. Martha Mendes"
-                                    className="w-full h-full object-cover"
-                                  />
-                                </div>
-                                <div className="p-6 flex-1">
-                                  <h4 className="font-heading text-xl font-bold text-foreground mb-2">
-                                    Dra. Martha Mendes
-                                  </h4>
-                                  <p className="text-primary font-medium mb-3">Fundadora e Coordenadora</p>
-                                  <p className="text-muted-foreground leading-relaxed mb-3">
-                                    Doutora em Psicologia, especialista em Terapias Integrativas com mais de 20 anos de experiência. 
-                                    Criadora da metodologia Psicobiosofia®.
-                                  </p>
-                                  <div className="flex flex-wrap gap-2">
-                                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
-                                      Psicologia
-                                    </span>
-                                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
-                                      Terapias Integrativas
-                                    </span>
+                          {course.teachers.length > 0 ? (
+                            <div className="grid gap-6">
+                              {course.teachers.map((teacher) => (
+                                <Card key={teacher.id} className="overflow-hidden border-2 hover:shadow-xl transition-shadow">
+                                  <div className="md:flex">
+                                    <div className="md:w-48 h-48 md:h-auto bg-gradient-to-br from-primary/20 to-primary/5 relative overflow-hidden flex-shrink-0">
+                                      <img 
+                                        src={teacher.photo} 
+                                        alt={teacher.name}
+                                        className="w-full h-full object-cover"
+                                      />
+                                    </div>
+                                    <div className="p-6 flex-1">
+                                      <h4 className="font-heading text-xl font-bold text-foreground mb-2">
+                                        {teacher.name}
+                                      </h4>
+                                      <p className="text-primary font-medium mb-3">{teacher.role}</p>
+                                      <p className="text-muted-foreground leading-relaxed mb-3">
+                                        {teacher.bio}
+                                      </p>
+                                      <div className="flex flex-wrap gap-2">
+                                        {teacher.specialties.map((specialty, idx) => (
+                                          <span 
+                                            key={idx}
+                                            className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full"
+                                          >
+                                            {specialty}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                            </Card>
-                            
-                            {/* Docente 2 */}
-                            <Card className="overflow-hidden border-2 hover:shadow-xl transition-shadow">
-                              <div className="md:flex">
-                                <div className="md:w-48 h-48 md:h-auto bg-gradient-to-br from-primary/20 to-primary/5 relative overflow-hidden flex-shrink-0">
-                                  <img 
-                                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop" 
-                                    alt="Prof. Carlos Silva"
-                                    className="w-full h-full object-cover"
-                                  />
-                                </div>
-                                <div className="p-6 flex-1">
-                                  <h4 className="font-heading text-xl font-bold text-foreground mb-2">
-                                    Prof. Carlos Silva
-                                  </h4>
-                                  <p className="text-primary font-medium mb-3">Professor Associado</p>
-                                  <p className="text-muted-foreground leading-relaxed mb-3">
-                                    Mestre em Filosofia e especialista em Bioética. Atua há 15 anos na formação de terapeutas 
-                                    holísticos e profissionais de saúde integrativa.
-                                  </p>
-                                  <div className="flex flex-wrap gap-2">
-                                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
-                                      Filosofia
-                                    </span>
-                                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
-                                      Bioética
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </Card>
-                            
-                            {/* Docente 3 */}
-                            <Card className="overflow-hidden border-2 hover:shadow-xl transition-shadow">
-                              <div className="md:flex">
-                                <div className="md:w-48 h-48 md:h-auto bg-gradient-to-br from-primary/20 to-primary/5 relative overflow-hidden flex-shrink-0">
-                                  <img 
-                                    src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=400&fit=crop" 
-                                    alt="Dra. Ana Costa"
-                                    className="w-full h-full object-cover"
-                                  />
-                                </div>
-                                <div className="p-6 flex-1">
-                                  <h4 className="font-heading text-xl font-bold text-foreground mb-2">
-                                    Dra. Ana Costa
-                                  </h4>
-                                  <p className="text-primary font-medium mb-3">Professora Visitante</p>
-                                  <p className="text-muted-foreground leading-relaxed mb-3">
-                                    Doutora em Neurociências com especialização em Medicina Integrativa. 
-                                    Pesquisadora nas áreas de consciência e neuroplasticidade.
-                                  </p>
-                                  <div className="flex flex-wrap gap-2">
-                                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
-                                      Neurociências
-                                    </span>
-                                    <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
-                                      Medicina Integrativa
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </Card>
-                          </div>
+                                </Card>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-muted-foreground text-center py-8">
+                              Nenhum docente cadastrado para este curso.
+                            </p>
+                          )}
                         </div>
                       </TabsContent>
                       
@@ -386,57 +315,28 @@ const CursoDetalhes = () => {
                             <HelpCircle className="w-6 h-6 text-primary" />
                             Perguntas Frequentes
                           </h3>
-                          <Accordion type="single" collapsible className="space-y-4">
-                            <AccordionItem value="faq-1" className="border-2 rounded-lg px-6 bg-background">
-                              <AccordionTrigger className="font-semibold text-left hover:text-primary py-4">
-                                Preciso ter formação prévia para fazer este curso?
-                              </AccordionTrigger>
-                              <AccordionContent className="text-muted-foreground pb-4">
-                                Não é necessário ter formação prévia. O curso é estruturado para receber tanto iniciantes quanto 
-                                profissionais que desejam ampliar seus conhecimentos na área de terapias integrativas.
-                              </AccordionContent>
-                            </AccordionItem>
-                            
-                            <AccordionItem value="faq-2" className="border-2 rounded-lg px-6 bg-background">
-                              <AccordionTrigger className="font-semibold text-left hover:text-primary py-4">
-                                O certificado é reconhecido pelo MEC?
-                              </AccordionTrigger>
-                              <AccordionContent className="text-muted-foreground pb-4">
-                                Sim, nossos cursos de {course.certification} são reconhecidos pelo MEC e seguem todas as 
-                                diretrizes e normas estabelecidas para a formação em terapias integrativas.
-                              </AccordionContent>
-                            </AccordionItem>
-                            
-                            <AccordionItem value="faq-3" className="border-2 rounded-lg px-6 bg-background">
-                              <AccordionTrigger className="font-semibold text-left hover:text-primary py-4">
-                                Qual é a carga horária do curso?
-                              </AccordionTrigger>
-                              <AccordionContent className="text-muted-foreground pb-4">
-                                O curso tem duração de {course.duration}, distribuídos em aulas teóricas, práticas 
-                                supervisionadas e atividades complementares. A carga horária é compatível com as exigências do MEC.
-                              </AccordionContent>
-                            </AccordionItem>
-                            
-                            <AccordionItem value="faq-4" className="border-2 rounded-lg px-6 bg-background">
-                              <AccordionTrigger className="font-semibold text-left hover:text-primary py-4">
-                                Há possibilidade de parcelamento?
-                              </AccordionTrigger>
-                              <AccordionContent className="text-muted-foreground pb-4">
-                                Sim, oferecemos condições facilitadas de pagamento em até 12x sem juros. Entre em contato 
-                                com nossa equipe para conhecer todas as opções disponíveis.
-                              </AccordionContent>
-                            </AccordionItem>
-                            
-                            <AccordionItem value="faq-5" className="border-2 rounded-lg px-6 bg-background">
-                              <AccordionTrigger className="font-semibold text-left hover:text-primary py-4">
-                                O curso oferece estágio supervisionado?
-                              </AccordionTrigger>
-                              <AccordionContent className="text-muted-foreground pb-4">
-                                Sim, o curso inclui carga horária de estágio supervisionado onde os alunos poderão aplicar 
-                                os conhecimentos adquiridos sob orientação de profissionais experientes.
-                              </AccordionContent>
-                            </AccordionItem>
-                          </Accordion>
+                          {course.faqs.length > 0 ? (
+                            <Accordion type="single" collapsible className="space-y-4">
+                              {course.faqs.map((faq) => (
+                                <AccordionItem 
+                                  key={faq.id} 
+                                  value={faq.id} 
+                                  className="border-2 rounded-lg px-6 bg-background"
+                                >
+                                  <AccordionTrigger className="font-semibold text-left hover:text-primary py-4">
+                                    {faq.question}
+                                  </AccordionTrigger>
+                                  <AccordionContent className="text-muted-foreground pb-4">
+                                    {faq.answer}
+                                  </AccordionContent>
+                                </AccordionItem>
+                              ))}
+                            </Accordion>
+                          ) : (
+                            <p className="text-muted-foreground text-center py-8">
+                              Nenhuma pergunta frequente cadastrada para este curso.
+                            </p>
+                          )}
                         </div>
                       </TabsContent>
                     </Tabs>

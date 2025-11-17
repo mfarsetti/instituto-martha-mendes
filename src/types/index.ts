@@ -33,6 +33,27 @@ export interface Post {
   readTime?: string;
 }
 
+export interface CourseModule {
+  id: string;
+  title: string;
+  topics: string[];
+}
+
+export interface CourseTeacher {
+  id: string;
+  name: string;
+  photo: string;
+  role: string;
+  bio: string;
+  specialties: string[];
+}
+
+export interface CourseFAQ {
+  id: string;
+  question: string;
+  answer: string;
+}
+
 export interface Course {
   id: string;
   title: string;
@@ -46,6 +67,9 @@ export interface Course {
   startDates: string[];
   image: string;
   content: string;
+  modules: CourseModule[];
+  teachers: CourseTeacher[];
+  faqs: CourseFAQ[];
   status: CourseStatus;
   seoTitle: string | null;
   seoDescription: string | null;
