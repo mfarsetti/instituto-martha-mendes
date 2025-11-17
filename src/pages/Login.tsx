@@ -34,7 +34,7 @@ const Login = () => {
 
     try {
       const result = await login(email, password);
-      
+
       if (result.success) {
         toast.success("Login realizado com sucesso!");
         navigate("/admin");
@@ -51,23 +51,18 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden">
       <AnimatedBackground />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-md mx-auto">
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <img src={logoWhite} alt="Instituto Martha Mendes" className="h-24 w-auto animate-float" />
+            <img src={logoWhite} alt="Instituto Martha Mendes" className="h-24 w-auto animate-float brightness-500" />
           </div>
 
           {/* Card */}
           <div className="glass-effect rounded-2xl p-8 shadow-elegant">
-            <h1 className="font-heading text-3xl font-bold text-center text-foreground mb-2">
-              Área Administrativa
-            </h1>
-            <p className="text-center text-muted-foreground mb-8">
-              Faça login para acessar o painel
-            </p>
-
+            <h1 className="font-heading text-3xl font-bold text-center text-foreground mb-2">Área Administrativa</h1>
+            <p className="text-center text-muted-foreground mb-8">Faça login para acessar o painel</p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
@@ -113,11 +108,7 @@ const Login = () => {
                 )}
               </div>
 
-              <Button
-                type="submit"
-                className="w-full gradient-gold text-white hover:opacity-90"
-                disabled={isLoading}
-              >
+              <Button type="submit" className="w-full gradient-gold text-white hover:opacity-90" disabled={isLoading}>
                 {isLoading ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
