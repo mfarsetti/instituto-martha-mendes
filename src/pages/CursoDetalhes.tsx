@@ -231,7 +231,7 @@ const CursoDetalhes = () => {
                             <FileText className="w-6 h-6 text-primary" />
                             Conteúdo Programático
                           </h3>
-                          {course.modules.length > 0 ? (
+                          {course.modules && course.modules.length > 0 ? (
                             <Accordion type="single" collapsible className="space-y-4">
                               {course.modules.map((module) => (
                                 <AccordionItem 
@@ -266,7 +266,7 @@ const CursoDetalhes = () => {
                             <GraduationCap className="w-6 h-6 text-primary" />
                             Corpo Docente
                           </h3>
-                          {course.teachers.length > 0 ? (
+                          {course.teachers && course.teachers.length > 0 ? (
                             <div className="grid gap-6">
                               {course.teachers.map((teacher) => (
                                 <Card key={teacher.id} className="overflow-hidden border-2 hover:shadow-xl transition-shadow">
@@ -315,7 +315,7 @@ const CursoDetalhes = () => {
                             <HelpCircle className="w-6 h-6 text-primary" />
                             Perguntas Frequentes
                           </h3>
-                          {course.faqs.length > 0 ? (
+                          {course.faqs && course.faqs.length > 0 ? (
                             <Accordion type="single" collapsible className="space-y-4">
                               {course.faqs.map((faq) => (
                                 <AccordionItem 
