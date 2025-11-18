@@ -12,17 +12,20 @@ const FeaturedCourses = () => {
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+          <div className="mb-12">
             <SectionHeading
               title="Cursos em Destaque"
               subtitle="Formações completas para sua jornada profissional"
+              centered
             />
-            <Link to="/cursos">
-              <Button variant="outline" className="mt-4 md:mt-0 group border-primary text-primary hover:bg-primary hover:text-white">
-                Ver Todos os Cursos
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+            <div className="text-center mt-6">
+              <Link to="/cursos">
+                <Button variant="outline" className="group border-primary text-primary hover:bg-primary hover:text-white">
+                  Ver Todos os Cursos
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
