@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
-import logoWhite from "@/assets/logo-white.svg";
+import logo from "@/assets/logo.svg";
 import { toast } from "sonner";
 import AnimatedBackground from "@/components/animations/AnimatedBackground";
 import Header from "@/components/layout/Header";
@@ -58,7 +58,7 @@ const Login = () => {
         <div className="max-w-md mx-auto">
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <img src={logoWhite} alt="Instituto Martha Mendes" className="h-24 w-auto animate-float brightness-500" />
+            <img src={logo} alt="Instituto Martha Mendes" className="h-24 w-auto animate-float" />
           </div>
 
           {/* Card */}
