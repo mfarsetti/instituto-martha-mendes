@@ -28,10 +28,10 @@ const FeaturedCourses = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             {courses.map((course, index) => (
               <ScrollReveal key={course.id} direction="up" delay={index * 0.1}>
-                <Link to={`/cursos/${course.slug}`} className="group block">
+                <Link to={`/cursos/${course.slug}`} className="group block w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] max-w-sm">
                   <div className="bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-2">
                     {/* Image */}
                     <div className="relative h-48 overflow-hidden">
