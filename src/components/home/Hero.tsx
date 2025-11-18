@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import AnimatedBackground from "@/components/animations/AnimatedBackground";
-import heroImage from "@/assets/hero-main.jpg";
+import marthaImage from "@/assets/martha-hero.jpg";
 
 const Hero = () => {
   return (
@@ -121,8 +121,8 @@ const Hero = () => {
               <div className="relative">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-elegant">
                   <img 
-                    src={heroImage} 
-                    alt="Instituto Martha Mendes - Ambiente sereno de terapias integrativas" 
+                    src={marthaImage} 
+                    alt="Martha Mendes - Fundadora do Instituto Martha Mendes" 
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />

@@ -2,13 +2,14 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Users, Award, GraduationCap } from "lucide-react";
+import marthaProfile from "@/assets/martha-profile.jpg";
 
 const team = [
   {
     name: "Dra. Martha Mendes",
     role: "Fundadora e Diretora",
     specialties: "Psicobiosofia®, Hipnose, Florais",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop",
+    image: marthaProfile,
     bio: "Mais de 30 anos de experiência em terapias integrativas. Criadora da metodologia Psicobiosofia® e autora de diversos livros na área.",
   },
   {
