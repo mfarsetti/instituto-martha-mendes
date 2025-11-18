@@ -6,6 +6,7 @@ import { Sparkles, Rocket, Users, Award, Globe, BookOpen, Heart, Target } from "
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import TimelineItem from "@/components/about/TimelineItem";
+import marthaAbout from "@/assets/martha-about.jpg";
 
 const Sobre = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -128,6 +129,79 @@ const Sobre = () => {
               >
                 Descubra como uma visão se transformou em um legado que impacta milhares de vidas ao redor do mundo.
               </motion.p>
+            </div>
+          </div>
+        </section>
+
+        {/* Founder Section - Martha Mendes */}
+        <section className="py-32 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                  className="relative"
+                >
+                  <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-elegant">
+                    <img 
+                      src={marthaAbout} 
+                      alt="Dra. Martha Mendes - Fundadora" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="absolute -bottom-6 -right-6 bg-card border-2 border-border rounded-xl p-6 shadow-elegant backdrop-blur-sm max-w-xs">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Award className="w-6 h-6 text-primary" />
+                      <span className="text-sm font-semibold text-primary">Reconhecimento MEC</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground">Mais de 30 anos dedicados à educação e transformação humana</p>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                  className="space-y-6"
+                >
+                  <div className="inline-flex items-center space-x-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2">
+                    <Sparkles className="w-4 h-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Fundadora</span>
+                  </div>
+
+                  <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+                    Dra. Martha Mendes
+                  </h2>
+
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    Pioneira nas terapias integrativas no Brasil, a Dra. Martha Mendes dedicou mais de três décadas 
+                    à pesquisa e desenvolvimento de metodologias que integram ciência, espiritualidade e autoconhecimento.
+                  </p>
+
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    Criadora da metodologia <span className="text-primary font-semibold">Psicobiosofia®</span>, 
+                    Martha revolucionou a forma como compreendemos a integração entre psicologia, biologia e filosofia, 
+                    formando milhares de profissionais que hoje transformam vidas ao redor do mundo.
+                  </p>
+
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    Seu compromisso com a excelência acadêmica e a compaixão humana estabeleceu novos padrões 
+                    na educação em terapias integrativas, conquistando reconhecimento do MEC e formando uma 
+                    comunidade global de terapeutas.
+                  </p>
+
+                  <Link to="/metodologia">
+                    <Button className="gradient-gold text-white shadow-elegant hover:shadow-glow transition-all group mt-4">
+                      Conheça a Psicobiosofia®
+                      <Sparkles className="ml-2 w-4 h-4 group-hover:rotate-12 transition-transform" />
+                    </Button>
+                  </Link>
+                </motion.div>
+              </div>
             </div>
           </div>
         </section>
