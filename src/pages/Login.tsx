@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Eye, EyeOff, Loader2, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import logoWhite from "@/assets/logo-white.svg";
 import { toast } from "sonner";
 import AnimatedBackground from "@/components/animations/AnimatedBackground";
+import Header from "@/components/layout/Header";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -50,16 +51,11 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden">
+      <Header />
       <AnimatedBackground />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-md mx-auto">
-          {/* Back Button */}
-          <Link to="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-smooth mb-6 group">
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm">Voltar para home</span>
-          </Link>
-
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <img src={logoWhite} alt="Instituto Martha Mendes" className="h-24 w-auto animate-float brightness-500" />
