@@ -1,4 +1,4 @@
-import logoWhite from "@/assets/logo-white.svg";
+import logo from "@/assets/logo.svg";
 
 interface WatermarkedImageProps {
   src: string;
@@ -24,9 +24,9 @@ const WatermarkedImage = ({ src, alt, className = "" }: WatermarkedImageProps) =
       <div className="absolute bottom-4 right-4 pointer-events-none">
         <div className="bg-white/90 rounded-lg px-4 py-2 shadow-lg border border-white/50">
           <img 
-            src={logoWhite} 
+            src={logo} 
             alt="Instituto Martha Mendes" 
-            className="h-8 md:h-10 invert"
+            className="h-8 md:h-10"
             draggable={false}
           />
         </div>
