@@ -24,6 +24,7 @@ import AdminBlogForm from "./pages/admin/BlogForm";
 import AdminCursosList from "./pages/admin/CursosList";
 import AdminCursosForm from "./pages/admin/CursosForm";
 import NotFound from "./pages/NotFound";
+import Midia from "./pages/Midia";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const AnimatedRoutes = () => {
         <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contato" element={<Contato />} />
+        <Route path="/midia" element={<Midia />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
         <Route path="/admin/blog" element={<ProtectedRoute><AdminBlogList /></ProtectedRoute>} />
