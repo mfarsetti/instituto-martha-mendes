@@ -20,14 +20,16 @@ const WatermarkedImage = ({ src, alt, className = "" }: WatermarkedImageProps) =
         draggable={false}
         onDragStart={(e) => e.preventDefault()}
       />
-      {/* Watermark overlay */}
-      <div className="absolute bottom-4 right-4 opacity-70 pointer-events-none">
-        <img 
-          src={logoWhite} 
-          alt="Instituto Martha Mendes" 
-          className="h-10 md:h-12 drop-shadow-lg"
-          draggable={false}
-        />
+      {/* Watermark overlay with background for visibility on dark images */}
+      <div className="absolute bottom-4 right-4 pointer-events-none">
+        <div className="bg-black/40 backdrop-blur-sm rounded-lg px-3 py-2">
+          <img 
+            src={logoWhite} 
+            alt="Instituto Martha Mendes" 
+            className="h-8 md:h-10 drop-shadow-lg"
+            draggable={false}
+          />
+        </div>
       </div>
       {/* Transparent protection layer */}
       <div className="absolute inset-0 bg-transparent" />
