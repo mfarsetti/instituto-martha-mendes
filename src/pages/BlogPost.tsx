@@ -6,6 +6,8 @@ import { ArrowLeft, Calendar, Clock, Share2, Tag } from "lucide-react";
 import { toast } from "sonner";
 import { useData } from "@/contexts/DataContext";
 import { renderMarkdown } from "@/lib/markdown";
+import WatermarkedImage from "@/components/blog/WatermarkedImage";
+import ContentProtection from "@/components/blog/ContentProtection";
 
 const BlogPost = () => {
   const { id } = useParams();
@@ -116,10 +118,10 @@ const BlogPost = () => {
           <section className="py-12 bg-background">
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
-                <img
+                <WatermarkedImage
                   src={post.image}
                   alt={post.title}
-                  className="w-full h-[400px] object-cover rounded-2xl shadow-elegant"
+                  className="w-full h-[400px] rounded-2xl shadow-elegant"
                 />
               </div>
             </div>
@@ -127,18 +129,20 @@ const BlogPost = () => {
         )}
 
         {/* Article Content */}
-        <section className="py-12 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <article
-                className="prose prose-xl max-w-none prose-headings:font-heading prose-headings:text-foreground prose-p:text-foreground prose-p:leading-relaxed prose-a:text-primary prose-strong:text-foreground prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground"
-                dangerouslySetInnerHTML={{
-                  __html: renderMarkdown(post.content)
-                }}
-              />
+        <ContentProtection>
+          <section className="py-12 bg-background">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <article
+                  className="prose prose-xl max-w-none prose-headings:font-heading prose-headings:text-foreground prose-p:text-foreground prose-p:leading-relaxed prose-a:text-primary prose-strong:text-foreground prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground"
+                  dangerouslySetInnerHTML={{
+                    __html: renderMarkdown(post.content)
+                  }}
+                />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </ContentProtection>
 
         {/* Share Section */}
         <section className="py-12 bg-muted/30">
