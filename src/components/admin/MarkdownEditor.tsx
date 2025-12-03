@@ -18,33 +18,51 @@ interface MarkdownEditorProps {
 const htmlToMarkdown = (html: string): string => {
   let text = html;
   
-  // Remove style tags and their content
+  // Remove script and style tags
+  text = text.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
   text = text.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
   
-  // Headers
-  text = text.replace(/<h1[^>]*>(.*?)<\/h1>/gi, '# $1\n\n');
-  text = text.replace(/<h2[^>]*>(.*?)<\/h2>/gi, '## $1\n\n');
-  text = text.replace(/<h3[^>]*>(.*?)<\/h3>/gi, '### $1\n\n');
-  text = text.replace(/<h4[^>]*>(.*?)<\/h4>/gi, '#### $1\n\n');
+  // Remove Word-specific tags and comments
+  text = text.replace(/<!--[\s\S]*?-->/g, '');
+  text = text.replace(/<o:p[^>]*>[\s\S]*?<\/o:p>/gi, '');
+  text = text.replace(/<\/?o:[^>]*>/gi, '');
+  text = text.replace(/<\/?w:[^>]*>/gi, '');
+  text = text.replace(/<\/?m:[^>]*>/gi, '');
   
-  // Bold and italic
-  text = text.replace(/<(strong|b)[^>]*>(.*?)<\/(strong|b)>/gi, '**$2**');
-  text = text.replace(/<(em|i)[^>]*>(.*?)<\/(em|i)>/gi, '*$2*');
+  // Headers (handle multiline content)
+  text = text.replace(/<h1[^>]*>([\s\S]*?)<\/h1>/gi, (_, content) => `# ${content.replace(/<[^>]+>/g, '').trim()}\n\n`);
+  text = text.replace(/<h2[^>]*>([\s\S]*?)<\/h2>/gi, (_, content) => `## ${content.replace(/<[^>]+>/g, '').trim()}\n\n`);
+  text = text.replace(/<h3[^>]*>([\s\S]*?)<\/h3>/gi, (_, content) => `### ${content.replace(/<[^>]+>/g, '').trim()}\n\n`);
+  text = text.replace(/<h4[^>]*>([\s\S]*?)<\/h4>/gi, (_, content) => `#### ${content.replace(/<[^>]+>/g, '').trim()}\n\n`);
+  
+  // Bold and italic (handle nested tags)
+  text = text.replace(/<(strong|b)[^>]*>([\s\S]*?)<\/(strong|b)>/gi, '**$2**');
+  text = text.replace(/<(em|i)[^>]*>([\s\S]*?)<\/(em|i)>/gi, '*$2*');
+  text = text.replace(/<u[^>]*>([\s\S]*?)<\/u>/gi, '$1'); // Remove underline, just keep text
   
   // Lists
   text = text.replace(/<ul[^>]*>/gi, '\n');
   text = text.replace(/<\/ul>/gi, '\n');
   text = text.replace(/<ol[^>]*>/gi, '\n');
   text = text.replace(/<\/ol>/gi, '\n');
-  text = text.replace(/<li[^>]*>(.*?)<\/li>/gi, '- $1\n');
+  text = text.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, (_, content) => `- ${content.replace(/<[^>]+>/g, '').trim()}\n`);
   
   // Paragraphs and line breaks
-  text = text.replace(/<p[^>]*>(.*?)<\/p>/gi, '$1\n\n');
+  text = text.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, (_, content) => {
+    const cleaned = content.replace(/<[^>]+>/g, '').trim();
+    return cleaned ? `${cleaned}\n\n` : '';
+  });
   text = text.replace(/<br\s*\/?>/gi, '\n');
-  text = text.replace(/<div[^>]*>(.*?)<\/div>/gi, '$1\n');
+  text = text.replace(/<div[^>]*>([\s\S]*?)<\/div>/gi, '$1\n');
   
   // Links
-  text = text.replace(/<a[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/gi, '[$2]($1)');
+  text = text.replace(/<a[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, '[$2]($1)');
+  
+  // Tables (basic conversion)
+  text = text.replace(/<table[^>]*>[\s\S]*?<\/table>/gi, '[Tabela removida - reformate manualmente se necessário]\n\n');
+  
+  // Remove span tags but keep content
+  text = text.replace(/<span[^>]*>([\s\S]*?)<\/span>/gi, '$1');
   
   // Remove remaining HTML tags
   text = text.replace(/<[^>]+>/g, '');
@@ -56,9 +74,20 @@ const htmlToMarkdown = (html: string): string => {
   text = text.replace(/&gt;/g, '>');
   text = text.replace(/&quot;/g, '"');
   text = text.replace(/&#39;/g, "'");
+  text = text.replace(/&rsquo;/g, "'");
+  text = text.replace(/&lsquo;/g, "'");
+  text = text.replace(/&rdquo;/g, '"');
+  text = text.replace(/&ldquo;/g, '"');
+  text = text.replace(/&mdash;/g, '—');
+  text = text.replace(/&ndash;/g, '–');
+  text = text.replace(/&hellip;/g, '...');
+  text = text.replace(/&#\d+;/g, ''); // Remove numeric entities
   
   // Clean up extra whitespace
-  text = text.replace(/\n{3,}/g, '\n\n');
+  text = text.replace(/[ \t]+/g, ' '); // Multiple spaces to single
+  text = text.replace(/\n[ \t]+/g, '\n'); // Remove leading spaces on lines
+  text = text.replace(/[ \t]+\n/g, '\n'); // Remove trailing spaces on lines
+  text = text.replace(/\n{3,}/g, '\n\n'); // Max 2 newlines
   text = text.trim();
   
   return text;
