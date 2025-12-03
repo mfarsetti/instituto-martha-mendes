@@ -6,6 +6,47 @@ import { ArrowLeft, Calendar, Clock, Share2, Tag } from "lucide-react";
 import { toast } from "sonner";
 import { useData } from "@/contexts/DataContext";
 
+// Render markdown to HTML
+const renderMarkdown = (text: string): string => {
+  if (!text) return '';
+  
+  // Process inline elements first
+  let html = text
+    // Bold
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    // Italic
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+    // Links
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary hover:underline">$1</a>');
+  
+  // Split into blocks (handle both single and double newlines)
+  const blocks = html.split(/\n{2,}|\n(?=[#-])/);
+  
+  return blocks.map(block => {
+    const trimmed = block.trim();
+    if (!trimmed) return '';
+    
+    // Headers
+    if (trimmed.startsWith('#### ')) return `<h4>${trimmed.slice(5)}</h4>`;
+    if (trimmed.startsWith('### ')) return `<h3>${trimmed.slice(4)}</h3>`;
+    if (trimmed.startsWith('## ')) return `<h2>${trimmed.slice(3)}</h2>`;
+    if (trimmed.startsWith('# ')) return `<h1>${trimmed.slice(2)}</h1>`;
+    
+    // Lists
+    if (trimmed.startsWith('- ')) {
+      const items = trimmed.split('\n')
+        .filter(line => line.trim())
+        .map(item => item.startsWith('- ') ? `<li>${item.slice(2)}</li>` : `<li>${item}</li>`)
+        .join('');
+      return `<ul>${items}</ul>`;
+    }
+    
+    // Regular paragraph - preserve single line breaks within
+    const withBreaks = trimmed.replace(/\n/g, '<br/>');
+    return `<p>${withBreaks}</p>`;
+  }).filter(Boolean).join('');
+};
+
 const BlogPost = () => {
   const { id } = useParams();
   const { getPostBySlug } = useData();
@@ -132,19 +173,7 @@ const BlogPost = () => {
               <article
                 className="prose prose-xl max-w-none prose-headings:font-heading prose-headings:text-foreground prose-p:text-foreground prose-p:leading-relaxed prose-a:text-primary prose-strong:text-foreground prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground"
                 dangerouslySetInnerHTML={{
-                  __html: post.content
-                    .split('\n\n')
-                    .map(p => {
-                      if (p.startsWith('# ')) return `<h1>${p.slice(2)}</h1>`;
-                      if (p.startsWith('## ')) return `<h2>${p.slice(3)}</h2>`;
-                      if (p.startsWith('### ')) return `<h3>${p.slice(4)}</h3>`;
-                      if (p.startsWith('- ')) {
-                        const items = p.split('\n').map(i => i.startsWith('- ') ? `<li>${i.slice(2)}</li>` : i).join('');
-                        return `<ul>${items}</ul>`;
-                      }
-                      return `<p>${p}</p>`;
-                    })
-                    .join('')
+                  __html: renderMarkdown(post.content)
                 }}
               />
             </div>
