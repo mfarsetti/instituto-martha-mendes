@@ -18,8 +18,8 @@ const FAQ = () => {
       category: "Sobre os Cursos",
       questions: [
         {
-          question: "Os cursos são reconhecidos pelo MEC?",
-          answer: "Sim, nossos cursos de pós-graduação são reconhecidos pelo MEC e seguem todas as normas estabelecidas pelo Ministério da Educação."
+          question: "Os cursos são certificados?",
+          answer: "Sim, todos os nossos cursos oferecem certificados de conclusão válidos em todo território nacional, seguindo padrões de excelência acadêmica."
         },
         {
           question: "Qual é a duração média dos cursos?",
@@ -31,7 +31,7 @@ const FAQ = () => {
         },
         {
           question: "Preciso ter formação prévia para me matricular?",
-          answer: "Para cursos de extensão, não há pré-requisitos. Para pós-graduações, é necessário diploma de nível superior reconhecido pelo MEC."
+          answer: "Para cursos de extensão, não há pré-requisitos. Para pós-graduações, é necessário diploma de nível superior."
         }
       ]
     },
@@ -61,7 +61,7 @@ const FAQ = () => {
         },
         {
           question: "O certificado é válido em todo o Brasil?",
-          answer: "Sim, nossos certificados têm validade nacional e são reconhecidos pelo MEC para cursos de pós-graduação."
+          answer: "Sim, nossos certificados têm validade nacional e são emitidos seguindo os mais altos padrões de qualidade educacional."
         },
         {
           question: "Quanto tempo demora para receber o certificado?",

@@ -38,8 +38,8 @@ const Sobre = () => {
     },
     {
       year: "2005",
-      title: "Reconhecimento MEC",
-      description: "Nossos cursos recebem reconhecimento do Ministério da Educação, consolidando nossa excelência acadêmica e compromisso com a qualidade educacional.",
+      title: "Excelência Acadêmica",
+      description: "Nossos cursos conquistam reconhecimento nacional pela qualidade e inovação, consolidando nossa posição como referência em terapias integrativas.",
       icon: Award,
     },
     {
@@ -155,7 +155,7 @@ const Sobre = () => {
                   <div className="absolute -bottom-6 -right-6 bg-card border-2 border-border rounded-xl p-6 shadow-elegant backdrop-blur-sm max-w-xs">
                     <div className="flex items-center gap-3 mb-2">
                       <Award className="w-6 h-6 text-primary" />
-                      <span className="text-sm font-semibold text-primary">Reconhecimento MEC</span>
+                      <span className="text-sm font-semibold text-primary">Excelência Acadêmica</span>
                     </div>
                     <p className="text-sm text-muted-foreground">Mais de 30 anos dedicados à educação e transformação humana</p>
                   </div>
@@ -190,8 +190,7 @@ const Sobre = () => {
 
                   <p className="text-lg text-muted-foreground leading-relaxed">
                     Seu compromisso com a excelência acadêmica e a compaixão humana estabeleceu novos padrões 
-                    na educação em terapias integrativas, conquistando reconhecimento do MEC e formando uma 
-                    comunidade global de terapeutas.
+                    na educação em terapias integrativas, formando uma comunidade global de terapeutas.
                   </p>
 
                   <Link to="/metodologia">

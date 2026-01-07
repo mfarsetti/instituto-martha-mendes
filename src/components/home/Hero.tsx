@@ -97,7 +97,7 @@ const Hero = () => {
               >
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-primary" />
-                  <span className="text-sm text-muted-foreground">Certificação MEC</span>
+                  <span className="text-sm text-muted-foreground">Certificado Nacional</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-primary" />

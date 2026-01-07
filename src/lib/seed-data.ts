@@ -187,8 +187,8 @@ Este curso é ideal para terapeutas holísticos iniciantes ou experientes, psic�
       },
       {
         id: 'faq_2',
-        question: 'O certificado é reconhecido pelo MEC?',
-        answer: 'Sim, nosso certificado de Extensão é reconhecido pelo MEC e válido em todo território nacional, habilitando você para atuar profissionalmente como terapeuta floral.'
+        question: 'O certificado é válido nacionalmente?',
+        answer: 'Sim, nosso certificado de Extensão é válido em todo território nacional, habilitando você para atuar profissionalmente como terapeuta floral.'
       },
       {
         id: 'faq_3',
@@ -203,7 +203,7 @@ Este curso é ideal para terapeutas holísticos iniciantes ou experientes, psic�
     ],
     status: 'published',
     seoTitle: 'Curso de Florais de Bach - Formação Completa Online',
-    seoDescription: 'Formação completa em Terapia Floral pelo Sistema Bach. Certificado reconhecido pelo MEC. Aprenda online com os melhores professores.',
+    seoDescription: 'Formação completa em Terapia Floral pelo Sistema Bach. Certificado válido nacionalmente. Aprenda online com os melhores professores.',
     createdAt: '2024-01-01T00:00:00.000Z',
     updatedAt: '2024-01-01T00:00:00.000Z',
     students: 2500,
@@ -311,13 +311,13 @@ Destinado a terapeutas que buscam aprofundamento teórico-prático, psicólogos 
       },
       {
         id: 'faq_2',
-        question: 'O certificado é reconhecido pelo MEC?',
-        answer: 'Sim, nossos cursos de Pós são reconhecidos pelo MEC e seguem todas as diretrizes e normas estabelecidas para a formação em terapias integrativas.'
+        question: 'O certificado é válido nacionalmente?',
+        answer: 'Sim, nossos cursos de Pós oferecem certificados válidos em todo território nacional e seguem todas as diretrizes e normas estabelecidas para a formação em terapias integrativas.'
       },
       {
         id: 'faq_3',
         question: 'Qual é a carga horária do curso?',
-        answer: 'O curso tem duração de 200h, distribuídos em aulas teóricas, práticas supervisionadas e atividades complementares. A carga horária é compatível com as exigências do MEC.'
+        answer: 'O curso tem duração de 200h, distribuídos em aulas teóricas, práticas supervisionadas e atividades complementares.'
       },
       {
         id: 'faq_4',
@@ -332,7 +332,7 @@ Destinado a terapeutas que buscam aprofundamento teórico-prático, psicólogos 
     ],
     status: 'published',
     seoTitle: 'Psicobiosofia® - Pós-Graduação em Terapias Integrativas',
-    seoDescription: 'Pós-Graduação em Psicobiosofia®. Metodologia exclusiva que integra psicologia, biologia e filosofia. Reconhecido pelo MEC.',
+    seoDescription: 'Pós-Graduação em Psicobiosofia®. Metodologia exclusiva que integra psicologia, biologia e filosofia.',
     createdAt: '2024-01-05T00:00:00.000Z',
     updatedAt: '2024-01-05T00:00:00.000Z',
     students: 1800,
@@ -433,12 +433,12 @@ Ideal para psicólogos e psicoterapeutas, terapeutas holísticos experientes, pr
       {
         id: 'faq_4',
         question: 'O curso oferece certificado?',
-        answer: 'Sim, o curso oferece Certificado de Extensão reconhecido pelo MEC, válido em todo território nacional.'
+        answer: 'Sim, o curso oferece Certificado de Extensão válido em todo território nacional.'
       }
     ],
     status: 'published',
     seoTitle: 'Curso de Hipnose e Regressão - Formação Online',
-    seoDescription: 'Formação avançada em Hipnose Clínica e Terapia Regressiva. Técnicas ericksonianas. Certificado MEC.',
+    seoDescription: 'Formação avançada em Hipnose Clínica e Terapia Regressiva. Técnicas ericksonianas. Certificado válido nacionalmente.',
     createdAt: '2024-01-01T00:00:00.000Z',
     updatedAt: '2024-01-01T00:00:00.000Z',
     students: 3200,
