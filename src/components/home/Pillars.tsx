@@ -6,7 +6,7 @@ const pillars = [
   {
     icon: GraduationCap,
     title: "Ensino de Excelência",
-    description: "Cursos reconhecidos pelo MEC com metodologia diferenciada que une teoria e prática transformadora.",
+    description: "Cursos certificados com metodologia diferenciada que une teoria e prática transformadora.",
     gradient: "gradient-gold",
   },
   {

@@ -39,7 +39,7 @@ const Cursos = () => {
                 Nossos Cursos
               </h1>
               <p className="text-xl text-muted-foreground">
-                Formações reconhecidas pelo MEC que transformam vidas e carreiras
+                Formações de excelência que transformam vidas e carreiras
               </p>
             </div>
           </div>
@@ -145,7 +145,7 @@ const Cursos = () => {
                         </div>
                         <div className="text-center">
                           <Award className="w-5 h-5 text-primary mx-auto mb-1" />
-                          <div className="text-xs font-medium text-foreground">MEC</div>
+                          <div className="text-xs font-medium text-foreground">{course.certification}</div>
                         </div>
                         <div className="text-center">
                           <Users className="w-5 h-5 text-primary mx-auto mb-1" />
