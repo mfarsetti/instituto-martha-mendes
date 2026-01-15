@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import logo from "@/assets/logo.svg";
+import { socialMedia } from "@/lib/social-config";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -20,10 +21,10 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Youtube, href: "#", label: "YouTube" },
+    { icon: Facebook, href: socialMedia.facebook.url, label: socialMedia.facebook.name },
+    { icon: Instagram, href: socialMedia.instagram.url, label: socialMedia.instagram.name },
+    { icon: Linkedin, href: socialMedia.linkedin.url, label: socialMedia.linkedin.name },
+    { icon: Youtube, href: socialMedia.youtube.url, label: socialMedia.youtube.name },
   ];
 
   return (
@@ -43,6 +44,8 @@ const Footer = () => {
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-primary hover:text-white transition-smooth shadow-soft"
                 >
@@ -92,11 +95,23 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
                 <Mail className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">contato@institutomarthamendes.com.br</span>
+                <a 
+                  href={socialMedia.email.url}
+                  className="text-sm text-muted-foreground hover:text-primary transition-smooth"
+                >
+                  {socialMedia.email.address}
+                </a>
               </li>
               <li className="flex items-start space-x-3">
                 <Phone className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">(11) 98765-4321</span>
+                <a 
+                  href={socialMedia.whatsapp.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground hover:text-primary transition-smooth"
+                >
+                  {socialMedia.whatsapp.phone}
+                </a>
               </li>
               <li className="flex items-start space-x-3">
                 <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />

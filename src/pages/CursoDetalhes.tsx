@@ -270,32 +270,23 @@ const CursoDetalhes = () => {
                             <div className="grid gap-6">
                               {course.teachers.map((teacher) => (
                                 <Card key={teacher.id} className="overflow-hidden border-2 hover:shadow-xl transition-shadow">
-                                  <div className="md:flex">
-                                    <div className="md:w-48 h-48 md:h-auto bg-gradient-to-br from-primary/20 to-primary/5 relative overflow-hidden flex-shrink-0">
-                                      <img 
-                                        src={teacher.photo} 
-                                        alt={teacher.name}
-                                        className="w-full h-full object-cover"
-                                      />
-                                    </div>
-                                    <div className="p-6 flex-1">
-                                      <h4 className="font-heading text-xl font-bold text-foreground mb-2">
-                                        {teacher.name}
-                                      </h4>
-                                      <p className="text-primary font-medium mb-3">{teacher.role}</p>
-                                      <p className="text-muted-foreground leading-relaxed mb-3">
-                                        {teacher.bio}
-                                      </p>
-                                      <div className="flex flex-wrap gap-2">
-                                        {teacher.specialties.map((specialty, idx) => (
-                                          <span 
-                                            key={idx}
-                                            className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full"
-                                          >
-                                            {specialty}
-                                          </span>
-                                        ))}
-                                      </div>
+                                  <div className="p-6">
+                                    <h4 className="font-heading text-xl font-bold text-foreground mb-2">
+                                      {teacher.name}
+                                    </h4>
+                                    <p className="text-primary font-medium mb-3">{teacher.role}</p>
+                                    <p className="text-muted-foreground leading-relaxed mb-3">
+                                      {teacher.bio}
+                                    </p>
+                                    <div className="flex flex-wrap gap-2">
+                                      {teacher.specialties.map((specialty, idx) => (
+                                        <span 
+                                          key={idx}
+                                          className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full"
+                                        >
+                                          {specialty}
+                                        </span>
+                                      ))}
                                     </div>
                                   </div>
                                 </Card>

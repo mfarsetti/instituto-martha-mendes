@@ -138,7 +138,7 @@ const Cursos = () => {
                       </p>
 
                       {/* Meta Info */}
-                      <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-border">
+                      <div className="flex justify-center gap-10 mb-6 pb-6 border-b border-border">
                         <div className="text-center">
                           <Clock className="w-5 h-5 text-primary mx-auto mb-1" />
                           <div className="text-xs font-medium text-foreground">{course.duration}</div>
@@ -147,14 +147,11 @@ const Cursos = () => {
                           <Award className="w-5 h-5 text-primary mx-auto mb-1" />
                           <div className="text-xs font-medium text-foreground">{course.certification}</div>
                         </div>
-                        <div className="text-center">
-                          <Users className="w-5 h-5 text-primary mx-auto mb-1" />
-                          <div className="text-xs font-medium text-foreground">{course.students.toLocaleString()}</div>
-                        </div>
+                        
                       </div>
 
                       {/* CTA */}
-                      <Link to={`/curso/${course.id}`}>
+                      <Link to={`/curso/${course.slug}`}>
                         <Button className="w-full gradient-gold text-white group-hover:shadow-elegant transition-all">
                           Saiba Mais
                         </Button>
