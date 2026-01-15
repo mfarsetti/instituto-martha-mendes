@@ -5,14 +5,13 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { Clock, Award, Users, BookOpen, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useData } from "@/contexts/DataContext";
+import { seedCourses } from "@/lib/seed-data";
 
 const Cursos = () => {
-  const { courses } = useData();
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [selectedModality, setSelectedModality] = useState("Todos");
 
-  const publishedCourses = courses.filter(c => c.status === 'published');
+  const publishedCourses = seedCourses.filter(c => c.status === 'published');
   const categories = ["Todos", ...Array.from(new Set(publishedCourses.map(c => c.category)))];
   const modalities = ["Todos", "Presencial", "EAD", "Híbrido"];
 

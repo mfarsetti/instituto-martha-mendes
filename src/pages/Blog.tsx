@@ -6,14 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BookOpen, Calendar, Clock, Search, Tag } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useData } from "@/contexts/DataContext";
+import { seedPosts } from "@/lib/seed-data";
 
 const Blog = () => {
-  const { posts } = useData();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Todas");
 
-  const publishedPosts = posts.filter(p => p.status === 'published');
+  const publishedPosts = seedPosts.filter(p => p.status === 'published');
   const categories = ["Todas", ...Array.from(new Set(publishedPosts.flatMap(p => p.tags)))];
 
   const filteredArticles = publishedPosts.filter(post => {

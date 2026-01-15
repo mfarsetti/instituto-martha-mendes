@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { useData } from "@/contexts/DataContext";
+import { seedCourses } from "@/lib/seed-data";
 import {
   Clock,
   Award,
@@ -38,8 +38,7 @@ import {
 } from "@/components/ui/breadcrumb";
 
 const CursoDetalhes = () => {
-  const { id } = useParams();
-  const { getCourseBySlug } = useData();
+  const { slug } = useParams();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -47,27 +46,10 @@ const CursoDetalhes = () => {
     message: "",
   });
 
-  const course = getCourseBySlug(id || '');
+  const course = slug ? seedCourses.find(c => c.slug === slug && c.status === 'published') : null;
 
   if (!course) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="pt-20">
-          <div className="container mx-auto px-4 py-20 text-center">
-            <h1 className="text-4xl font-heading font-bold mb-4">Curso não encontrado</h1>
-            <p className="text-muted-foreground mb-8">O curso que você está procurando não existe ou foi removido.</p>
-            <Link to="/cursos">
-              <Button className="gradient-gold text-white">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Voltar para Cursos
-              </Button>
-            </Link>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
+    return <Navigate to="/cursos" replace />;
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -145,13 +127,7 @@ const CursoDetalhes = () => {
                   <span className="font-semibold">{course.modality}</span>
                   <span className="text-xs text-white/70">Modalidade</span>
                 </div>
-                {course.students && (
-                  <div className="flex flex-col items-center space-y-2 bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4 min-w-[140px]">
-                    <Users className="w-6 h-6 text-primary" />
-                    <span className="font-semibold">{course.students}+</span>
-                    <span className="text-xs text-white/70">Alunos</span>
-                  </div>
-                )}
+                
               </div>
             </div>
           </div>
@@ -409,7 +385,7 @@ const CursoDetalhes = () => {
         </section>
 
         {/* Next Classes */}
-        {course.startDates.length > 0 && (
+        {course.startDates && course.startDates.length > 0 && (
           <section className="py-20 bg-gradient-to-br from-muted/50 to-muted/20">
             <div className="container mx-auto px-4">
               <div className="max-w-6xl mx-auto">

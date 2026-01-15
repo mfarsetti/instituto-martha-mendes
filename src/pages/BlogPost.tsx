@@ -1,39 +1,21 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, Share2, Tag } from "lucide-react";
 import { toast } from "sonner";
-import { useData } from "@/contexts/DataContext";
+import { seedPosts } from "@/lib/seed-data";
 import { renderMarkdown } from "@/lib/markdown";
 import WatermarkedImage from "@/components/blog/WatermarkedImage";
 import ContentProtection from "@/components/blog/ContentProtection";
 
 const BlogPost = () => {
-  const { id } = useParams();
-  const { getPostBySlug } = useData();
+  const { slug } = useParams();
 
-  const post = getPostBySlug(id || '');
+  const post = slug ? seedPosts.find(p => p.slug === slug && p.status === 'published') : null;
 
   if (!post) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="pt-20">
-          <div className="container mx-auto px-4 py-20 text-center">
-            <h1 className="text-4xl font-heading font-bold mb-4">Post não encontrado</h1>
-            <p className="text-muted-foreground mb-8">O post que você está procurando não existe ou foi removido.</p>
-            <Link to="/blog">
-              <Button className="gradient-gold text-white">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Voltar para o Blog
-              </Button>
-            </Link>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
+    return <Navigate to="/blog" replace />;
   }
 
   const handleShare = async () => {

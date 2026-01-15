@@ -3,11 +3,10 @@ import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/animations/ScrollReveal";
-import { useData } from "@/contexts/DataContext";
+import { seedCourses } from "@/lib/seed-data";
 
 const FeaturedCourses = () => {
-  const { courses: allCourses } = useData();
-  const courses = allCourses.filter(c => c.status === 'published').slice(0, 4);
+  const courses = seedCourses.filter(c => c.status === 'published').slice(0, 4);
   return (
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -31,7 +30,7 @@ const FeaturedCourses = () => {
           <div className="flex flex-wrap justify-center gap-6">
             {courses.map((course, index) => (
               <ScrollReveal key={course.id} direction="up" delay={index * 0.1}>
-                <Link to={`/cursos/${course.slug}`} className="group block w-full sm:w-[calc(50%-12px)] lg:w-[280px] xl:w-[300px]">
+                <Link to={`/curso/${course.slug}`} className="group block w-full sm:w-[calc(50%-12px)] lg:w-[280px] xl:w-[300px]">
                   <div className="bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-2">
                     {/* Image */}
                     <div className="relative h-48 overflow-hidden">
