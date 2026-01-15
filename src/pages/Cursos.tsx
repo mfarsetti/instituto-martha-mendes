@@ -136,6 +136,7 @@ const Cursos = () => {
                       <p className="text-sm text-muted-foreground mb-6 line-clamp-3">
                         {course.summary}
                       </p>
+                      
 
                       {/* Meta Info */}
                       <div className="flex justify-center gap-10 mb-6 pb-6 border-b border-border">
