@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Index from "./pages/Index";
 import Sobre from "./pages/Sobre";
+import MarthaCV from "./pages/MarthaCV";
 import Metodologia from "./pages/Metodologia";
 import Equipe from "./pages/Equipe";
 import Cursos from "./pages/Cursos";
@@ -27,6 +28,7 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Index />} />
         <Route path="/sobre" element={<Sobre />} />
+        <Route path="/martha-mendes" element={<MarthaCV />} />
         <Route path="/metodologia" element={<Metodologia />} />
         <Route path="/equipe" element={<Equipe />} />
         <Route path="/cursos" element={<Cursos />} />

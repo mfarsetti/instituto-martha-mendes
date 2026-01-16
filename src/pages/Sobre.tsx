@@ -193,12 +193,19 @@ const Sobre = () => {
                     na educação em terapias integrativas, formando uma comunidade global de terapeutas.
                   </p>
 
-                  <Link to="/metodologia">
-                    <Button className="gradient-gold text-white shadow-elegant hover:shadow-glow transition-all group mt-4">
-                      Conheça a Psicobiosofia®
-                      <Sparkles className="ml-2 w-4 h-4 group-hover:rotate-12 transition-transform" />
-                    </Button>
-                  </Link>
+                  <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                    <Link to="/martha-mendes">
+                      <Button className="gradient-gold text-white shadow-elegant hover:shadow-glow transition-all group">
+                        Saiba Mais sobre Martha Mendes
+                        <Sparkles className="ml-2 w-4 h-4 group-hover:rotate-12 transition-transform" />
+                      </Button>
+                    </Link>
+                    <Link to="/metodologia">
+                      <Button variant="outline" className="border-2 border-primary hover:bg-primary/10 transition-all">
+                        Conheça a Psicobiosofia®
+                      </Button>
+                    </Link>
+                  </div>
                 </motion.div>
               </div>
             </div>

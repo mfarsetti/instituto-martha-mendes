@@ -11,12 +11,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { seedCourses } from "@/lib/seed-data";
 import {
-  Clock,
   Award,
-  Users,
   Calendar,
   BookOpen,
-  ArrowLeft,
   Mail,
   Phone,
   MapPin,
@@ -112,22 +109,12 @@ const CursoDetalhes = () => {
                 {course.summary}
               </p>
               <div className="flex flex-wrap justify-center gap-8 text-white/95">
-                <div className="flex flex-col items-center space-y-2 bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4 min-w-[140px]">
-                  <Clock className="w-6 h-6 text-primary" />
-                  <span className="font-semibold">{course.duration}</span>
-                  <span className="text-xs text-white/70">Duração</span>
-                </div>
-                <div className="flex flex-col items-center space-y-2 bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4 min-w-[140px]">
-                  <Award className="w-6 h-6 text-primary" />
-                  <span className="font-semibold">{course.certification}</span>
-                  <span className="text-xs text-white/70">Certificação</span>
-                </div>
+
                 <div className="flex flex-col items-center space-y-2 bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4 min-w-[140px]">
                   <BookOpen className="w-6 h-6 text-primary" />
                   <span className="font-semibold">{course.modality}</span>
                   <span className="text-xs text-white/70">Modalidade</span>
                 </div>
-                
               </div>
             </div>
           </div>
@@ -321,26 +308,13 @@ const CursoDetalhes = () => {
                       </h3>
                       <div className="space-y-4">
                         <div className="flex items-start gap-3 p-3 rounded-lg bg-background/50">
-                          <Clock className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="text-sm text-muted-foreground">Duração</p>
-                            <p className="font-semibold text-foreground">{course.duration}</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-3 p-3 rounded-lg bg-background/50">
                           <BookOpen className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="text-sm text-muted-foreground">Modalidade</p>
                             <p className="font-semibold text-foreground">{course.modality}</p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-3 p-3 rounded-lg bg-background/50">
-                          <Award className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="text-sm text-muted-foreground">Certificação</p>
-                            <p className="font-semibold text-foreground">{course.certification}</p>
-                          </div>
-                        </div>
+
                         {course.investment && (
                           <div className="flex items-start gap-3 p-3 rounded-lg bg-background/50">
                             <Star className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />

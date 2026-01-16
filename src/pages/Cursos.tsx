@@ -3,7 +3,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
-import { Clock, Award, Users, BookOpen, Filter } from "lucide-react";
+import { BookOpen, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { seedCourses } from "@/lib/seed-data";
 
@@ -135,20 +135,6 @@ const Cursos = () => {
                       <p className="text-sm text-muted-foreground mb-6 line-clamp-3">
                         {course.summary}
                       </p>
-                      
-
-                      {/* Meta Info */}
-                      <div className="flex justify-center gap-10 mb-6 pb-6 border-b border-border">
-                        <div className="text-center">
-                          <Clock className="w-5 h-5 text-primary mx-auto mb-1" />
-                          <div className="text-xs font-medium text-foreground">{course.duration}</div>
-                        </div>
-                        <div className="text-center">
-                          <Award className="w-5 h-5 text-primary mx-auto mb-1" />
-                          <div className="text-xs font-medium text-foreground">{course.certification}</div>
-                        </div>
-                        
-                      </div>
 
                       {/* CTA */}
                       <Link to={`/curso/${course.slug}`}>

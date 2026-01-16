@@ -6,25 +6,25 @@ const pillars = [
   {
     icon: GraduationCap,
     title: "Ensino de Excelência",
-    description: "Cursos certificados com metodologia diferenciada que une teoria e prática transformadora.",
+    description: "Nossos cursos são direcionados a quem já possui nível acadêmico, com elevado padrão de qualidade, metodologia inovadora e a integração essencial entre teoria e prática. Transforme seu conhecimento prévio em competências terapêuticas sólidas. Aqui, acreditamos que todos conseguem aprender, apreender e empreender, evoluindo continuamente em sua jornada profissional. ",
     gradient: "gradient-gold",
   },
   {
     icon: FlaskConical,
-    title: "Pesquisa Científica",
-    description: "Publicações acadêmicas e pesquisas que validam as práticas integrativas no meio científico.",
+    title: "Visão Científica",
+    description: "Nossa proposta visa despertar o olhar crítico e científico: incentivamos a escuta ativa, a reflexão fundamentada e a escrita como ferramentas para um profissional mais preparado e consciente.",
     gradient: "gradient-purple",
   },
   {
     icon: Heart,
     title: "Psicobiosofia®",
-    description: "Metodologia exclusiva que integra corpo, mente e espírito para o autoconhecimento profundo.",
+    description: "Mergulhar em uma abordagem exclusiva que integra corpo, mente e espírito. Descobrir o indivíduo terapeuta para desvendar as dores do indivíduo em terapia.  Vivenciar o autoconhecimento profundo com uma metodologia pioneira na formação e estruturação do processo terapêutico. Metodologia de Martha Mendes.",
     gradient: "gradient-mixed",
   },
   {
     icon: Sparkles,
     title: "Terapias Integrativas",
-    description: "Formação completa em diversas modalidades terapêuticas reconhecidas pela OMS.",
+    description: "Formação completa e rigorosa em múltiplas modalidades reconhecidas no Brasil e no exterior, integrando psicoeducação, práticas somáticas e alinhamento corpo-mente-espírito. Cursos livres com qualidade comparável à pós-graduação, orientados à prática clínica, ética e pesquisa. ",
     gradient: "gradient-gold",
   },
 ];
