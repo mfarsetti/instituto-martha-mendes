@@ -11,13 +11,7 @@ import {
 } from "@/components/ui/carousel";
 
 const testimonials = [
-  {
-    name: "Maria Joselice Santos Silva",
-    location: "SP",
-    role: "Psicoterapeuta Holística",
-    text: "Há momentos em nossa vida profissional que sentimos necessidade de um upgrade na profissão. Foi assim que surgiu o Instituto Martha Mendes em minha vida profissional. Íntegros e comprometidos com suas propostas de ensino, apresentou-me entre outros cursos, a Pós Graduação em Regressão. Curso reconhecido pelo MEC, trouxe para minha vida como psicoterapeuta, uma extensão maior e melhor para trabalhar com meus clientes.",
-    rating: 5,
-  },
+
   {
     name: "Emerson Vieira Peixoto",
     location: "São Paulo, SP",

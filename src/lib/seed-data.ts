@@ -1,5 +1,10 @@
 import { Post, Course } from '@/types';
 
+import enriquecaImg from "@/assets/cursos/enriqueça.png";
+import floraisImg from "@/assets/cursos/florais.png";
+import psicobiosofiaImg from "@/assets/cursos/psicobiosofia.png";
+import psicoeducacaoImg from "@/assets/cursos/psicoeducacao.png";
+
 export const seedPosts: Post[] = [
   {
     id: 'post_1',
@@ -113,7 +118,7 @@ export const seedCourses: Course[] = [
     certification: 'Outro',
     investment: null,
     startDates: ['2026-07-26'],
-    image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&h=600&fit=crop',
+    image: enriquecaImg,
     content: `A jornada da consciência para transformar crenças de escassez em maturidade emocional e prosperidade.
 
 ### Objetivo é tornar-se:
@@ -218,7 +223,7 @@ export const seedCourses: Course[] = [
         name: 'Martha Mendes',
         photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop',
         role: 'Instituto Martha Mendes',
-        bio: 'Especialista em consciência emocional, crenças limitantes e transformação pessoal. Criadora de metodologias integradas que unem psicologia profunda, práticas conscientes e desenvolvimento humano.',
+        bio: 'Criadora da Psicobiosofia®, metodologia terapêutica, elaborou o curso Enriqueça-se para Enriquecer, com o propósito de auxiliar pessoas a compreender e ressignificar suas crenças, desbloquear potenciais e conquistar uma vida mais autêntica e realizada.',
         specialties: ['Crenças Limitantes', 'Maturidade Emocional', 'Transformação Consciente']
       }
     ],
@@ -272,7 +277,7 @@ export const seedCourses: Course[] = [
     certification: 'Extensão',
     investment: null,
     startDates: ['2026-08-01'],
-    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop',
+    image: psicobiosofiaImg,
     content: `A Psicobiosofia® nasce da prática clínica real, de décadas de escuta profunda, observação cuidadosa e integração entre mente, corpo, história, emoções e consciência.
 
 Este não é apenas um curso. É um processo. Um processo que começa no momento em que você decide olhar para o ser humano além do sintoma, além da queixa e além do comportamento visível.
@@ -594,7 +599,7 @@ Se você busca apenas informação, este curso não é para você. Mas se você 
     certification: 'Extensão',
     investment: null,
     startDates: ['2026-03-01'],
-    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=600&fit=crop',
+    image: floraisImg,
     content: `Os seres humanos são movidos por missão e propósito. 
 
 Aprenda a integrar os Florais de Bach ao seu repertório terapêutico com embasamento, ética e clareza psicoeducativa, conduzindo processos de autoconhecimento e equilíbrio emocional de forma segura e responsável.
@@ -802,7 +807,7 @@ Experiência de 30+ anos em clínica, método psicoeducativo, foco em autonomia 
     certification: 'Extensão',
     investment: null,
     startDates: ['2026-05-17'],
-    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop',
+    image: psicoeducacaoImg,
     content: `A Psicoeducação Terapêutica Integrativa nasce para apoiar terapeutas que sentem que a técnica, sozinha, já não dá conta da complexidade humana – mas que também não querem ultrapassar limites éticos, confundir espiritualidade com religião ou atuar a partir de crenças pessoais não elaboradas.
 
 Este curso oferece clareza onde antes havia medo, estrutura onde havia intuição e segurança para transformar perguntas difíceis em diálogos terapêuticos responsáveis. Ao longo de quatro sábados, você será conduzido por uma jornada que amplia a percepção clínica, integra educação, filosofia e espiritualidade como dimensões humanas legítimas e ensina como traduzir tudo isso em prática real no consultório.

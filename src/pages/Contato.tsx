@@ -5,8 +5,9 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { Mail, MapPin, Clock, Send } from "lucide-react";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 const Contato = () => {
   const [formData, setFormData] = useState({
@@ -43,22 +44,10 @@ const Contato = () => {
 
   const contactInfo = [
     {
-      icon: Mail,
-      title: "E-mail",
-      content: "contato@institutomarthamendes.com.br",
-      link: "mailto:contato@institutomarthamendes.com.br",
-    },
-    {
-      icon: Phone,
-      title: "Telefone",
-      content: "(11) 98765-4321",
-      link: "tel:+5511987654321",
-    },
-    {
       icon: MapPin,
       title: "Endereço",
-      content: "Av. Paulista, 1000 - São Paulo, SP",
-      link: "https://maps.google.com",
+      content: "São Paulo, SP - Brasil",
+      link: null,
     },
     {
       icon: Clock,
@@ -252,7 +241,7 @@ const Contato = () => {
         </section>
 
         {/* FAQ Quick Section */}
-        <section className="py-20 bg-muted/30">
+        {/* <section className="py-20 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <SectionHeading
@@ -264,12 +253,14 @@ const Contato = () => {
               <p className="text-muted-foreground mb-6">
                 Antes de entrar em contato, que tal verificar nossa seção de perguntas frequentes? Você pode encontrar a resposta que procura lá.
               </p>
-              <Button variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-white">
-                Ver FAQ Completo
-              </Button>
+              <Link to="/faq">
+                <Button variant="outline" size="lg" className="border-2 border-primary text-primary hover:bg-primary hover:text-white">
+                  Ver FAQ Completo
+                </Button>
+              </Link>
             </div>
           </div>
-        </section>
+        </section> */}
       </main>
 
       <Footer />

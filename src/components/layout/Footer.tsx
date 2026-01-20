@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import { MapPin, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import logo from "@/assets/logo.svg";
 import { socialMedia } from "@/lib/social-config";
 
@@ -91,28 +91,8 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="font-heading text-base font-semibold mb-4">Contato</h4>
+            <h4 className="font-heading text-base font-semibold mb-4">Localização</h4>
             <ul className="space-y-3">
-              <li className="flex items-start space-x-3">
-                <Mail className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <a 
-                  href={socialMedia.email.url}
-                  className="text-sm text-muted-foreground hover:text-primary transition-smooth"
-                >
-                  {socialMedia.email.address}
-                </a>
-              </li>
-              <li className="flex items-start space-x-3">
-                <Phone className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <a 
-                  href={socialMedia.whatsapp.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground hover:text-primary transition-smooth"
-                >
-                  {socialMedia.whatsapp.phone}
-                </a>
-              </li>
               <li className="flex items-start space-x-3">
                 <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                 <span className="text-sm text-muted-foreground">São Paulo, SP - Brasil</span>

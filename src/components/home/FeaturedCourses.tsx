@@ -1,6 +1,6 @@
-import { Clock, Award, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { seedCourses } from "@/lib/seed-data";
@@ -24,50 +24,56 @@ const FeaturedCourses = () => {
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
+              <p className="text-xs text-muted-foreground mt-4">
+                Cursos livres, previstos pelo Decreto Presidencial nº 5.154/2004 e pela Lei nº 9.394/96.
+              </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {courses.map((course, index) => (
               <ScrollReveal key={course.id} direction="up" delay={index * 0.1}>
-                <Link to={`/curso/${course.slug}`} className="group block w-full sm:w-[calc(50%-12px)] lg:w-[280px] xl:w-[300px]">
-                  <div className="bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-2">
-                    {/* Image */}
-                    <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={course.image}
-                        alt={course.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      <div className="absolute top-4 right-4 bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
-                        {course.modality}
-                      </div>
+                <div className="group bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-2">
+                  {/* Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+                    {/* Badge */}
+                    <div className="absolute top-4 right-4">
+                      <Link to="/cursos-livres">
+                        <div className="bg-primary text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-primary/90 transition-colors">
+                          Curso Livre
+                        </div>
+                      </Link>
                     </div>
 
-                    {/* Content */}
-                    <div className="p-5">
-                      <h3 className="font-heading text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {/* Title Overlay */}
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="font-heading text-xl font-bold text-white mb-1">
                         {course.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                        {course.summary}
-                      </p>
-
-                      {/* Meta */}
-                      <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <div className="flex items-center space-x-1">
-                          <Clock className="w-4 h-4" />
-                          <span>{course.duration}</span>
-                        </div>
-                        <div className="flex items-center space-x-1 text-primary">
-                          <Award className="w-4 h-4" />
-                          <span>{course.certification}</span>
-                        </div>
-                      </div>
                     </div>
                   </div>
-                </Link>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <p className="text-sm text-muted-foreground mb-6 line-clamp-3">
+                      {course.summary}
+                    </p>
+
+                    {/* CTA */}
+                    <Link to={`/curso/${course.slug}`}>
+                      <Button className="w-full gradient-gold text-white group-hover:shadow-elegant transition-all">
+                        Saiba Mais
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
               </ScrollReveal>
             ))}
           </div>

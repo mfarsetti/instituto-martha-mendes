@@ -11,6 +11,8 @@ import Metodologia from "./pages/Metodologia";
 import Equipe from "./pages/Equipe";
 import Cursos from "./pages/Cursos";
 import CursoDetalhes from "./pages/CursoDetalhes";
+import CursosLivres from "./pages/CursosLivres";
+import EbookPage from "./pages/EbookPage";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import FAQ from "./pages/FAQ";
@@ -33,6 +35,8 @@ const AnimatedRoutes = () => {
         <Route path="/equipe" element={<Equipe />} />
         <Route path="/cursos" element={<Cursos />} />
         <Route path="/curso/:slug" element={<CursoDetalhes />} />
+        <Route path="/cursos-livres" element={<CursosLivres />} />
+        <Route path="/ebook" element={<EbookPage />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/faq" element={<FAQ />} />

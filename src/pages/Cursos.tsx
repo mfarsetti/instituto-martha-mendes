@@ -1,25 +1,12 @@
-import { useState } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Filter } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import { seedCourses } from "@/lib/seed-data";
 
 const Cursos = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Todos");
-  const [selectedModality, setSelectedModality] = useState("Todos");
-
   const publishedCourses = seedCourses.filter(c => c.status === 'published');
-  const categories = ["Todos", ...Array.from(new Set(publishedCourses.map(c => c.category)))];
-  const modalities = ["Todos", "Presencial", "EAD", "Híbrido"];
-
-  const filteredCourses = publishedCourses.filter(course => {
-    const categoryMatch = selectedCategory === "Todos" || course.category === selectedCategory;
-    const modalityMatch = selectedModality === "Todos" || course.modality === selectedModality;
-    return categoryMatch && modalityMatch;
-  });
 
   return (
     <div className="min-h-screen bg-background">
@@ -44,60 +31,12 @@ const Cursos = () => {
           </div>
         </section>
 
-        {/* Filters Section */}
-        <section className="py-8 bg-background border-b border-border sticky top-20 z-40 glass-effect">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <Filter className="w-5 h-5 text-muted-foreground" />
-                <span className="text-sm font-medium text-foreground">Filtrar por:</span>
-              </div>
-              
-              <div className="flex flex-wrap gap-3">
-                <div className="flex gap-2">
-                  {categories.map(category => (
-                    <Button
-                      key={category}
-                      size="sm"
-                      variant={selectedCategory === category ? "default" : "outline"}
-                      onClick={() => setSelectedCategory(category)}
-                      className={selectedCategory === category ? "gradient-gold text-white" : ""}
-                    >
-                      {category}
-                    </Button>
-                  ))}
-                </div>
-                
-                <div className="flex gap-2">
-                  {modalities.map(modality => (
-                    <Button
-                      key={modality}
-                      size="sm"
-                      variant={selectedModality === modality ? "default" : "outline"}
-                      onClick={() => setSelectedModality(modality)}
-                      className={selectedModality === modality ? "gradient-purple text-white" : ""}
-                    >
-                      {modality}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Courses Grid */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="max-w-7xl mx-auto">
-              <div className="mb-8 text-center">
-                <p className="text-muted-foreground">
-                  {filteredCourses.length} {filteredCourses.length === 1 ? 'curso encontrado' : 'cursos encontrados'}
-                </p>
-              </div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredCourses.map((course, index) => (
+                {publishedCourses.map((course, index) => (
                   <div
                     key={course.id}
                     className="group bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-2 animate-fadeIn"
@@ -112,14 +51,13 @@ const Cursos = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                       
-                      {/* Badges */}
-                      <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
-                        <div className="bg-primary text-white text-xs font-medium px-3 py-1 rounded-full">
-                          {course.category}
-                        </div>
-                        <div className="bg-secondary text-white text-xs font-medium px-3 py-1 rounded-full">
-                          {course.modality}
-                        </div>
+                      {/* Badge */}
+                      <div className="absolute top-4 right-4">
+                        <Link to="/cursos-livres">
+                          <div className="bg-primary text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-primary/90 transition-colors">
+                            Curso Livre
+                          </div>
+                        </Link>
                       </div>
 
                       {/* Title Overlay */}

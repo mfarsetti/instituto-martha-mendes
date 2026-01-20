@@ -108,14 +108,7 @@ const CursoDetalhes = () => {
               <p className="text-xl md:text-2xl text-white/95 mb-12 drop-shadow-lg max-w-3xl mx-auto leading-relaxed">
                 {course.summary}
               </p>
-              <div className="flex flex-wrap justify-center gap-8 text-white/95">
-
-                <div className="flex flex-col items-center space-y-2 bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4 min-w-[140px]">
-                  <BookOpen className="w-6 h-6 text-primary" />
-                  <span className="font-semibold">{course.modality}</span>
-                  <span className="text-xs text-white/70">Modalidade</span>
-                </div>
-              </div>
+              
             </div>
           </div>
         </section>
@@ -234,9 +227,11 @@ const CursoDetalhes = () => {
                               {course.teachers.map((teacher) => (
                                 <Card key={teacher.id} className="overflow-hidden border-2 hover:shadow-xl transition-shadow">
                                   <div className="p-6">
-                                    <h4 className="font-heading text-xl font-bold text-foreground mb-2">
-                                      {teacher.name}
-                                    </h4>
+                                    <Link to="/martha-mendes">
+                                      <h4 className="font-heading text-xl font-bold text-foreground mb-2 hover:text-primary transition-colors cursor-pointer">
+                                        {teacher.name}
+                                      </h4>
+                                    </Link>
                                     <p className="text-primary font-medium mb-3">{teacher.role}</p>
                                     <p className="text-muted-foreground leading-relaxed mb-3">
                                       {teacher.bio}
@@ -302,55 +297,16 @@ const CursoDetalhes = () => {
                   <div className="sticky top-24 space-y-6">
                     {/* Course Info Card */}
                     <Card className="p-6 border-2 shadow-lg bg-gradient-to-br from-primary/5 to-transparent">
-                      <h3 className="font-heading text-xl font-bold text-foreground mb-6 flex items-center gap-2">
-                        <CheckCircle2 className="w-5 h-5 text-primary" />
-                        Informações do Curso
-                      </h3>
-                      <div className="space-y-4">
-                        <div className="flex items-start gap-3 p-3 rounded-lg bg-background/50">
-                          <BookOpen className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="text-sm text-muted-foreground">Modalidade</p>
-                            <p className="font-semibold text-foreground">{course.modality}</p>
-                          </div>
-                        </div>
-
-                        {course.investment && (
-                          <div className="flex items-start gap-3 p-3 rounded-lg bg-background/50">
-                            <Star className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                            <div>
-                              <p className="text-sm text-muted-foreground">Investimento</p>
-                              <p className="font-bold text-foreground text-lg">{course.investment}</p>
-                              <p className="text-xs text-muted-foreground">ou em até 12x</p>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                      <Button className="w-full mt-6 gradient-gold text-white font-semibold py-6 text-base">
-                        Quero me inscrever
-                      </Button>
+                      
+                      
+                      <a href="#formulario-inscricao" className="block">
+                        <Button className="w-full gradient-gold text-white font-semibold py-6 text-base">
+                          Quero me inscrever
+                        </Button>
+                      </a>
                     </Card>
 
-                    {/* Contact Card */}
-                    <Card className="p-6 border-2 shadow-lg">
-                      <h3 className="font-heading text-lg font-bold text-foreground mb-4">
-                        Precisa de ajuda?
-                      </h3>
-                      <div className="space-y-3 text-sm">
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <Phone className="w-4 h-4 text-primary" />
-                          <span>(11) 98765-4321</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <Mail className="w-4 h-4 text-primary" />
-                          <span>contato@institutomm.com.br</span>
-                        </div>
-                        <div className="flex items-start gap-2 text-muted-foreground">
-                          <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                          <span>São Paulo, SP</span>
-                        </div>
-                      </div>
-                    </Card>
+                    
                   </div>
                 </div>
               </div>
@@ -388,7 +344,7 @@ const CursoDetalhes = () => {
                               Turma {index + 1}
                             </p>
                             <p className="font-bold text-foreground text-lg leading-tight">
-                              {new Date(date).toLocaleDateString('pt-BR', { 
+                              {new Date(date + 'T00:00:00').toLocaleDateString('pt-BR', { 
                                 day: '2-digit',
                                 month: 'long',
                                 year: 'numeric'
@@ -412,9 +368,11 @@ const CursoDetalhes = () => {
                             <CheckCircle2 className="w-4 h-4" />
                             <span>Vagas disponíveis</span>
                           </div>
-                          <Button className="w-full gradient-gold text-white font-semibold hover:opacity-90 transition-opacity">
-                            Inscrever-se agora
-                          </Button>
+                          <a href="#formulario-inscricao" className="block">
+                            <Button className="w-full gradient-gold text-white font-semibold hover:opacity-90 transition-opacity">
+                              Inscrever-se agora
+                            </Button>
+                          </a>
                         </div>
                       </div>
                     </Card>
@@ -426,7 +384,7 @@ const CursoDetalhes = () => {
         )}
 
         {/* Interest Form */}
-        <section className="py-20 bg-background relative overflow-hidden">
+        <section id="formulario-inscricao" className="py-20 bg-background relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
           <div className="container mx-auto px-4 relative">
             <div className="max-w-3xl mx-auto">
@@ -443,7 +401,7 @@ const CursoDetalhes = () => {
                 <div className="bg-gradient-to-r from-primary/10 to-primary/5 p-6 border-b-2">
                   <h3 className="font-heading text-xl font-bold text-foreground flex items-center gap-2">
                     <Mail className="w-5 h-5 text-primary" />
-                    Formulário de Contato
+                    {course.title}
                   </h3>
                 </div>
                 

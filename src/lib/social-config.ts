@@ -12,8 +12,8 @@ export const socialMedia = {
   },
   youtube: {
     name: 'YouTube',
-    handle: '@InstitutoMarthaMendes',
-    url: 'https://youtube.com/@institutomarthamendes',
+    handle: '@SimplesMenteMartha',
+    url: 'https://www.youtube.com/@SimplesMenteMartha',
     channelId: '', // Adicionar ID do canal quando disponível
     description: 'Vídeos educativos, meditações guiadas e entrevistas',
   },
@@ -26,8 +26,8 @@ export const socialMedia = {
   },
   linkedin: {
     name: 'LinkedIn',
-    handle: 'Instituto Martha Mendes',
-    url: 'https://linkedin.com/company/instituto-martha-mendes',
+    handle: 'Martha Mendes',
+    url: 'https://www.linkedin.com/in/martha-mendes-94581a21',
     description: 'Conteúdo profissional e oportunidades',
   },
   tiktok: {
