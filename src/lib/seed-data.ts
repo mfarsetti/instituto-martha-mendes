@@ -4,105 +4,378 @@ import enriquecaImg from "@/assets/cursos/enriqueça.png";
 import floraisImg from "@/assets/cursos/florais.png";
 import psicobiosofiaImg from "@/assets/cursos/psicobiosofia.png";
 import psicoeducacaoImg from "@/assets/cursos/psicoeducacao.png";
+import floraisBachBlogImg from "@/assets/blog/florais-bach/image.png";
+import encontroSagradoImg from "@/assets/blog/encontro-sagrado/image.png";
+import psicofobiaImg from "@/assets/blog/encontro-sagrado/image.png";
+import raioDeLuzImg from "@/assets/blog/raio-de-luz/image.png";
+import tvpImg from "@/assets/blog/tvp/image.png";
+import reikiBlogImg from "@/assets/blog/reiki/image.png";
 
 export const seedPosts: Post[] = [
   {
     id: 'post_1',
-    title: 'Os Benefícios Científicos da Meditação',
-    slug: 'beneficios-cientificos-meditacao',
-    summary: 'Descubra como a prática meditativa regular transforma o cérebro e promove bem-estar físico e mental.',
-    image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=600&fit=crop',
-    tags: ['Bem-estar', 'Meditação', 'Ciência'],
-    content: `# Os Benefícios Científicos da Meditação
+    title: 'Encontro com o Sagrado',
+    slug: 'encontro-com-o-sagrado',
+    summary: 'Reflexão sobre autoconhecimento, fé e o despertar do sagrado interior — além de crenças religiosas — como caminho de transformação e realização.',
+    image: encontroSagradoImg,
+    tags: ['Autoconhecimento', 'Espiritualidade', 'Consciência'],
+    content: `# Encontro com o Sagrado
 
-A meditação tem sido praticada há milhares de anos, mas só recentemente a ciência moderna começou a compreender seus profundos efeitos sobre o cérebro e o corpo.
+**Por Martha Mendes**
 
-## Neuroplasticidade e Meditação
+> A gente arruma os cabelos todos os dias; por que não o coração?  
+> *Provérbio chinês.*
 
-Estudos de neuroimagem mostram que a prática regular de meditação pode literalmente remodelar o cérebro, fortalecendo áreas associadas à atenção, empatia e regulação emocional.
+Todos os dias pela manhã recebemos informações sobre autoajuda vindas de diversos meios de comunicação: através da leitura de um livro, de um programa de televisão, de um programa na rádio, de uma matéria lida na internet ou no jornal, de revistas, de conversas corriqueiras etc. Entretanto, apegamo-nos a repetições que geralmente não condizem com a nossa crença.
 
-## Benefícios Comprovados
+O sistema de crenças é tão enraizado que não nos damos conta de que ele existe e passamos a repetir frases feitas de maneira automática, acreditando que isso irá mudar a nossa vida. Mas nada muda, tudo continua igual.
 
-- Redução do estresse e ansiedade
-- Melhora da concentração e foco
-- Maior equilíbrio emocional
-- Fortalecimento do sistema imunológico
-- Redução da pressão arterial
+Certa vez, um cliente questionou o porquê de isso acontecer. Relatou ter lido diversos livros de autoajuda, posto em prática todas as técnicas possíveis, assistido a vários filmes e a contribuição disso tudo foi ter se tornado uma pessoa ainda mais insatisfeita.
 
-## Como Começar
+É importante esclarecer que os livros de autoajuda são ferramentas magníficas, quando se sabe exatamente qual o sujeito a que se destinam. Mas como ajudar alguém que não se conhece?
 
-Apenas 10 minutos diários de prática já podem trazer benefícios significativos para sua saúde mental e física.`,
+O autoconhecimento deve anteceder a autoajuda. Dessa forma, é possível conhecer as necessidades, as habilidades, os desejos e as dificuldades de quem precisa ser ajudado. Só assim a autoajuda faz sentido.
+
+Conhecer-se é despertar o sagrado que há dentro de si. E o sagrado independe de crenças religiosas. O despertar do sagrado é a fé que se traduz em confiança em si e no fluxo da vida. Quanto maior for a disponibilidade de olhar para dentro, mais eficazes tornam-se as habilidades divinas impressas no Ser.
+
+Os pensamentos, as emoções e as sensações influenciam as células do corpo e agem diretamente na formação das crenças, que respondem a qualquer comando contrário.
+
+Sufocados, viciados por velhos padrões e velhas crenças, nos colocamos como vítimas de nossas próprias armadilhas. Vivemos em guerra com as informações que obtemos e com medo do desconhecido. Geralmente, vivemos uma dicotomia: contradição e ambiguidade. Um exemplo disso é a vontade de se afastar das pessoas e viver isoladamente, mas temer a solidão.
+
+Quanto mais reviramos arquivos sem olhar de fato para o que já está lá, mais amarras criamos. E isso favorece a vontade de desistir.
+
+Entretanto, a consciência solicita que “arrumemos” o coração, onde o verdadeiro EU habita. O coração é o primeiro órgão do corpo humano a ser formado e é nele que se encontram as mensagens para esta encarnação. “Arrumar” o coração e contactar o sagrado é aproveitar a existência sem desperdícios. E, na medida em que nos permitimos conhecer, possibilita-se ao indivíduo que nos coloca frente ao sagrado, onde a vida é plena.
+
+O sentido do sagrado na vida possibilita e potencializa a renovação, a transformação e a realização. Em algum momento, o autoconhecimento e a autotranscendência nos convidam para conhecer o desconhecido (o inconsciente) e buscar novos horizontes… Esse é o processo de evolução espiritual.
+
+## Como iniciar um processo de autoconhecimento?
+
+Simples: comece por observar-se quando for contrariado. Como reage? Quais são os pensamentos, emoções e sensações no momento? Que impressão você tem da situação? Sua reação é proporcional ao fato?
+
+Coloque-se como observador de si e perceberá que vários “EUS” habitam dentro de você. Conhecer, harmonizar e integrar as diversas energias (subpersonalidades) favorece o autoconhecimento, o encontro com seu EU divino e o caminho para a felicidade.
+
+O que você entende por felicidade?
+
+## Sobre a autora
+
+Martha Mendes é educadora, pós-graduada em Psicossomática e Psicobiofísica, Psicanalista Clínica, especialista em Florais de Bach, Terapia Regressiva, Hipnose Clínica e Ericksoniana. Mestre em Bioeletrografia pela IUMAB (International Union of Medical and Applied Bioelectrography in Brazil), presidente do II e VII Congresso de Hipnoterapia e Terapia Regressiva (São Paulo – SP, 2010 e 2019). Membro certificado pela EARTH (European Association for Regression Therapy), autora da filosofia/metodologia Psicobiosofia® e escritora.`,
     status: 'published',
-    publishedAt: '2024-03-15T00:00:00.000Z',
-    createdAt: '2024-03-15T00:00:00.000Z',
-    updatedAt: '2024-03-15T00:00:00.000Z',
-    author: 'Dra. Martha Mendes',
-    readTime: '8 min',
+    publishedAt: '2026-02-21T00:00:00.000Z',
+    createdAt: '2026-02-21T00:00:00.000Z',
+    updatedAt: '2026-02-21T00:00:00.000Z',
+    author: 'Martha Mendes',
+    readTime: '7 min',
   },
   {
     id: 'post_2',
-    title: 'Florais de Bach: Ciência ou Placebo?',
-    slug: 'florais-de-bach-ciencia-ou-placebo',
-    summary: 'Uma análise científica sobre como as essências florais atuam no equilíbrio emocional.',
-    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=600&fit=crop',
-    tags: ['Terapias', 'Florais', 'Ciência'],
-    content: `# Florais de Bach: Ciência ou Placebo?
+    title: 'Florais de Bach, um recurso na psicoterapia',
+    slug: 'florais-de-bach-um-recurso-na-psicoterapia',
+    summary: 'Uma visão clínica sobre a atuação dos Florais de Bach no processo psicoterapêutico, a partir do princípio de ressonância, recuperação da força vital e integração de subpersonalidades.',
+    image: floraisBachBlogImg,
+    tags: ['Florais de Bach', 'Psicoterapia', 'Terapias Integrativas'],
+    content: `# Florais de Bach, um recurso na psicoterapia
 
-Os Florais de Bach são essências naturais desenvolvidas pelo Dr. Edward Bach na década de 1930. Mas qual é a base científica por trás dessa terapia?
+**Por Martha Mendes**
 
-## O Sistema Bach
+> “Não é necessário brigar com o que somos, mas sim desenvolver virtudes opostas.”  
+> *Dr. Edward Bach*
 
-Dr. Bach identificou 38 essências florais, cada uma correspondendo a um estado emocional específico. A proposta é que essas essências ajudam a restaurar o equilíbrio emocional.
+Minha hipótese de trabalho é baseada no poder de ressonância existente entre as essências florais e o ser humano no sistema de energias de ambos.
 
-## Evidências Científicas
+Em 1997, quando fotografei as essências dos florais do Dr. Bach (bioeletrografia), fiquei maravilhada ao constatar a energia vital impressa em cada gota, energias semelhantes às nossas (yin, yang, ki — força vital), também constatadas pelo mesmo sistema fotográfico, reconhecido cientificamente na Rússia.
 
-Embora muitos estudos mostrem resultados positivos, a comunidade científica ainda debate os mecanismos de ação dos florais. Alguns estudos sugerem efeitos além do placebo, enquanto outros pedem mais pesquisas.
+Desde a realização das fotos, passei a pesquisar a atuação das essências florais no processo terapêutico.
 
-## Aplicação Clínica
+As essências florais de Bach (objeto da minha pesquisa) atuam na recuperação da força vital, promovendo a homeostasia, que favorece a reconciliação das subpersonalidades (cápsulas de energias poderosas, muitas vezes confundidas com obsessão espiritual) que habitam em nossa consciência, gerando a “força” necessária para despertar o curador interno. O floral, quando empregado adequadamente, possibilita ao cliente e ao terapeuta entender a origem do desequilíbrio.
 
-Independentemente do debate científico, milhares de terapeutas ao redor do mundo relatam resultados positivos no tratamento de ansiedade, estresse e desequilíbrios emocionais.`,
+As memórias (tanto de cunho extracerebral como de corpo astral-emocional) de vivências passadas, genético-ancestrais e espirituais são transportadas do inconsciente para o consciente por meio de sensações/impressões e sonhos. As sensações/impressões são uma ampliação da consciência, geradas por vários fatores como a mediunidade, os traumas de vida atual, da vida intrauterina, de intravida e seculares.
+
+Os sonhos são resultado de conteúdos das várias almas (existências, personagens vividos, padrões) e pode-se dizer que é uma atuação do espírito enquanto se dorme.
+
+Ao longo do tempo, mediante relatos de clientes em meu consultório, pude observar que no sono REM (em que acontece o movimento rápido dos olhos e há intensa atividade cerebral, como se a pessoa estivesse acordada, mas com tônus muscular diminuído), havia a sensação de estar vivendo aquele sonho de maneira tão lúcida, com carga emocional tão intensa, que comecei a explorar aspectos como pensamentos, sentimentos, emoções e sensações. Isso tudo, além de tempos remotos, lugares desconhecidos, pessoas desconhecidas, mas ao mesmo tempo habituais, condutas parecidas em contextos diferentes, fazia muito sentido na busca pela origem do desequilíbrio. Passamos, assim, a explorar com mais intensidade e a adequar o floral às necessidades expressas durante o sono.
+
+O sono do meu cliente, no processo terapêutico, é de suma importância. Sem um sono tranquilo, não há como recuperar a energia vital empregada nas atividades diárias. Durante o sono, há atividades fisiológicas, produção de hormônios e de outras substâncias químicas necessárias para a manutenção do corpo humano, merecendo, portanto, atenção especial. Sendo assim, é necessário que o cliente durma bem.
+
+Quando isso não acontece, ficamos como uma flor murcha: sem vitalidade (veja as bioeletrografias abaixo, no final). Aproveitamos o sono para trazer à consciência memórias necessárias para o processo de autocura/transformação. Brinco assim com meu cliente: enquanto ele dorme, trabalha por si mesmo.
+
+Buscamos (sim, buscamos, é uma parceria) nos conteúdos oníricos, informações sobre as necessidades de sua alma, as dificuldades, tendências e intolerâncias que se repetem. O cliente identifica aquelas forças (subpersonalidades) como grandes aliadas em seu processo de autocura.
+
+Muitas pessoas encontram dificuldades nas relações pessoais, familiares, afetivas, profissionais e espirituais por estarem “espalhadas” (até mesmo dissociadas) e não conseguem fazer a síntese de suas energias (forças), algo muito comum nas pessoas que sofrem algum tipo de trauma ou possuem um grau de percepção ampliada e não refinada.
+
+Os florais contribuem levando luz para que, no processo terapêutico, haja uma desidentificação com a parte que está em conflito (na sombra). Os florais de Bach são gotas de luz que adentram a escuridão da alma; sem o direcionamento psicoterapêutico, a transformação, ou seja, o desenvolvimento das virtudes opostas, segundo Dr. Bach, pode ficar comprometido.
+
+Conhecer-se tem o propósito de transformar aquilo que não é mais necessário e focar nas habilidades conquistadas ao longo dos tempos.
+
+## Bioeletrografias de humanos e das essências Florais de Bach
+
+*(imagens/figuras a inserir)*
+
+## Sobre a autora
+
+Martha Mendes é educadora, pós-graduada em Psicossomática e Psicobiofísica, Psicanalista Clínica, especialista em Florais de Bach, Terapia Regressiva, Hipnose Clínica e Ericksoniana. Mestre em Bioeletrografia pela IUMAB (International Union of Medical and Applied Bioelectrography in Brazil), presidente do II e VII Congresso de Hipnoterapia e Terapia Regressiva (São Paulo – SP, 2010 e 2019). Membro certificado pela EARTH (European Association for Regression Therapy), autora da filosofia/metodologia Psicobiosofia® e escritora.`,
     status: 'published',
-    publishedAt: '2024-03-10T00:00:00.000Z',
-    createdAt: '2024-03-10T00:00:00.000Z',
-    updatedAt: '2024-03-10T00:00:00.000Z',
-    author: 'Profª Ana Costa',
-    readTime: '10 min',
+    publishedAt: '2026-02-21T00:00:00.000Z',
+    createdAt: '2026-02-21T00:00:00.000Z',
+    updatedAt: '2026-02-21T00:00:00.000Z',
+    author: 'Martha Mendes',
+    readTime: '9 min',
   },
   {
     id: 'post_3',
-    title: 'Psicobiosofia®: Uma Nova Visão do Ser Humano',
-    slug: 'psicobiosofia-nova-visao-ser-humano',
-    summary: 'Compreendendo a integração entre psicologia, biologia e filosofia na prática terapêutica.',
-    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop',
-    tags: ['Metodologia', 'Psicobiosofia', 'Terapia'],
-    content: `# Psicobiosofia®: Uma Nova Visão do Ser Humano
+    title: 'Psicobiosofia: Na era de uma verdadeira revolução espiritual e científica',
+    slug: 'psicobiosofia-na-era-de-uma-verdadeira-revolucao-espiritual-e-cientifica',
+    summary: 'Uma reflexão sobre autocura, filosofia e ciência diante de uma revolução espiritual e científica, convidando o leitor ao autoconhecimento e à responsabilidade sobre a própria verdade.',
+    image: psicofobiaImg,
+    tags: ['Psicobiosofia', 'Autoconhecimento', 'Filosofia'],
+    content: `# Psicobiosofia: Na era de uma verdadeira revolução espiritual e científica
 
-A Psicobiosofia® é uma metodologia exclusiva que integra três dimensões fundamentais do ser humano: psicologia, biologia e filosofia.
+**Por Martha Mendes**
 
-## Os Três Pilares
+É provável que o leitor amigo estranhe o título deste trabalho.
 
-### Psicologia
-Compreensão dos processos mentais, emocionais e comportamentais.
+A filosofia faz parte do processo de autocura. Estamos condicionados a ver, tocar e mensurar o conhecimento, mesmo porque a ciência é epistemológica. A era em que estamos vivendo é de verdadeira revolução científica e espiritual. Nada pode ser ignorado. Tudo deve ser, no mínimo, observado. O novo sempre causa impacto e é muitas vezes refutado pela falta de dados consistentes.
 
-### Biologia
-Entendimento dos processos fisiológicos e sua relação com a saúde integral.
+> “O dia em que a ciência começar a estudar os fenômenos não físicos, fará mais progressos numa década do que em todos os séculos anteriores.”  
+> *Nikola Tesla.*
 
-### Filosofia
-Reflexão sobre o sentido da existência e propósito de vida.
+Voltando no tempo, podemos observar que grandes filósofos e cientistas foram, muitas vezes, ridicularizados para posteriormente serem considerados verdadeiros pilares no processo de desenvolvimento das ciências biopsicossocial e espiritual. Todos experimentaram, de certa forma, a rejeição de suas ideias por serem consideradas empíricas. Filósofos e cientistas adentram o mundo das ideias, insights, descobertas e invenções pela arte de raciocinar, pela capacidade de análise e de síntese. Eles buscam a verdade! E o que é verdade?
 
-## Aplicações Práticas
+Meu espírito é movido pela pesquisa. Sempre busquei respostas para a existência e as dificuldades que nós, seres humanos, encontramos em Ser.
 
-A Psicobiosofia® oferece ferramentas para autoconhecimento profundo, transformação pessoal e desenvolvimento de propósito de vida.
+Busquei na filosofia, na biologia, na psicologia e nas religiões informações que pudessem elucidar minhas dúvidas. Percebi que a verdade é aquilo em que acreditamos, com o complexo psicobiofísico. Talvez essa seja uma crença inadequada, mas é a minha verdade pessoal.
 
-## Formação
+Algumas ciências tentam anular a existência de uma força maior, outras a colocam como tirânica, outras, ainda, como salvadora. Creio numa força maior que nos permite a vida, o intelecto, a emoção, a razão, a percepção e, também, a responsabilidade com o ser humano e com o universo. Não fomos jogados ao acaso num planeta maravilhoso, de uma natureza inenarrável, sem eira nem beira e com todas as ferramentas ‘psicobiofísico e espirituais’. Decididamente, não somos vítimas do acaso.
 
-O Instituto Martha Mendes oferece formação completa em Psicobiosofia®, com certificação reconhecida.`,
+A reflexão permite ao curador pessoal despertar alguns questionamentos: De que maneira nos relacionamos com o mundo nos diferentes aspectos de nossas vidas? Quais são nossas crenças, nossas verdades? Essas crenças nos limitam ou nos liberta?
+
+A diversidade de situações no processo de vida e dos diferentes selfs nos coloca diante de vivências que podem ser percebidas como castigo ou como bênção do aprendizado. A verdade é a percepção pessoal.
+
+A compreensão dessa verdade faz com que encontremos momentos especiais de aprendizado e de amadurecimento, nos permitindo entrar no mundo das ideias dos filósofos e dos cientistas. O saber de si e da energia gerada pela condição mental e emocional é ferramenta imprescindível para sairmos da condição de vítimas e nos posicionarmos como aprendizes.
+
+Estamos acostumados a ter uma visão somente do que acontece exteriormente, dificultando o processo de autocura. Poder observar o que acontece em nosso íntimo, em nosso ser, em nossa química, nos possibilita a condição para a imutável verdade de Sócrates: “Conhece-te e cura-te.”
+
+Todo processo de autocura necessita de coragem e de ousadia. Identificar habilidades e limitações nos dá as rédeas de nossas vidas. Encontrar em nós a “semente divina” desperta Chiron, o arquétipo do curador. O autoconhecimento nos leva até o ponto de diferenciação, até o equilíbrio do “eu” e do “não eu”, do “ser” e do “estar”.
+
+Quando assumimos a responsabilidade sobre nós mesmos, praticamos a verdadeira alquimia, que abre o caminho para a energia psíquica fluir naturalmente e modificar os humores que agem de maneira inteligente em todo o Ser. Adentrar ao mundo das ideias requer uma química harmônica.
+
+A Bioeletrografia nos auxilia na observação da energia que geramos por nossas verdades e que, muitas vezes, entram em conflito com nosso modo de nos relacionar com o mundo. Os conflitos geram uma desorganização ‘psicobiofísico e espiritual’, resultando na somatização de diversas doenças.
+
+Ter uma vida saudável é um convide da própria alma.
+
+Reflita!
+
+## Sobre a autora
+
+Martha Mendes é educadora, pós-graduada em Psicossomática e Psicobiofísica, Psicanalista Clínica, especialista em Florais de Bach, Terapia Regressiva, Hipnose Clínica e Ericksoniana. Mestre em Bioeletrografia pela IUMAB (International Union of Medical and Applied Bioelectrography in Brazil), presidente do II e VII Congresso de Hipnoterapia e Terapia Regressiva (São Paulo – SP, 2010 e 2019). Membro certificado pela EARTH (European Association for Regression Therapy), autora da filosofia/metodologia Psicobiosofia® e escritora.`,
     status: 'published',
-    publishedAt: '2024-02-20T00:00:00.000Z',
-    createdAt: '2024-02-20T00:00:00.000Z',
-    updatedAt: '2024-02-20T00:00:00.000Z',
-    author: 'Dra. Martha Mendes',
-    readTime: '20 min',
+    publishedAt: '2026-02-21T00:00:00.000Z',
+    createdAt: '2026-02-21T00:00:00.000Z',
+    updatedAt: '2026-02-21T00:00:00.000Z',
+    author: 'Martha Mendes',
+    readTime: '6 min',
+  },
+  {
+    id: 'post_4',
+    title: 'Psicobiosofia — Raios de Luz (Parte I)',
+    slug: 'psicobiosofia-raios-de-luz-parte-i',
+    summary: 'Uma reflexão sobre ancestralidade, força raiz e a “semente divina”, convidando a integrar as múltiplas energias que habitam em nós e escolher viver com potência e consciência.',
+    image: raioDeLuzImg,
+    tags: ['Psicobiosofia', 'Ancestralidade', 'Autoconhecimento'],
+    content: `# Psicobiosofia — Raios de Luz (Parte I)
+
+**Por Martha Mendes**
+
+No processo evolutivo da alma, muitas energias são mobilizadas, uma delas é a energia ancestral, a força raiz, ou seja, para estar aqui fisicamente dois seres magníficos se uniram e num ato de amor uma célula começou a tomar forma. Esses dois seres vieram da união de dois outros, que vieram de mais dois e assim formando uma arvore grande, frondosa com raízes muito fortes. Podemos chamar a célula que se formou de semente divina, que germina, cria raízes, tronco, folhas e frutos que naturalmente embelezam com cores, perfumes e sabores a existência.
+
+Muito bem!… Já pensou quanta gente mora dentro de você?
+
+Quantos seres já vividos em diferentes tempos e espaços?
+
+Por conta da decisão deles hoje você está aqui.
+
+Agora imagine quanta energia existe aí dentro…
+
+O segredo agora é administrar esses condomínios, consciente de que a união faz a força. E que força!!!
+
+Você já ouviu falar de genealogia? A genealogia é a ciência que estuda a origem, a disseminação, a evolução da família. Família é um grande laboratório. É nela que aprendemos valores, convivência, respeito, limites, amor e tantas outras coisas, até mesmo o que não devemos fazer.
+
+Certa vez, um cliente começou a queixar-se demasiadamente sobre seus pais, que isso, aquilo… eu o ouvia atentamente. Após suas queixas, disse-lhe: Que injustiça, não é mesmo?! Com tantas famílias no universo, você foi nascer justamente nessa. Deve existir um motivo muito forte para que isso tenha lhe acontecido não é mesmo? Ficou a olhar-me com espanto… então eu lhe disse o que será que tem nesse núcleo familiar que você precisa aprender e a superar?
+
+Qual é o sentido de família pra você? O que você pode aprender com seus familiares, o que pode ensinar à eles, o que podem compartilhar e construir?
+
+Geralmente se dá conta da ancestralidade quando numa consulta médica tem-se a tradicional pergunta: alguém em sua família é portador disso ou aquilo? Será que só se herda doenças?
+
+Seus antepassados, suas forças, estão esperando você desvendar a sua história. E nela descobrir “Eus maravilhosos”.
+
+Então, os raios de luz da Psicobiosofia vão abrindo as trilhas para que, com um único propósito, os moradores do condomínio, chamado você, possam certificar a sua evolução.
+
+Divino não é mesmo?!
+
+A união dessas forças dá a sustentação necessária à vida no corpo… o templo de sua alma.
+
+Você não herdou doenças como na maioria das vezes, olha para trás e procura. Você herdou força, coragem, determinação, criatividade e muitas habilidades.
+
+Você tem uma linhagem divina.
+
+Partindo do princípio de que o tempo não existe, as ondas de sua consciência acessam os universos paralelos onde cada parte dessa energia continua viva e atuante.
+
+A energia ancestral não é consciente, é uma energia estrutural.
+
+No corpo físico existem espirais de energia, são microespirais… elas são extremamente importantes… no núcleo dessas espirais alojam-se os genes… eles são os mensageiros que transportam as informações de uma geração à outra, essas informações determinam as suas características como cor de pele, cabelos, olhos, altura, sexo e tantas outras…. Na verdade, eles são os engenheiros do templo da alma.
+
+Sinta, perceba quão magnífico você é!!!!
+
+Existe no corpo físico um ponto entre os rins onde é ancorada a energia ancestral… leve sua atenção até lá… na medicina tradicional chinesa, é chamado de Ming Men… São as suprarrenais. É o portão da vitalidade, aí reside um cabedal de energia para realização, manifestação, sinta… perceba em você a força, a sua capacidade de realizar, de ir em busca daquilo que deseja.
+
+Quando se olha para aquilo que é belo, sente-se o belo, percebe-se o belo, no sentido amplo da palavra você acaba por gerar um êxtase que o coloca num estado pleno e integral de gratidão, faz o religare com o transcendental, com a força do seu EU SUPERIOR. O seu estado de Divindade.
+
+Esse estado amplia o Ser experimentado a felicidade e faz o resgate secular de seu saber.
+
+A consciência necessita, convida, solicita para que se arrume o coração. Lá habita o conhecimento do EU. O coração, como falamos há pouco, é o primeiro órgão a ser formado e nele se encontram suas mensagens para esta encarnação. “Arrumar” o coração, contatar o sagrado que existe lá, é aproveitar a existência, sem desperdícios. E à medida que vamos nos conhecendo, vai se tornando possível o “indivíduo” que nos coloca frente ao sagrado, onde a vida se torna plena.
+
+Então, pense em algo que deseja realizar, construir com a sua bagagem, com aquilo que você já aprendeu… Talvez um estudo, quem sabe um trabalho, ou até mesmo uma condição emocional/espiritual que lhe traga satisfação… SIM, pense nisso agora… Veja o que pensa… Como sente o que pensa… perceba a sensação que o pensamento gerou, um sentimento/emoção se manifesta em você… imagine isso acontecendo de forma alegre, dinâmica… Einstein disse: a imaginação é mais importante do que o conhecimento… Imaginação é imagem em ação, é dar vida à imagem.
+
+Substitua o “não consigo” por eu posso.
+
+Participe da vida com toda sua potência!
+
+Escolha ser quem você nasceu para Ser!
+
+## Sobre a autora
+
+Martha Mendes é educadora, pós-graduada em Psicossomática e Psicobiofísica, Psicanalista Clínica, especialista em Florais de Bach, Terapia Regressiva, Hipnose Clínica e Ericksoniana. Mestre em Bioeletrografia pela IUMAB (International Union of Medical and Applied Bioelectrography in Brazil), presidente do II e VII Congresso de Hipnoterapia e Terapia Regressiva (São Paulo – SP, 2010 e 2019). Membro certificado pela EARTH (European Association for Regression Therapy), autora da filosofia/metodologia Psicobiosofia® e escritora.`,
+    status: 'published',
+    publishedAt: '2026-02-21T00:00:00.000Z',
+    createdAt: '2026-02-21T00:00:00.000Z',
+    updatedAt: '2026-02-21T00:00:00.000Z',
+    author: 'Martha Mendes',
+    readTime: '8 min',
+  },
+  {
+    id: 'post_5',
+    title: 'Reiki: uma experiência de autolibertação',
+    slug: 'reiki-uma-experiencia-de-autolibertacao',
+    summary: 'Reiki como prática de amor, disciplina e autoconhecimento: uma energia que mobiliza e harmoniza, favorecendo autocura, dignidade e transformação interior.',
+    image: reikiBlogImg,
+    tags: ['Reiki', 'Autoconhecimento', 'Terapias Integrativas'],
+    content: `# Reiki: uma experiência de autolibertação
+
+**Por Martha Mendes**
+
+O Reiki é uma técnica que está muito além da imposição de mãos, é muito mais amplo, é o verdadeiro exercício do amor e do autoconhecimento. É estar vinculado à disciplina e à responsabilidade consigo mesmo, vivenciando a autolibertação.
+
+Dentro do que pude vivenciar no Reiki, ficou bastante claro para mim, tanto no campo pessoal quanto no campo terapêutico, que essa energia divina exerce influências profundas em nosso ser. Mobiliza todo o amálgama energético, promovendo a autocura que advém de informação e conhecimento, despertando em cada um a vontade de se autoconhecer. Sendo assim, o Reiki torna-se um estilo de vida.
+
+Existem muitos mestres de Reiki no Brasil e no mundo com características peculiares, as quais entendo ser a verdade de cada um. Uma das maravilhas da consciência humana é a percepção diferenciada.
+
+Quando iniciamos um percurso em direção ao autoconhecimento, muitas respostas são encontradas em nós mesmos, tornando-se o Reiki uma ferramenta valiosíssima nesse processo, pois nos permite fazer o resgate da própria capacidade de cura.
+
+A mobilização do amálgama energético, a higienização e a harmonização da força dos elementos Terra, Ar, Água e Fogo promovem a transformação química no complexo glandular, modificando nosso humor. De acordo com Paracelso, o humor é o licor da vida. O que para Mikao Usui era a dignidade. Segundo Mikao, o homem adoece pela perda da dignidade (amor próprio, satisfação, realização).
+
+Nossa mente é geradora de pensamentos que, consequentemente, geram emoções. Dependendo da qualidade dos pensamentos, geramos harmonia ou desequilíbrio em nossa saúde.
+
+Muitas pessoas sentem-se diferentes após a iniciação em Reiki. Essa diferença se dá pela reorganização dos elementos, período em que se faz necessário o respeito e o carinho para consigo mesmo.
+
+O Reiki não faz milagres em nossas vidas, ele é tão somente uma ferramenta para que cada um, no seu tempo, processe a própria dádiva da transformação para tornar-se um ser melhor a cada dia, vivenciando a autolibertação. Reiki-se!
+
+## Livros
+
+- *Reiki uma Experiência de Libertação*  
+  Prefácio: Geraldo Medeiros Jr.  
+  Lançamento: Bienal do Livro/2000 — SP
+
+- *Reiki um Processo Alquímico*  
+  Prefácio: Wagner Borges  
+  Lançamento: Bienal do Livro/2002 — SP
+
+## Sobre a autora
+
+Martha Mendes é educadora, pós-graduada em Psicossomática e Psicobiofísica, Psicanalista Clínica, especialista em Florais de Bach, Terapia Regressiva, Hipnose Clínica e Ericksoniana. Mestre em Bioeletrografia pela IUMAB (International Union of Medical and Applied Bioelectrography in Brazil), presidente do II e VII Congresso de Hipnoterapia e Terapia Regressiva (São Paulo – SP, 2010 e 2019). Membro certificado pela EARTH (European Association for Regression Therapy), autora da filosofia/metodologia Psicobiosofia® e escritora.`,
+    status: 'published',
+    publishedAt: '2026-02-21T00:00:00.000Z',
+    createdAt: '2026-02-21T00:00:00.000Z',
+    updatedAt: '2026-02-21T00:00:00.000Z',
+    author: 'Martha Mendes',
+    readTime: '6 min',
+  },
+  {
+    id: 'post_6',
+    title: 'Terapia de Vivências Passadas: crença ou ciência?',
+    slug: 'terapia-de-vivencias-passadas-crenca-ou-ciencia',
+    summary: 'Uma leitura da Terapia de Vivências Passadas (TVP) a partir de Hipócrates, da hipnose como foco e autoconsciência, e do “curador interno” como recurso de ressignificação e autocura.',
+    image: tvpImg,
+    tags: ['Terapia Regressiva', 'Hipnose', 'Psicoterapia'],
+    content: `# Terapia de Vivências Passadas: crença ou ciência?
+
+**Por Martha Mendes**
+
+Antes de entrar na questão da terapia regressiva, que responde à pergunta do título, vale pensar na frase de Mario Quintana: “O passado não reconhece o seu lugar: está sempre presente”.
+
+As memórias, situações de imensa alegria ou de extremo desprazer, estão arquivadas e impressas em cada célula dos nossos corpos.
+
+O cérebro consegue armazenar informações de toda uma existência e, dependendo da carga afetiva que produz, desencadeia uma ciranda bioquímica que altera o funcionamento do sistema corporal, levando o indivíduo do paraíso ao inferno, sendo o inverso também verdadeiro.
+
+Dito isto e pensando nas informações que a história do passado nos revela, mais especificamente o legado do considerado Pai da Medicina — Hipócrates de Cós (ilha da Grécia Antiga onde médicos e terapeutas atuavam, atendendo personalizadamente o ser humano que adoeceu). Constatamos que já naquela época Hipócrates consagrou-se pela habilidade em usar sua sabedoria com amor, interessando-se pela dinâmica da vida de seus pacientes e procurando entender, com base na visão holística, como cada ser/paciente se posicionava diante de sua própria existência. Da observação dos diversos e peculiares sintomas nasceu então o conceito e exercício das clínicas multidisciplinares.
+
+O desequilíbrio era visto sem crendices. Consciente da importância da espiritualidade, Hipócrates afirmou que o adoecer se dava pela desarmonia do indivíduo com o cosmo. Esta ordem de raciocínio/diagnóstico comprova a existência de um ruído desagregador entre o corpo e a alma humana.
+
+A alma necessita de um corpo, via natural de evolução, para se manifestar e se autoaprimorar, independente da escolha religiosa que o indivíduo tenha.
+
+Hipócrates direcionava seus conhecimentos de forma científica, e não supersticiosamente, entendendo os humores corporais (bioquímica) e a personalidade. “Tuas forças naturais, as quais estão em ti, serão as que curarão suas doenças”, afirmava ele.
+
+Compreendendo os conceitos de Hipócrates, reporto-me às terapias regressivas, ou Terapias de Vida Passadas (TVP), tema desta matéria.
+
+A hipnose, desde a antiguidade era considerada misteriosa e, provavelmente pela desinformação das pessoas, era uma forma de impor uma espécie de poder sobre o outro.
+
+Hoje, graças aos estudos sobre a técnica, posso dizer que a hipnose é uma das formas mais assertivas de o indivíduo se conectar com a própria força.
+
+A hipnose não é o sono profundo, pelo contrário, é estar desperto em um estado em que todos os seus sentidos trabalham em conjunto. É uma verdadeira equipe que trabalha para favorecer o próprio indivíduo.
+
+O terapeuta que utiliza desse recurso deve ter em mente que a hipnose facilita o cliente a manter o foco de atenção, auxiliando-o a se concentrar em suas habilidades; habilidades essas que, futuramente, irão auxiliá-lo a encontrar a origem de suas dificuldades/desequilíbrios.
+
+A hipnose não tira a consciência, ela é um dos recursos para a autoconsciência.
+
+É importante que o profissional tenha conhecimentos de neuroanatomia funcional e transpessoal (estados modificados de consciência), o que lhe conferirá segurança em sua atuação.
+
+Cada cliente é um universo sendo preciso estar munido de diferentes recursos para auxiliá-lo.
+
+O terapeuta, como já indicava Hipócrates, precisa se informar sobre como o cliente participa efetivamente da vida, encontrando com ele a maior dificuldade. Através da hipnose (transe leve-médio), é possível acessar um arquivo com memórias onde a origem dessa dificuldade (o motivo que o levou até o consultório) possa ser encontrada e resignificada por ele com a consciência de suas habilidades internas. É a manifestação de seu “curador interno”.
+
+E é simples explicar o “curador interno” se fizermos uma mera comparação com a tecnologia criada pela própria inteligência humana para a ciência da computação. Sabendo que existem nas máquinas as funções restart ou “reparar configurações”, pergunto então: “Como o corpo e a mente humana, máquinas perfeitas em sua concepção, não teriam como acessar essas funções?” Ora, mas é claro que elas têm essa permissão de acesso! São acessos realizados através do curador interno de cada ser-corpo e alma.
+
+Durante a terapia regressiva, tudo é importante e carregado de conteúdo simbólico, independente do tempo em que esteja. O mais importante é o sentido que esse conteúdo tem na vida do Ser.
+
+Estando o cliente rememorando sua adolescência, sua infância, sua vida intrauterina, um período entre vidas, outra vida, inimigos ou seres espirituais, nós, terapeutas, devemos respeitar e acolher essas memórias para serem trabalhadas na psicoterapia. O conteúdo é recheado de significados e, por consequência, de entendimentos, resultando em soluções para as mais inusitadas fontes de dor, desequilíbrios e doenças.
+
+Desejo do corpo, aspiração da alma — esse é o conflito ao qual Hipócrates se referiu.
+
+A terapia regressiva é um recurso da psicoterapia utilizado por profissionais habilitados, portanto, difere da terapia em si. Assim, é importante ressaltar que acessar conteúdos sem trabalhá-los é acentuar um desequilíbrio.
+
+Sabemos que o ser humano tem capacidade e habilidade de lembrar-se de fatos há muito tempo vivenciados. A memória é um recurso cognitivo que utiliza os sentidos para armazenar as experiências de toda a existência.
+
+A terapia regressiva favorece ao Ser/paciente recordar e vivenciar fatos (muitas vezes registrados distorcidamente), esgotando assim a tensão emocional desse núcleo de dor e dando um novo significado a ele. Trauma significa uma ferida aberta (dor emocional) infeccionada (carga afetiva intensa) que ao menor esbarro (gatilho) dói, levando a reações diversas e desproporcionais.
+
+A terapia regressiva permite ao indivíduo higienizar sua ferida e curá-la com seus próprios recursos, recuperando a força despendida no momento traumático. Sendo um trauma uma ferida, produz alterações funcionais.
+
+No cérebro existem as amigadas (arquivos de momentos traumáticos) que armazenam a emoção vivenciada e sinalizam o perigo, enviando mensagens de sobrevivência. Assim, todo o conjunto cerebral envolvido se mobiliza para a proteção, dificultando a interpretação do evento. Quando há um gatilho, a carga emocional é acionada (sem a lembrança do fato), perdendo a capacidade de diferenciar o perigo. A atividade elétrica do cérebro é alterada, fica desordenada, produz irritação do funcionamento do hipocampo (autobiografia — história do indivíduo) e libera o hormônio do estresse. Logo, os dois lados do cérebro trabalham de maneira irregular, alterando o discernimento.
+
+O terapeuta não é um juiz e sim um acolhedor dos conteúdos, que serão objeto da psicoterapia.
+
+Como psicoterapeuta, utilizo várias ferramentas tais como a Bioeletrografia, para verificar como está a energia gerada pelo cliente e os florais de Bach, para recuperar força e promover a homeostasia (recuperação da força vital). Recorro também aos conteúdos de sonhos para, depois, utilizar a terapia regressiva ou a hipnoterapia, já com um endereço certo, sem dar voltas no passado.
+
+A espiritualidade é uma condição do ser humano, a religião é uma escolha. Estamos vivendo uma grande revolução científica e espiritual e nada pode ser ignorado, tudo precisa ser, no mínimo, observado.
+
+Espiritualize-se e se liberte das limitações nas diversas áreas da sua vida.
+
+## Sobre a autora
+
+Martha Mendes é educadora, pós-graduada em Psicossomática e Psicobiofísica, Psicanalista Clínica, especialista em Florais de Bach, Terapia Regressiva, Hipnose Clínica e Ericksoniana. Mestre em Bioeletrografia pela IUMAB (International Union of Medical and Applied Bioelectrography in Brazil), presidente do II e VII Congresso de Hipnoterapia e Terapia Regressiva (São Paulo – SP, 2010 e 2019). Membro certificado pela EARTH (European Association for Regression Therapy), autora da filosofia/metodologia Psicobiosofia® e escritora.`,
+    status: 'published',
+    publishedAt: '2026-02-21T00:00:00.000Z',
+    createdAt: '2026-02-21T00:00:00.000Z',
+    updatedAt: '2026-02-21T00:00:00.000Z',
+    author: 'Martha Mendes',
+    readTime: '12 min',
   },
 ];
 

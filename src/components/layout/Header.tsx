@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.svg";
@@ -23,6 +23,7 @@ const Header = () => {
     { label: "Cursos", href: "/cursos" },
     { label: "Mídia", href: "/midia" },
     { label: "Blog", href: "/blog" },
+    { label: "Contato", href: "/contato" },
   ];
 
   return (
@@ -62,7 +63,10 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
             <Link to="/contato">
-              <Button size="default" className="gradient-gold text-white hover:opacity-90 rounded-full px-6">
+              <Button
+                size="default"
+                className="gradient-gold text-white hover:opacity-90 rounded-full px-6"
+              >
                 Fale Conosco
               </Button>
             </Link>

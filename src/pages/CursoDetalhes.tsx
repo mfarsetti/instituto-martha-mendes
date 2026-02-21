@@ -291,7 +291,6 @@ const CursoDetalhes = () => {
                     </Tabs>
                   </Card>
                 </div>
-
                 {/* Sidebar */}
                 <div className="lg:col-span-1">
                   <div className="sticky top-24 space-y-6">
@@ -305,8 +304,6 @@ const CursoDetalhes = () => {
                         </Button>
                       </a>
                     </Card>
-
-                    
                   </div>
                 </div>
               </div>

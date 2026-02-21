@@ -3,6 +3,7 @@ import { Presentation, Building2, Users, Sparkles, ArrowRight } from "lucide-rea
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import { motion } from "framer-motion";
+import somar from "@/assets/somar.jpeg";
 
 const PalestrasConsultorias = () => {
   return (
@@ -112,7 +113,17 @@ const PalestrasConsultorias = () => {
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 mb-8 border border-primary/20">
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="flex items-center gap-4">
-                  <Users className="w-12 h-12 text-primary" />
+                  <div className="flex items-center gap-4">
+                    <Users className="w-12 h-12 text-primary" />
+                    <div className="w-12 h-12 rounded-xl overflow-hidden border border-primary/20 shadow-soft bg-background">
+                      <img
+                        src={somar}
+                        alt="Instituto Somar"
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
                   <div>
                     <p className="text-sm font-medium text-primary mb-1">Parceria</p>
                     <p className="font-heading text-2xl font-bold text-foreground">
