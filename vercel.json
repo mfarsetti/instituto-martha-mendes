@@ -1,16 +1,15 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/uploads/:path*",
-      "destination": "/api/uploads/:path*"
+      "src": "/uploads/(.*)",
+      "dest": "/api/uploads/$1"
     },
     {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
+      "handle": "filesystem"
     },
     {
-      "source": "/:path*",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
