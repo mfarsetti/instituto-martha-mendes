@@ -1,8 +1,18 @@
 {
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/api/index",
+      "headers": {
+        "x-imm-path": "/api/$1"
+      }
+    },
+    {
       "src": "/uploads/(.*)",
-      "dest": "/api/uploads/$1"
+      "dest": "/api/index",
+      "headers": {
+        "x-imm-path": "/api/uploads/$1"
+      }
     },
     {
       "handle": "filesystem"

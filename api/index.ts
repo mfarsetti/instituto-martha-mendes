@@ -264,7 +264,7 @@ function contentTypeFromExt(ext: string): string {
 
 async function handle(request: Request): Promise<Response> {
   const url = new URL(request.url);
-  const pathname = url.pathname;
+  const pathname = request.headers.get("x-imm-path") ?? url.pathname;
   const method = request.method.toUpperCase();
 
   // health
