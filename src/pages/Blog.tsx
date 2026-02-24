@@ -6,13 +6,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BookOpen, Calendar, Clock, Search, Tag } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { seedPosts } from "@/lib/seed-data";
+import { fetchPublishedPosts } from "@/lib/public-api";
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Todas");
 
-  const publishedPosts = seedPosts.filter(p => p.status === 'published');
+  const postsQuery = useQuery({
+    queryKey: ["posts"],
+    queryFn: fetchPublishedPosts,
+  });
+
+  const allPosts = postsQuery.data ?? seedPosts;
+  const publishedPosts = allPosts.filter((p) => p.status === "published");
   const categories = ["Todas", ...Array.from(new Set(publishedPosts.flatMap(p => p.tags)))];
 
   const filteredArticles = publishedPosts.filter(post => {

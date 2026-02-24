@@ -1,15 +1,26 @@
-import { Post, Course } from '@/types';
+import type { Post, Course } from "../types";
 
-import enriquecaImg from "@/assets/cursos/enriqueça.png";
-import floraisImg from "@/assets/cursos/florais.png";
-import psicobiosofiaImg from "@/assets/cursos/psicobiosofia.png";
-import psicoeducacaoImg from "@/assets/cursos/psicoeducacao.png";
-import floraisBachBlogImg from "@/assets/blog/florais-bach/image.png";
-import encontroSagradoImg from "@/assets/blog/encontro-sagrado/image.png";
-import psicofobiaImg from "@/assets/blog/encontro-sagrado/image.png";
-import raioDeLuzImg from "@/assets/blog/raio-de-luz/image.png";
-import tvpImg from "@/assets/blog/tvp/image.png";
-import reikiBlogImg from "@/assets/blog/reiki/image.png";
+const enriquecaImg =
+  "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1600&h=900&fit=crop&auto=format";
+const floraisImg =
+  "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=1600&h=900&fit=crop&auto=format";
+const psicobiosofiaImg =
+  "https://images.unsplash.com/photo-1532153259564-a5f24f261f51?w=1600&h=900&fit=crop&auto=format";
+const psicoeducacaoImg =
+  "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=900&fit=crop&auto=format";
+
+const floraisBachBlogImg =
+  "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1600&h=900&fit=crop&auto=format";
+const encontroSagradoImg =
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1600&h=900&fit=crop&auto=format";
+const psicofobiaImg =
+  "https://images.unsplash.com/photo-1520637836862-4d197d17c7a2?w=1600&h=900&fit=crop&auto=format";
+const raioDeLuzImg =
+  "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1600&h=900&fit=crop&auto=format";
+const tvpImg =
+  "https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?w=1600&h=900&fit=crop&auto=format";
+const reikiBlogImg =
+  "https://images.unsplash.com/photo-1519985176271-adb1088fa94c?w=1600&h=900&fit=crop&auto=format";
 
 export const seedPosts: Post[] = [
   {
@@ -547,7 +558,7 @@ export const seedCourses: Course[] = [
     category: 'Metodologia Exclusiva',
     duration: '200h',
     modality: 'EAD',
-    certification: 'Extensão',
+    certification: 'Extensao',
     investment: null,
     startDates: ['2026-08-01'],
     image: psicobiosofiaImg,
@@ -869,7 +880,7 @@ Se você busca apenas informação, este curso não é para você. Mas se você 
     category: 'Terapia Floral',
     duration: '152h',
     modality: 'EAD',
-    certification: 'Extensão',
+    certification: 'Extensao',
     investment: null,
     startDates: ['2026-03-01'],
     image: floraisImg,
@@ -1077,7 +1088,7 @@ Experiência de 30+ anos em clínica, método psicoeducativo, foco em autonomia 
     category: 'Formação Integrativa',
     duration: '32h',
     modality: 'EAD',
-    certification: 'Extensão',
+    certification: 'Extensao',
     investment: null,
     startDates: ['2026-05-17'],
     image: psicoeducacaoImg,

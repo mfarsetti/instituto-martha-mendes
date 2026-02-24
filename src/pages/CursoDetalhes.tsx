@@ -9,7 +9,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useQuery } from "@tanstack/react-query";
 import { seedCourses } from "@/lib/seed-data";
+import { fetchPublishedCourse } from "@/lib/public-api";
 import {
   Award,
   Calendar,
@@ -42,17 +44,48 @@ const CursoDetalhes = () => {
     phone: "",
     message: "",
   });
+  const [submitting, setSubmitting] = useState(false);
 
-  const course = slug ? seedCourses.find(c => c.slug === slug && c.status === 'published') : null;
+  const courseQuery = useQuery({
+    queryKey: ["course", slug],
+    queryFn: () => fetchPublishedCourse(slug!),
+    enabled: !!slug,
+  });
 
-  if (!course) {
+  const fallbackCourse = slug
+    ? seedCourses.find((c) => c.slug === slug && c.status === "published") ?? null
+    : null;
+  const course = courseQuery.data ?? fallbackCourse;
+
+  if (!course && !courseQuery.isLoading) {
     return <Navigate to="/cursos" replace />;
   }
+  if (!course) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Interesse registrado! Entraremos em contato em breve.");
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/course-interest", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          courseSlug: course.slug,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message || undefined,
+        }),
+      });
+      if (!res.ok) throw new Error("failed");
+      toast.success("Interesse registrado! Entraremos em contato em breve.");
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch {
+      toast.error("Não foi possível registrar seu interesse. Tente novamente.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -298,6 +331,18 @@ const CursoDetalhes = () => {
                     <Card className="p-6 border-2 shadow-lg bg-gradient-to-br from-primary/5 to-transparent">
                       
                       
+                      {course.hotmartUrl && (
+                        <a
+                          href={course.hotmartUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="block mb-3"
+                        >
+                          <Button className="w-full gradient-purple text-white font-semibold py-6 text-base">
+                            {course.hotmartText?.trim() || "Comprar na Hotmart"}
+                          </Button>
+                        </a>
+                      )}
                       <a href="#formulario-inscricao" className="block">
                         <Button className="w-full gradient-gold text-white font-semibold py-6 text-base">
                           Quero me inscrever
@@ -470,10 +515,11 @@ const CursoDetalhes = () => {
                   
                   <Button 
                     type="submit" 
-                    className="w-full gradient-gold text-white font-semibold py-6 text-lg hover:opacity-90 transition-opacity"
+                    disabled={submitting}
+                    className="w-full gradient-gold text-white font-semibold py-6 text-lg hover:opacity-90 transition-opacity disabled:opacity-70"
                   >
                     <Mail className="w-5 h-5 mr-2" />
-                    Enviar mensagem
+                    {submitting ? "Enviando..." : "Enviar mensagem"}
                   </Button>
                 </form>
               </Card>

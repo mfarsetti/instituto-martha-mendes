@@ -4,7 +4,9 @@ import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, Share2, Tag } from "lucide-react";
 import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
 import { seedPosts } from "@/lib/seed-data";
+import { fetchPublishedPost } from "@/lib/public-api";
 import { renderMarkdown } from "@/lib/markdown";
 import WatermarkedImage from "@/components/blog/WatermarkedImage";
 import ContentProtection from "@/components/blog/ContentProtection";
@@ -12,11 +14,21 @@ import ContentProtection from "@/components/blog/ContentProtection";
 const BlogPost = () => {
   const { slug } = useParams();
 
-  const post = slug ? seedPosts.find(p => p.slug === slug && p.status === 'published') : null;
+  const postQuery = useQuery({
+    queryKey: ["post", slug],
+    queryFn: () => fetchPublishedPost(slug!),
+    enabled: !!slug,
+  });
 
-  if (!post) {
+  const fallbackPost = slug
+    ? seedPosts.find((p) => p.slug === slug && p.status === "published") ?? null
+    : null;
+  const post = postQuery.data ?? fallbackPost;
+
+  if (!post && !postQuery.isLoading) {
     return <Navigate to="/blog" replace />;
   }
+  if (!post) return null;
 
   const handleShare = async () => {
     try {

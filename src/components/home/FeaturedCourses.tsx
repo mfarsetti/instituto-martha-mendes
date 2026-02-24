@@ -3,10 +3,18 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import { useQuery } from "@tanstack/react-query";
 import { seedCourses } from "@/lib/seed-data";
+import { fetchPublishedCourses } from "@/lib/public-api";
 
 const FeaturedCourses = () => {
-  const courses = seedCourses.filter(c => c.status === 'published').slice(0, 4);
+  const coursesQuery = useQuery({
+    queryKey: ["courses"],
+    queryFn: fetchPublishedCourses,
+  });
+
+  const allCourses = coursesQuery.data ?? seedCourses;
+  const courses = allCourses.filter((c) => c.status === "published").slice(0, 4);
   return (
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">

@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  admin
+  editor
+}
+
+enum PostStatus {
+  draft
+  published
+}
+
+enum CourseStatus {
+  draft
+  published
+}
+
+enum CourseModality {
+  Presencial
+  EAD
+  Hibrido
+}
+
+enum CourseCertification {
+  Extensao
+  Pos
+  Mestrado
+  Outro
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  role         UserRole @default(editor)
+  passwordHash String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id          String     @id @default(cuid())
+  title       String
+  slug        String     @unique
+  summary     String
+  image       String
+  tags        String[]
+  content     String
+  status      PostStatus @default(draft)
+  publishedAt DateTime?
+  author      String?
+  readTime    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, publishedAt(sort: Desc)])
+}
+
+model Course {
+  id             String              @id @default(cuid())
+  title          String
+  slug           String              @unique
+  summary        String
+  category       String
+  duration       String
+  modality       CourseModality
+  certification  CourseCertification
+  investment     String?
+  startDates     String[]
+  image          String
+  hotmartUrl     String?
+  hotmartText    String?
+  content        String
+  status         CourseStatus        @default(draft)
+  seoTitle       String?
+  seoDescription String?
+  students       Int?
+
+  modules  CourseModule[]
+  teachers CourseTeacher[]
+  faqs     CourseFAQ[]
+  leads    CourseLead[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([category])
+}
+
+model CourseModule {
+  id       String  @id @default(cuid())
+  courseId String
+  title    String
+  topics   String[]
+  order    Int?
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@index([courseId])
+}
+
+model CourseTeacher {
+  id          String  @id @default(cuid())
+  courseId    String
+  name        String
+  photo       String
+  role        String
+  bio         String
+  specialties String[]
+  order       Int?
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@index([courseId])
+}
+
+model CourseFAQ {
+  id       String  @id @default(cuid())
+  courseId String
+  question String
+  answer   String
+  order    Int?
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@index([courseId])
+}
+
+model CourseLead {
+  id       String  @id @default(cuid())
+  courseId String?
+  name     String
+  email    String
+  phone    String
+  message  String?
+
+  createdAt DateTime @default(now())
+
+  course Course? @relation(fields: [courseId], references: [id], onDelete: SetNull)
+
+  @@index([courseId])
+  @@index([email])
+  @@index([createdAt(sort: Desc)])
+}

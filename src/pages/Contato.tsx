@@ -17,6 +17,7 @@ const Contato = () => {
     subject: "",
     message: "",
   });
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
@@ -25,21 +26,35 @@ const Contato = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Mock submission
-    toast.success("Mensagem enviada com sucesso!", {
-      description: "Responderemos em breve. Obrigado pelo contato!",
-    });
-    
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    });
+    if (submitting) return;
+    setSubmitting(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) throw new Error("failed");
+
+      toast.success("Mensagem enviada com sucesso!", {
+        description: "Responderemos em breve. Obrigado pelo contato!",
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch {
+      toast.error("Não foi possível enviar sua mensagem. Tente novamente.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -178,10 +193,11 @@ const Contato = () => {
                     <Button
                       type="submit"
                       size="lg"
+                      disabled={submitting}
                       className="w-full gradient-gold text-white shadow-elegant hover:shadow-glow transition-all group"
                     >
                       <Send className="mr-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                      Enviar Mensagem
+                      {submitting ? "Enviando..." : "Enviar Mensagem"}
                     </Button>
                   </form>
                 </div>

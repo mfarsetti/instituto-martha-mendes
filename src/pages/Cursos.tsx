@@ -3,10 +3,18 @@ import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { seedCourses } from "@/lib/seed-data";
+import { fetchPublishedCourses } from "@/lib/public-api";
 
 const Cursos = () => {
-  const publishedCourses = seedCourses.filter(c => c.status === 'published');
+  const coursesQuery = useQuery({
+    queryKey: ["courses"],
+    queryFn: fetchPublishedCourses,
+  });
+
+  const allCourses = coursesQuery.data ?? seedCourses;
+  const publishedCourses = allCourses.filter((c) => c.status === "published");
 
   return (
     <div className="min-h-screen bg-background">

@@ -14,8 +14,8 @@ export interface AuthSession {
 
 export type PostStatus = 'draft' | 'published';
 export type CourseStatus = 'draft' | 'published';
-export type CourseModality = 'Presencial' | 'EAD' | 'Híbrido';
-export type CourseCertification = 'Extensão' | 'Pós' | 'Mestrado' | 'Outro';
+export type CourseModality = 'Presencial' | 'EAD' | 'Hibrido';
+export type CourseCertification = 'Extensao' | 'Pos' | 'Mestrado' | 'Outro';
 
 export interface Post {
   id: string;
@@ -66,6 +66,8 @@ export interface Course {
   investment: string | null;
   startDates: string[];
   image: string;
+  hotmartUrl?: string | null;
+  hotmartText?: string | null;
   content: string;
   modules: CourseModule[];
   teachers: CourseTeacher[];

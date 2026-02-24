@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { AuthProvider } from "@/admin/auth";
+import RequireAuth from "@/admin/RequireAuth";
 import Index from "./pages/Index";
 import Sobre from "./pages/Sobre";
 import MarthaCV from "./pages/MarthaCV";
@@ -19,6 +21,13 @@ import FAQ from "./pages/FAQ";
 import Contato from "./pages/Contato";
 import NotFound from "./pages/NotFound";
 import Midia from "./pages/Midia";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminPosts from "./pages/admin/AdminPosts";
+import AdminPostEditor from "./pages/admin/AdminPostEditor";
+import AdminCourses from "./pages/admin/AdminCourses";
+import AdminCourseEditor from "./pages/admin/AdminCourseEditor";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +51,18 @@ const AnimatedRoutes = () => {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contato" element={<Contato />} />
         <Route path="/midia" element={<Midia />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route element={<RequireAuth />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="posts" element={<AdminPosts />} />
+            <Route path="posts/new" element={<AdminPostEditor />} />
+            <Route path="posts/:id" element={<AdminPostEditor />} />
+            <Route path="courses" element={<AdminCourses />} />
+            <Route path="courses/new" element={<AdminCourseEditor />} />
+            <Route path="courses/:id" element={<AdminCourseEditor />} />
+          </Route>
+        </Route>
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -55,7 +76,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <AnimatedRoutes />
+        <AuthProvider>
+          <AnimatedRoutes />
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
