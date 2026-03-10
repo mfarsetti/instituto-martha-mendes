@@ -18,7 +18,7 @@ import {
 } from "./auth";
 import { slugify } from "./slug";
 import { ensureUploadsDir, UPLOADS_DIR } from "./upload";
-import { sendMail } from "./mailer";
+import { buildCourseInterestMail, getCourseLeadRecipients, sendMail } from "./mailer";
 
 const app = express();
 
@@ -493,33 +493,36 @@ app.post("/api/course-interest", async (req, res) => {
       message: input.data.message?.trim() ? input.data.message : null,
     },
   });
+  console.info("[course-interest] lead salvo", {
+    courseSlug: input.data.courseSlug,
+    email: input.data.email,
+    hasCourse: Boolean(course?.id),
+  });
 
   try {
-    const to = "contato@institutomarthamendes.com.br";
-    const bcc = "matheus.farsetti@gmail.com";
-    const subject = `Novo interesse em curso: ${input.data.courseSlug}`;
-    const text = [
-      "Novo formulário de interesse recebido.",
-      "",
-      `Curso (slug): ${input.data.courseSlug}`,
-      `Nome: ${input.data.name}`,
-      `E-mail: ${input.data.email}`,
-      `Telefone: ${input.data.phone}`,
-      `Mensagem: ${input.data.message ?? ""}`,
-      "",
-      "— Instituto Martha Mendes",
-    ].join("\n");
+    const { to, bcc } = getCourseLeadRecipients();
+    const { subject, text } = buildCourseInterestMail(input.data);
+    console.info("[course-interest] enviando email", {
+      to,
+      bcc: bcc ?? null,
+      replyTo: input.data.email,
+      subject,
+    });
 
-    await sendMail({
+    const info = await sendMail({
       to,
       bcc,
       subject,
       text,
       replyTo: input.data.email,
     });
+    console.info("[course-interest] email enviado", {
+      messageId: info.messageId,
+      accepted: info.accepted,
+      rejected: info.rejected,
+    });
   } catch (err) {
     // não bloquear o lead por falha de e-mail
-    // eslint-disable-next-line no-console
     console.error("Mailer error (course-interest)", err);
   }
 

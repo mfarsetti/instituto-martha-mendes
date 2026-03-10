@@ -3,10 +3,10 @@ import fs from "node:fs/promises";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import nodemailer from "nodemailer";
 import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
+import { buildCourseInterestMail, getCourseLeadRecipients, sendMail } from "../server/mailer";
 
 function requireEnv(name: string): string {
   const value = process.env[name];
@@ -85,7 +85,6 @@ const COOKIE_NAME = "imm_session";
 const JWT_SECRET = process.env.JWT_SECRET; // não chamar requireEnv na inicialização do módulo
 
 declare global {
-  // eslint-disable-next-line no-var
   var __immPrisma: PrismaClient | undefined;
 }
 
@@ -147,43 +146,6 @@ async function requireAuth(request: Request) {
   const user = await getUserFromRequest(request);
   if (!user) return unauthorized();
   return user;
-}
-
-function getTransport() {
-  const host = requireEnv("SMTP_HOST");
-  const port = Number(requireEnv("SMTP_PORT"));
-  const secure = (process.env.SMTP_SECURE ?? "false").toLowerCase() === "true";
-  const user = requireEnv("SMTP_USER");
-  const pass = requireEnv("SMTP_PASS");
-
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure,
-    auth: { user, pass },
-  });
-}
-
-async function sendMail(params: {
-  to: string;
-  bcc?: string;
-  subject: string;
-  text: string;
-  html?: string;
-  replyTo?: string;
-}) {
-  const transporter = getTransport();
-  const from = requireEnv("SMTP_FROM");
-
-  await transporter.sendMail({
-    from,
-    to: params.to,
-    bcc: params.bcc,
-    replyTo: params.replyTo,
-    subject: params.subject,
-    text: params.text,
-    html: params.html,
-  });
 }
 
 const adminPostInput = z.object({
@@ -331,7 +293,8 @@ async function handle(request: Request): Promise<Response> {
     try {
       const buf = await fs.readFile(filePath);
       const ext = path.extname(filename).toLowerCase();
-      return new Response(buf, {
+      const body = Uint8Array.from(buf).buffer;
+      return new Response(body, {
         headers: {
           "content-type": contentTypeFromExt(ext),
           "cache-control": "public, max-age=604800",
@@ -422,33 +385,36 @@ async function handle(request: Request): Promise<Response> {
         message: input.data.message?.trim() ? input.data.message : null,
       },
     });
+    console.info("[course-interest] lead salvo", {
+      courseSlug: input.data.courseSlug,
+      email: input.data.email,
+      hasCourse: Boolean(course?.id),
+    });
 
     try {
-      const to = "contato@institutomarthamendes.com.br";
-      const bcc = "matheus.farsetti@gmail.com";
-      const subject = `Novo interesse em curso: ${input.data.courseSlug}`;
-      const mailText = [
-        "Novo formulário de interesse recebido.",
-        "",
-        `Curso (slug): ${input.data.courseSlug}`,
-        `Nome: ${input.data.name}`,
-        `E-mail: ${input.data.email}`,
-        `Telefone: ${input.data.phone}`,
-        `Mensagem: ${input.data.message ?? ""}`,
-        "",
-        "— Instituto Martha Mendes",
-      ].join("\n");
+      const { to, bcc } = getCourseLeadRecipients();
+      const { subject, text: mailText } = buildCourseInterestMail(input.data);
+      console.info("[course-interest] enviando email", {
+        to,
+        bcc: bcc ?? null,
+        replyTo: input.data.email,
+        subject,
+      });
 
-      await sendMail({
+      const info = await sendMail({
         to,
         bcc,
         subject,
         text: mailText,
         replyTo: input.data.email,
       });
+      console.info("[course-interest] email enviado", {
+        messageId: info.messageId,
+        accepted: info.accepted,
+        rejected: info.rejected,
+      });
     } catch (err) {
       // não bloquear o lead por falha de e-mail
-      // eslint-disable-next-line no-console
       console.error("Mailer error (course-interest)", err);
     }
 
