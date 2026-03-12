@@ -17,6 +17,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "Quem Somos", href: "/sobre" },
