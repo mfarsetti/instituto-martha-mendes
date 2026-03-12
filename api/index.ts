@@ -11,8 +11,8 @@ import {
   getCourseLeadRecipients,
   isMailerConfigured,
   sendMail,
-} from "./lib/mailer";
-import { uploadFile } from "./lib/upload-handler";
+} from "./lib/mailer.js";
+import { uploadFile } from "./lib/upload-handler.js";
 
 function requireEnv(name: string): string {
   const value = process.env[name];

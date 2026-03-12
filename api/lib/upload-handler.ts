@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 
 import { put } from "@vercel/blob";
 
-import { UPLOADS_DIR } from "./upload";
+import { UPLOADS_DIR } from "./upload.js";
 
 const BLOB_TOKEN = process.env.BLOB_READ_WRITE_TOKEN;
 const IS_VERCEL = Boolean(process.env.VERCEL);
