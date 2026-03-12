@@ -12,7 +12,7 @@ import {
   isMailerConfigured,
   sendMail,
 } from "./lib/mailer.js";
-import { uploadFile } from "./lib/upload-handler.js";
+import { getUploadedFile, type AssetStore, uploadFile } from "./lib/upload-handler.js";
 
 function requireEnv(name: string): string {
   const value = process.env[name];
@@ -339,6 +339,24 @@ async function handle(request: Request): Promise<Response> {
     }
   }
 
+  if (pathname.startsWith("/api/assets/")) {
+    if (method !== "GET") return methodNotAllowed();
+    const id = decodeURIComponent(pathname.slice("/api/assets/".length));
+    if (!id) return notFound();
+
+    const assetStore = getPrisma() as unknown as AssetStore;
+    const asset = await getUploadedFile(assetStore, id);
+    if (!asset) return notFound();
+
+    const body = Uint8Array.from(asset.data).buffer;
+    return new Response(body, {
+      headers: {
+        "content-type": asset.contentType,
+        "cache-control": "public, max-age=31536000, immutable",
+      },
+    });
+  }
+
   // public posts
   if (pathname === "/api/posts") {
     if (method !== "GET") return methodNotAllowed();
@@ -538,7 +556,8 @@ async function handle(request: Request): Promise<Response> {
 
     try {
       const bytes = new Uint8Array(await file.arrayBuffer());
-      const { url } = await uploadFile(Buffer.from(bytes), file.name || "image", file.type);
+      const assetStore = getPrisma() as unknown as AssetStore;
+      const { url } = await uploadFile(assetStore, Buffer.from(bytes), file.name || "image", file.type);
       return json({ url });
     } catch (err) {
       const msg = err instanceof Error ? err.message : "upload_failed";

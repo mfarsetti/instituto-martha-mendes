@@ -28,5 +28,5 @@ dist-ssr
 
 /generated/prisma
 
-# Uploads locais (em produção usa Vercel Blob)
+# Uploads locais legados
 server/uploads/

@@ -16,7 +16,7 @@ import {
 } from "./auth";
 import { slugify } from "./slug";
 import { ensureUploadsDir, UPLOADS_DIR } from "../api/lib/upload";
-import { uploadFile } from "../api/lib/upload-handler";
+import { getUploadedFile, type AssetStore, uploadFile } from "../api/lib/upload-handler";
 import { buildCourseInterestMail, getCourseLeadRecipients, isMailerConfigured, sendMail } from "../api/lib/mailer";
 
 const app = express();
@@ -90,12 +90,24 @@ app.post("/api/admin/upload", authRequired, upload.single("file"), async (req, r
   const file = req.file;
   if (!file?.buffer) return res.status(400).json({ error: "missing_file" });
   try {
-    const { url } = await uploadFile(file.buffer, file.originalname || "image", file.mimetype);
+    const assetStore = prisma as unknown as AssetStore;
+    const { url } = await uploadFile(assetStore, file.buffer, file.originalname || "image", file.mimetype);
     return res.json({ url });
   } catch (err) {
     const msg = err instanceof Error ? err.message : "upload_failed";
     return res.status(500).json({ error: msg });
   }
+});
+
+app.get("/api/assets/:id", async (req, res) => {
+  const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+  const assetStore = prisma as unknown as AssetStore;
+  const asset = await getUploadedFile(assetStore, id);
+  if (!asset) return res.status(404).json({ error: "not_found" });
+
+  res.setHeader("Content-Type", asset.contentType);
+  res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+  return res.send(Buffer.from(asset.data));
 });
 
 app.use((err: unknown, _req: express.Request, res: express.Response, next: express.NextFunction) => {

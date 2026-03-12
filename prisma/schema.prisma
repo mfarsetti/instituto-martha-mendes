@@ -151,3 +151,12 @@ model CourseLead {
   @@index([email])
   @@index([createdAt(sort: Desc)])
 }
+
+model StoredAsset {
+  id               String   @id @default(cuid())
+  originalFilename String?
+  contentType      String
+  size             Int
+  data             Bytes
+  createdAt        DateTime @default(now())
+}
