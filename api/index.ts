@@ -20,6 +20,27 @@ function requireEnv(name: string): string {
   return value;
 }
 
+function addCorsHeaders(headers: Headers, request: Request): void {
+  const origin = request.headers.get("origin");
+  const webOrigin = process.env.WEB_ORIGIN?.trim();
+  const allowed = webOrigin ? webOrigin.split(",").map((o) => o.trim().replace(/\/$/, "")) : [];
+  if (origin) {
+    const originClean = origin.replace(/\/$/, "");
+    if (allowed.length === 0 || allowed.includes("*") || allowed.includes(originClean) || allowed.includes(origin)) {
+      headers.set("Access-Control-Allow-Origin", origin);
+    }
+  }
+  headers.set("Access-Control-Allow-Credentials", "true");
+  headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+}
+
+function withCors(response: Response, request: Request): Response {
+  const headers = new Headers(response.headers);
+  addCorsHeaders(headers, request);
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+}
+
 function json(data: unknown, init: ResponseInit = {}): Response {
   const headers = new Headers(init.headers);
   if (!headers.has("content-type")) headers.set("content-type", "application/json; charset=utf-8");
@@ -234,6 +255,13 @@ async function handle(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const pathname = request.headers.get("x-imm-path") ?? url.pathname;
   const method = request.method.toUpperCase();
+
+  // CORS preflight
+  if (method === "OPTIONS") {
+    const headers = new Headers();
+    addCorsHeaders(headers, request);
+    return new Response(null, { status: 204, headers });
+  }
 
   // health
   if (pathname === "/api/health") {
@@ -835,13 +863,15 @@ async function handle(request: Request): Promise<Response> {
 export default {
   async fetch(request: Request) {
     try {
-      return await handle(request);
+      const response = await handle(request);
+      return withCors(response, request);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       const stack = err instanceof Error ? err.stack : undefined;
       // eslint-disable-next-line no-console
       console.error("API error:", msg, stack ?? "");
-      return json({ error: "server_error" }, { status: 500 });
+      const errorResponse = json({ error: "server_error" }, { status: 500 });
+      return withCors(errorResponse, request);
     }
   },
 };
