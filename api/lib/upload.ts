@@ -12,4 +12,3 @@ export const UPLOADS_DIR = isVercel
 export function ensureUploadsDir() {
   fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 }
-

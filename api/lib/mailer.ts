@@ -89,4 +89,3 @@ export function buildCourseInterestMail(input: {
     ].join("\n"),
   };
 }
-

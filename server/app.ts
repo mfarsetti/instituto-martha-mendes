@@ -15,9 +15,9 @@ import {
   verifyPassword,
 } from "./auth";
 import { slugify } from "./slug";
-import { ensureUploadsDir, UPLOADS_DIR } from "./upload";
-import { uploadFile } from "./upload-handler";
-import { buildCourseInterestMail, getCourseLeadRecipients, isMailerConfigured, sendMail } from "./mailer";
+import { ensureUploadsDir, UPLOADS_DIR } from "../api/lib/upload";
+import { uploadFile } from "../api/lib/upload-handler";
+import { buildCourseInterestMail, getCourseLeadRecipients, isMailerConfigured, sendMail } from "../api/lib/mailer";
 
 const app = express();
 
