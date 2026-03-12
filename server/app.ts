@@ -17,7 +17,16 @@ import {
 import { slugify } from "./slug";
 import { ensureUploadsDir, UPLOADS_DIR } from "../api/lib/upload";
 import { getUploadedFile, type AssetStore, uploadFile } from "../api/lib/upload-handler";
-import { buildCourseInterestMail, getCourseLeadRecipients, isMailerConfigured, sendMail } from "../api/lib/mailer";
+import {
+  buildContactMail,
+  buildCourseInterestMail,
+  buildNewsletterMail,
+  getContactRecipients,
+  getCourseLeadRecipients,
+  getNewsletterRecipients,
+  isMailerConfigured,
+  sendMail,
+} from "../api/lib/mailer";
 
 const app = express();
 
@@ -558,22 +567,9 @@ app.post("/api/contact", async (req, res) => {
 
   if (!input.success) return res.status(400).json({ error: "invalid_input" });
 
-  const to = "contato@institutomarthamendes.com.br";
-  const bcc = "matheus.farsetti@gmail.com";
-  const subject = `Fale Conosco: ${input.data.subject}`;
-  const text = [
-    "Nova mensagem de contato recebida.",
-    "",
-    `Nome: ${input.data.name}`,
-    `E-mail: ${input.data.email}`,
-    `Telefone: ${input.data.phone ?? ""}`,
-    "",
-    input.data.message,
-    "",
-    "— Instituto Martha Mendes",
-  ].join("\n");
-
   try {
+    const { to, bcc } = getContactRecipients();
+    const { subject, text } = buildContactMail(input.data);
     await sendMail({
       to,
       bcc,
@@ -585,6 +581,37 @@ app.post("/api/contact", async (req, res) => {
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error("Mailer error (contact)", err);
+    return res.status(500).json({ error: "email_failed" });
+  }
+});
+
+app.post("/api/newsletter", async (req, res) => {
+  const input = z
+    .object({
+      email: z.string().email(),
+      agreed: z.literal(true),
+    })
+    .safeParse(req.body);
+
+  if (!input.success) return res.status(400).json({ error: "invalid_input" });
+  if (!isMailerConfigured()) {
+    console.warn("[newsletter] SMTP não configurado.");
+    return res.status(500).json({ error: "email_failed" });
+  }
+
+  try {
+    const { to, bcc } = getNewsletterRecipients();
+    const { subject, text } = buildNewsletterMail(input.data);
+    await sendMail({
+      to,
+      bcc,
+      subject,
+      text,
+      replyTo: input.data.email,
+    });
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error("Mailer error (newsletter)", err);
     return res.status(500).json({ error: "email_failed" });
   }
 });

@@ -7,8 +7,12 @@ import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import {
+  buildContactMail,
   buildCourseInterestMail,
+  buildNewsletterMail,
+  getContactRecipients,
   getCourseLeadRecipients,
+  getNewsletterRecipients,
   isMailerConfigured,
   sendMail,
 } from "./lib/mailer.js";
@@ -500,26 +504,13 @@ async function handle(request: Request): Promise<Response> {
       .safeParse(body);
     if (!input.success) return badRequest();
 
-    const to = "contato@institutomarthamendes.com.br";
-    const bcc = "matheus.farsetti@gmail.com";
-    const subject = `Fale Conosco: ${input.data.subject}`;
-    const mailText = [
-      "Nova mensagem de contato recebida.",
-      "",
-      `Nome: ${input.data.name}`,
-      `E-mail: ${input.data.email}`,
-      `Telefone: ${input.data.phone ?? ""}`,
-      "",
-      input.data.message,
-      "",
-      "— Instituto Martha Mendes",
-    ].join("\n");
-
     if (!isMailerConfigured()) {
       console.warn("[contact] SMTP não configurado no Vercel.");
       return json({ error: "email_failed" }, { status: 500 });
     }
     try {
+      const { to, bcc } = getContactRecipients();
+      const { subject, text: mailText } = buildContactMail(input.data);
       await sendMail({
         to,
         bcc,
@@ -531,6 +522,46 @@ async function handle(request: Request): Promise<Response> {
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error("Mailer error (contact)", err);
+      return json({ error: "email_failed" }, { status: 500 });
+    }
+  }
+
+  if (pathname === "/api/newsletter") {
+    if (method !== "POST") return methodNotAllowed();
+
+    let body: unknown;
+    try {
+      body = await request.json();
+    } catch {
+      return badRequest();
+    }
+
+    const input = z
+      .object({
+        email: z.string().email(),
+        agreed: z.literal(true),
+      })
+      .safeParse(body);
+    if (!input.success) return badRequest();
+
+    if (!isMailerConfigured()) {
+      console.warn("[newsletter] SMTP não configurado no Vercel.");
+      return json({ error: "email_failed" }, { status: 500 });
+    }
+
+    try {
+      const { to, bcc } = getNewsletterRecipients();
+      const { subject, text } = buildNewsletterMail(input.data);
+      await sendMail({
+        to,
+        bcc,
+        subject,
+        text,
+        replyTo: input.data.email,
+      });
+      return json({ ok: true });
+    } catch (err) {
+      console.error("Mailer error (newsletter)", err);
       return json({ error: "email_failed" }, { status: 500 });
     }
   }

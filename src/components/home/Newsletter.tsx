@@ -7,9 +7,11 @@ import { toast } from "sonner";
 const Newsletter = () => {
   const [email, setEmail] = useState("");
   const [agreed, setAgreed] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
     
     if (!agreed) {
       toast.error("Por favor, aceite a política de privacidade");
@@ -21,12 +23,27 @@ const Newsletter = () => {
       return;
     }
 
-    // Mock submission
-    toast.success("Inscrição realizada com sucesso!", {
-      description: "Você receberá nossas novidades em breve.",
-    });
-    setEmail("");
-    setAgreed(false);
+    setSubmitting(true);
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, agreed }),
+      });
+
+      if (!res.ok) throw new Error("failed");
+
+      toast.success("Inscrição realizada com sucesso!", {
+        description: "Você receberá nossas novidades em breve.",
+      });
+      setEmail("");
+      setAgreed(false);
+    } catch {
+      toast.error("Não foi possível concluir sua inscrição. Tente novamente.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -66,10 +83,11 @@ const Newsletter = () => {
               <Button
                 type="submit"
                 size="lg"
+                disabled={submitting}
                 className="gradient-gold text-white shadow-elegant hover:shadow-glow transition-all"
               >
                 <CheckCircle2 className="mr-2 w-5 h-5" />
-                Inscrever-se
+                {submitting ? "Enviando..." : "Inscrever-se"}
               </Button>
             </div>
 
