@@ -55,12 +55,35 @@ const CursoDetalhes = () => {
   const fallbackCourse = slug
     ? seedCourses.find((c) => c.slug === slug && c.status === "published") ?? null
     : null;
-  const course = courseQuery.data ?? fallbackCourse;
+  // Só usa fallback quando a API já terminou e não retornou dados (evita flash de imagem errada)
+  const course =
+    courseQuery.data ?? (courseQuery.isFetched && !courseQuery.isLoading ? fallbackCourse : null);
 
-  if (!course && !courseQuery.isLoading) {
+  if (courseQuery.isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pt-20">
+          <section className="relative py-32 overflow-hidden bg-muted/30 animate-pulse" />
+          <section className="py-20">
+            <div className="container mx-auto px-4 max-w-4xl">
+              <div className="h-8 bg-muted rounded w-3/4 mb-4" />
+              <div className="h-4 bg-muted rounded w-1/2 mb-8" />
+              <div className="space-y-4">
+                <div className="h-4 bg-muted rounded" />
+                <div className="h-4 bg-muted rounded" />
+                <div className="h-4 bg-muted rounded w-5/6" />
+              </div>
+            </div>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+  if (!course) {
     return <Navigate to="/cursos" replace />;
   }
-  if (!course) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

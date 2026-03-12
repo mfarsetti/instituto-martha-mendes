@@ -1,6 +1,7 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -13,7 +14,10 @@ const Cursos = () => {
     queryFn: fetchPublishedCourses,
   });
 
-  const allCourses = coursesQuery.data ?? seedCourses;
+  // Só usa seed quando a API já terminou e não retornou dados (evita flash de imagem errada)
+  const allCourses =
+    coursesQuery.data ??
+    (coursesQuery.isFetched && !coursesQuery.isLoading ? seedCourses : []);
   const publishedCourses = allCourses.filter((c) => c.status === "published");
 
   return (
@@ -44,7 +48,20 @@ const Cursos = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-7xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {publishedCourses.map((course, index) => (
+                {coursesQuery.isLoading ? (
+                  Array.from({ length: 6 }).map((_, i) => (
+                    <div key={i} className="bg-card rounded-2xl overflow-hidden shadow-soft">
+                      <Skeleton className="h-56 w-full rounded-none" />
+                      <div className="p-6 space-y-3">
+                        <Skeleton className="h-6 w-3/4" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-10 w-full mt-4" />
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  publishedCourses.map((course, index) => (
                   <div
                     key={course.id}
                     className="group bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-2 animate-fadeIn"
@@ -90,7 +107,8 @@ const Cursos = () => {
                       </Link>
                     </div>
                   </div>
-                ))}
+                ))
+                )}
               </div>
             </div>
           </div>

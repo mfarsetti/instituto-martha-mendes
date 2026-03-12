@@ -11,6 +11,16 @@ function getOptionalEnv(name: string): string | undefined {
   return value ? value : undefined;
 }
 
+const SMTP_VARS = ["SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASS", "SMTP_FROM"] as const;
+
+/** Verifica se as variáveis SMTP estão configuradas (para Vercel/produção) */
+export function isMailerConfigured(): boolean {
+  return SMTP_VARS.every((name) => {
+    const v = process.env[name];
+    return typeof v === "string" && v.trim().length > 0;
+  });
+}
+
 function getTransport() {
   const host = requireEnv("SMTP_HOST");
   const port = Number(requireEnv("SMTP_PORT"));

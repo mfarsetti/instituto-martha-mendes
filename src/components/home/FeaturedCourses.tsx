@@ -13,7 +13,10 @@ const FeaturedCourses = () => {
     queryFn: fetchPublishedCourses,
   });
 
-  const allCourses = coursesQuery.data ?? seedCourses;
+  // Só usa seed quando a API já terminou e não retornou dados (evita flash de imagem errada)
+  const allCourses =
+    coursesQuery.data ??
+    (coursesQuery.isFetched && !coursesQuery.isLoading ? seedCourses : []);
   const courses = allCourses.filter((c) => c.status === "published").slice(0, 4);
   return (
     <section className="py-20 bg-muted/30">

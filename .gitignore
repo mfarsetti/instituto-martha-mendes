@@ -27,3 +27,6 @@ dist-ssr
 *.sw?
 
 /generated/prisma
+
+# Uploads locais (em produção usa Vercel Blob)
+server/uploads/

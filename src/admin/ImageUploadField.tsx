@@ -32,12 +32,17 @@ export default function ImageUploadField({ label = "Imagem", value, onChange }: 
         body: form,
         credentials: "include",
       });
-      if (!res.ok) throw new Error("upload_failed");
-      const data = (await res.json()) as { url: string };
+      const data = (await res.json().catch(() => ({}))) as { url?: string; error?: string };
+      if (!res.ok) throw new Error(data.error || "upload_failed");
+      if (!data.url) throw new Error("upload_failed");
       onChange(data.url);
       toast.success("Imagem enviada.");
-    } catch {
-      toast.error("Não foi possível enviar a imagem.");
+    } catch (e) {
+      const msg =
+        e instanceof Error && e.message !== "upload_failed"
+          ? e.message
+          : "Não foi possível enviar a imagem.";
+      toast.error(msg);
     } finally {
       setUploading(false);
       if (inputRef.current) inputRef.current.value = "";

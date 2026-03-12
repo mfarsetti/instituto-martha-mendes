@@ -6,8 +6,6 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { z } from "zod";
 import multer from "multer";
-import path from "node:path";
-
 import { prisma } from "./prisma";
 import {
   authOptional,
@@ -18,7 +16,8 @@ import {
 } from "./auth";
 import { slugify } from "./slug";
 import { ensureUploadsDir, UPLOADS_DIR } from "./upload";
-import { buildCourseInterestMail, getCourseLeadRecipients, sendMail } from "./mailer";
+import { uploadFile } from "./upload-handler";
+import { buildCourseInterestMail, getCourseLeadRecipients, isMailerConfigured, sendMail } from "./mailer";
 
 const app = express();
 
@@ -75,14 +74,7 @@ app.get("/api/auth/me", authRequired, async (req, res) => {
 });
 
 const upload = multer({
-  storage: multer.diskStorage({
-    destination: (_req, _file, cb) => cb(null, UPLOADS_DIR),
-    filename: (_req, file, cb) => {
-      const ext = path.extname(file.originalname || "").toLowerCase();
-      const safeExt = ext && ext.length <= 10 ? ext : "";
-      cb(null, `${Date.now()}-${Math.random().toString(16).slice(2)}${safeExt}`);
-    },
-  }),
+  storage: multer.memoryStorage(),
   limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (_req, file, cb) => {
     const ok =
@@ -95,9 +87,15 @@ const upload = multer({
 });
 
 app.post("/api/admin/upload", authRequired, upload.single("file"), async (req, res) => {
-  const filename = req.file?.filename;
-  if (!filename) return res.status(400).json({ error: "missing_file" });
-  return res.json({ url: `/api/uploads/${filename}` });
+  const file = req.file;
+  if (!file?.buffer) return res.status(400).json({ error: "missing_file" });
+  try {
+    const { url } = await uploadFile(file.buffer, file.originalname || "image", file.mimetype);
+    return res.json({ url });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "upload_failed";
+    return res.status(500).json({ error: msg });
+  }
 });
 
 app.use((err: unknown, _req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -499,31 +497,37 @@ app.post("/api/course-interest", async (req, res) => {
     hasCourse: Boolean(course?.id),
   });
 
-  try {
-    const { to, bcc } = getCourseLeadRecipients();
-    const { subject, text } = buildCourseInterestMail(input.data);
-    console.info("[course-interest] enviando email", {
-      to,
-      bcc: bcc ?? null,
-      replyTo: input.data.email,
-      subject,
-    });
+  if (isMailerConfigured()) {
+    try {
+      const { to, bcc } = getCourseLeadRecipients();
+      const { subject, text } = buildCourseInterestMail(input.data);
+      console.info("[course-interest] enviando email", {
+        to,
+        bcc: bcc ?? null,
+        replyTo: input.data.email,
+        subject,
+      });
 
-    const info = await sendMail({
-      to,
-      bcc,
-      subject,
-      text,
-      replyTo: input.data.email,
-    });
-    console.info("[course-interest] email enviado", {
-      messageId: info.messageId,
-      accepted: info.accepted,
-      rejected: info.rejected,
-    });
-  } catch (err) {
-    // não bloquear o lead por falha de e-mail
-    console.error("Mailer error (course-interest)", err);
+      const info = await sendMail({
+        to,
+        bcc,
+        subject,
+        text,
+        replyTo: input.data.email,
+      });
+      console.info("[course-interest] email enviado", {
+        messageId: info.messageId,
+        accepted: info.accepted,
+        rejected: info.rejected,
+      });
+    } catch (err) {
+      // não bloquear o lead por falha de e-mail
+      console.error("Mailer error (course-interest)", err);
+    }
+  } else {
+    console.warn(
+      "[course-interest] SMTP não configurado. Adicione SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS e SMTP_FROM."
+    );
   }
 
   return res.json({ ok: true });

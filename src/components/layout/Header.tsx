@@ -21,7 +21,7 @@ const Header = () => {
     { label: "Home", href: "/" },
     { label: "Quem Somos", href: "/sobre" },
     { label: "Cursos", href: "/cursos" },
-    { label: "Mídia", href: "/midia" },
+    // { label: "Mídia", href: "/midia" },
     { label: "Blog", href: "/blog" },
     { label: "Contato", href: "/contato" },
   ];

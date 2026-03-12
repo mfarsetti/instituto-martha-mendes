@@ -6,7 +6,13 @@ import jwt from "jsonwebtoken";
 import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { buildCourseInterestMail, getCourseLeadRecipients, sendMail } from "../server/mailer";
+import {
+  buildCourseInterestMail,
+  getCourseLeadRecipients,
+  isMailerConfigured,
+  sendMail,
+} from "../server/mailer";
+import { uploadFile } from "../server/upload-handler";
 
 function requireEnv(name: string): string {
   const value = process.env[name];
@@ -391,31 +397,37 @@ async function handle(request: Request): Promise<Response> {
       hasCourse: Boolean(course?.id),
     });
 
-    try {
-      const { to, bcc } = getCourseLeadRecipients();
-      const { subject, text: mailText } = buildCourseInterestMail(input.data);
-      console.info("[course-interest] enviando email", {
-        to,
-        bcc: bcc ?? null,
-        replyTo: input.data.email,
-        subject,
-      });
+    if (isMailerConfigured()) {
+      try {
+        const { to, bcc } = getCourseLeadRecipients();
+        const { subject, text: mailText } = buildCourseInterestMail(input.data);
+        console.info("[course-interest] enviando email", {
+          to,
+          bcc: bcc ?? null,
+          replyTo: input.data.email,
+          subject,
+        });
 
-      const info = await sendMail({
-        to,
-        bcc,
-        subject,
-        text: mailText,
-        replyTo: input.data.email,
-      });
-      console.info("[course-interest] email enviado", {
-        messageId: info.messageId,
-        accepted: info.accepted,
-        rejected: info.rejected,
-      });
-    } catch (err) {
-      // não bloquear o lead por falha de e-mail
-      console.error("Mailer error (course-interest)", err);
+        const info = await sendMail({
+          to,
+          bcc,
+          subject,
+          text: mailText,
+          replyTo: input.data.email,
+        });
+        console.info("[course-interest] email enviado", {
+          messageId: info.messageId,
+          accepted: info.accepted,
+          rejected: info.rejected,
+        });
+      } catch (err) {
+        // não bloquear o lead por falha de e-mail
+        console.error("Mailer error (course-interest)", err);
+      }
+    } else {
+      console.warn(
+        "[course-interest] SMTP não configurado. Adicione SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS e SMTP_FROM no Vercel Dashboard > Settings > Environment Variables."
+      );
     }
 
     return json({ ok: true });
@@ -457,6 +469,10 @@ async function handle(request: Request): Promise<Response> {
       "— Instituto Martha Mendes",
     ].join("\n");
 
+    if (!isMailerConfigured()) {
+      console.warn("[contact] SMTP não configurado no Vercel.");
+      return json({ error: "email_failed" }, { status: 500 });
+    }
     try {
       await sendMail({
         to,
@@ -488,15 +504,18 @@ async function handle(request: Request): Promise<Response> {
     const file = form.get("file");
     if (!(file instanceof File)) return badRequest({ error: "missing_file" });
 
-    const ext = path.extname(file.name || "").toLowerCase();
-    const safeExt = ext && ext.length <= 10 ? ext : "";
-    const filename = `${Date.now()}-${Math.random().toString(16).slice(2)}${safeExt}`;
+    const ok =
+      file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/webp";
+    if (!ok) return badRequest({ error: "invalid_file_type" });
 
-    await fs.mkdir(UPLOADS_DIR, { recursive: true });
-    const bytes = new Uint8Array(await file.arrayBuffer());
-    await fs.writeFile(path.join(UPLOADS_DIR, filename), bytes);
-
-    return json({ url: `/uploads/${filename}` });
+    try {
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      const { url } = await uploadFile(Buffer.from(bytes), file.name || "image", file.type);
+      return json({ url });
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "upload_failed";
+      return json({ error: msg }, { status: 500 });
+    }
   }
 
   // admin posts
@@ -818,8 +837,10 @@ export default {
     try {
       return await handle(request);
     } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      const stack = err instanceof Error ? err.stack : undefined;
       // eslint-disable-next-line no-console
-      console.error("API error", err);
+      console.error("API error:", msg, stack ?? "");
       return json({ error: "server_error" }, { status: 500 });
     }
   },
