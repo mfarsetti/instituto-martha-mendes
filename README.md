@@ -1,73 +1,43 @@
-# Welcome to your Lovable project
+# Instituto Martha Mendes
 
-## Project info
+Aplicação web institucional com área administrativa, blog, cursos, captação de leads e backend em Node/Prisma.
 
-**URL**: https://lovable.dev/projects/601e7d14-b2d7-4936-8c92-324cf2348e56
+## Stack
 
-## How can I edit this code?
+- Vite
+- React
+- TypeScript
+- Tailwind CSS
+- Express
+- Prisma
+- PostgreSQL
 
-There are several ways of editing your application.
+## Requisitos
 
-**Use Lovable**
+- Node.js `20.19.4` ou superior
+- npm
+- PostgreSQL configurado
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/601e7d14-b2d7-4936-8c92-324cf2348e56) and start prompting.
+## Ambiente
 
-Changes made via Lovable will be committed automatically to this repo.
+Crie um arquivo `.env` com as variáveis necessárias. Use `.env.example` como referência.
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Desenvolvimento
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Scripts úteis
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```sh
+npm run lint
+npm run db:generate
+npm run db:migrate
+npm run db:seed
+```
 
-**Use GitHub Codespaces**
+## Deploy
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/601e7d14-b2d7-4936-8c92-324cf2348e56) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+O deploy pode ser feito em qualquer ambiente compatível com Node.js e PostgreSQL, incluindo a Vercel.

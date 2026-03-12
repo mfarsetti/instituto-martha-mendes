@@ -2,10 +2,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { AuthProvider } from "@/admin/auth";
 import RequireAuth from "@/admin/RequireAuth";
+import logo from "@/assets/logo.svg";
 import Index from "./pages/Index";
 import Sobre from "./pages/Sobre";
 import MarthaCV from "./pages/MarthaCV";
@@ -30,6 +32,64 @@ import AdminCourses from "./pages/admin/AdminCourses";
 import AdminCourseEditor from "./pages/admin/AdminCourseEditor";
 
 const queryClient = new QueryClient();
+
+function upsertMeta(selector: string, attributes: Record<string, string>) {
+  let meta = document.head.querySelector(selector) as HTMLMetaElement | null;
+  if (!meta) {
+    meta = document.createElement("meta");
+    document.head.appendChild(meta);
+  }
+
+  Object.entries(attributes).forEach(([key, value]) => {
+    meta?.setAttribute(key, value);
+  });
+}
+
+function upsertLink(selector: string, attributes: Record<string, string>) {
+  let link = document.head.querySelector(selector) as HTMLLinkElement | null;
+  if (!link) {
+    link = document.createElement("link");
+    document.head.appendChild(link);
+  }
+
+  Object.entries(attributes).forEach(([key, value]) => {
+    link?.setAttribute(key, value);
+  });
+}
+
+const SiteBrandingAssets = () => {
+  useEffect(() => {
+    const logoUrl = new URL(logo, window.location.origin).toString();
+
+    upsertLink('link[rel="icon"]', {
+      rel: "icon",
+      type: "image/svg+xml",
+      href: logoUrl,
+    });
+
+    upsertLink('link[rel="apple-touch-icon"]', {
+      rel: "apple-touch-icon",
+      href: logoUrl,
+    });
+
+    upsertMeta('meta[property="og:image"]', {
+      property: "og:image",
+      content: logoUrl,
+    });
+
+    upsertMeta('meta[property="og:image:alt"]', {
+      property: "og:image:alt",
+      content: "Logo do Instituto Martha Mendes",
+    });
+
+    upsertMeta('meta[name="twitter:image"]', {
+      name: "twitter:image",
+      content: logoUrl,
+    });
+  }, []);
+
+  return null;
+};
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -73,6 +133,7 @@ const AnimatedRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <SiteBrandingAssets />
       <Toaster />
       <Sonner />
       <BrowserRouter>
