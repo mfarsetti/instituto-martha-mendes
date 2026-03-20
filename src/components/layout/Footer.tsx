@@ -95,7 +95,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
                 <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-muted-foreground">São Paulo, SP - Brasil</span>
+                <span className="text-sm text-muted-foreground">Santana de Parnaíba, SP - Brasil</span>
               </li>
             </ul>
           </div>

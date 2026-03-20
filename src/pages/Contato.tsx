@@ -61,12 +61,12 @@ const Contato = () => {
     {
       icon: MapPin,
       title: "Endereço",
-      content: "São Paulo, SP - Brasil",
+      content: "Santana de Parnaíba, SP - Brasil",
       link: null,
     },
     {
       icon: Clock,
-      title: "Horário",
+      title: "Horário - somente online",
       content: "Seg-Sex: 9h-18h | Sáb: 9h-13h",
       link: null,
     },

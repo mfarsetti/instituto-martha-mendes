@@ -115,7 +115,7 @@ const PalestrasConsultorias = () => {
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-4">
                     <Users className="w-12 h-12 text-primary" />
-                    <div className="w-12 h-12 rounded-xl overflow-hidden border border-primary/20 shadow-soft bg-background">
+                    <div className="w-[145px] h-[100px] rounded-xl overflow-hidden border border-primary/20 shadow-soft bg-background">
                       <img
                         src={somar}
                         alt="Instituto Somar"
