@@ -33,6 +33,7 @@ import AdminCourseEditor from "./pages/admin/AdminCourseEditor";
 
 const queryClient = new QueryClient();
 
+
 function upsertMeta(selector: string, attributes: Record<string, string>) {
   let meta = document.head.querySelector(selector) as HTMLMetaElement | null;
   if (!meta) {
